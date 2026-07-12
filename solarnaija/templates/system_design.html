@@ -1,0 +1,314 @@
+
+{% extends "app.html" %}
+
+{% block title %}System Design{% endblock %}
+
+{% block content %}
+
+<div class="space-y-8">
+
+    <!-- Header -->
+
+    <div class="flex flex-col lg:flex-row lg:justify-between lg:items-center gap-6">
+
+        <div>
+
+            <h1 class="text-3xl font-bold text-slate-800">
+
+                System Design
+
+            </h1>
+
+            <p class="text-slate-500 mt-2">
+
+                {{ project.client_name }} • {{ project.location }}
+
+            </p>
+
+        </div>
+
+        <div class="flex flex-wrap gap-3">
+
+            <a
+                href="{% url 'project_bom' project.pk %}"
+                class="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-xl">
+
+                View BOM
+
+            </a>
+
+            <a
+                href="{% url 'project_quote' project.pk %}"
+                class="bg-slate-900 hover:bg-slate-800 text-white px-6 py-3 rounded-xl">
+
+                Generate Quote
+
+            </a>
+
+        </div>
+
+    </div>
+
+    <!-- Summary Cards -->
+
+    <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
+
+        <div class="bg-white rounded-2xl shadow-sm p-6">
+
+            <p class="text-slate-500">
+
+                Daily Energy
+
+            </p>
+
+            <h2 class="text-3xl font-bold mt-3">
+
+                {{ daily_energy|floatformat:1 }} Wh
+
+            </h2>
+
+        </div>
+
+        <div class="bg-white rounded-2xl shadow-sm p-6">
+
+            <p class="text-slate-500">
+
+                Peak Load
+
+            </p>
+
+            <h2 class="text-3xl font-bold mt-3">
+
+                {{ peak_load|floatformat:1 }} W
+
+            </h2>
+
+        </div>
+
+        <div class="bg-white rounded-2xl shadow-sm p-6">
+
+            <p class="text-slate-500">
+
+                Solar Array
+
+            </p>
+
+            <h2 class="text-3xl font-bold mt-3">
+
+                {{ solar_size|floatformat:2 }} kW
+
+            </h2>
+
+        </div>
+
+        <div class="bg-white rounded-2xl shadow-sm p-6">
+
+            <p class="text-slate-500">
+
+                Battery Storage
+
+            </p>
+
+            <h2 class="text-3xl font-bold mt-3">
+
+                {{ battery_capacity|floatformat:1 }} Ah
+
+            </h2>
+
+        </div>
+
+    </div>
+
+    <!-- Recommended Equipment -->
+
+    <div class="bg-white rounded-2xl shadow-sm p-8">
+
+        <h2 class="text-2xl font-bold mb-8">
+
+            Recommended Equipment
+
+        </h2>
+
+        <div class="grid md:grid-cols-2 gap-8">
+
+            <div>
+
+                <h3 class="font-semibold text-lg mb-4">
+
+                    Solar Panels
+
+                </h3>
+
+                <div class="space-y-3">
+
+                    <div class="flex justify-between">
+
+                        <span>Panel Wattage</span>
+
+                        <span>{{ panel_wattage }} W</span>
+
+                    </div>
+
+                    <div class="flex justify-between">
+
+                        <span>Panels Required</span>
+
+                        <span>{{ number_of_panels }}</span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div>
+
+                <h3 class="font-semibold text-lg mb-4">
+
+                    Inverter
+
+                </h3>
+
+                <div class="space-y-3">
+
+                    <div class="flex justify-between">
+
+                        <span>Recommended Size</span>
+
+                        <span>{{ inverter_size }} W</span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div>
+
+                <h3 class="font-semibold text-lg mb-4">
+
+                    Battery Bank
+
+                </h3>
+
+                <div class="space-y-3">
+
+                    <div class="flex justify-between">
+
+                        <span>Battery Voltage</span>
+
+                        <span>{{ battery_voltage }} V</span>
+
+                    </div>
+
+                    <div class="flex justify-between">
+
+                        <span>Battery Capacity</span>
+
+                        <span>{{ battery_capacity }} Ah</span>
+
+                    </div>
+
+                    <div class="flex justify-between">
+
+                        <span>Number of Batteries</span>
+
+                        <span>{{ battery_quantity }}</span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div>
+
+                <h3 class="font-semibold text-lg mb-4">
+
+                    Charge Controller
+
+                </h3>
+
+                <div class="space-y-3">
+
+                    <div class="flex justify-between">
+
+                        <span>Controller Rating</span>
+
+                        <span>{{ controller_size }} A</span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Calculation Summary -->
+
+    <div class="bg-white rounded-2xl shadow-sm p-8">
+
+        <h2 class="text-xl font-bold mb-6">
+
+            Calculation Summary
+
+        </h2>
+
+        <table class="w-full">
+
+            <tbody>
+
+                <tr class="border-b">
+
+                    <td class="py-4">Daily Energy Consumption</td>
+                    <td class="text-right">{{ daily_energy }} Wh/day</td>
+
+                </tr>
+
+                <tr class="border-b">
+
+                    <td class="py-4">Peak Load</td>
+                    <td class="text-right">{{ peak_load }} W</td>
+
+                </tr>
+
+                <tr class="border-b">
+
+                    <td class="py-4">Solar Array Size</td>
+                    <td class="text-right">{{ solar_size }} kW</td>
+
+                </tr>
+
+                <tr class="border-b">
+
+                    <td class="py-4">Panels Required</td>
+                    <td class="text-right">{{ number_of_panels }}</td>
+
+                </tr>
+
+                <tr class="border-b">
+
+                    <td class="py-4">Battery Capacity</td>
+                    <td class="text-right">{{ battery_capacity }} Ah</td>
+
+                </tr>
+
+                <tr>
+
+                    <td class="py-4">Inverter Rating</td>
+                    <td class="text-right">{{ inverter_size }} W</td>
+
+                </tr>
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+{% endblock %}

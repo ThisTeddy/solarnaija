@@ -1,0 +1,194 @@
+
+{% extends "app.html" %}
+
+{% block title %}Quotes{% endblock %}
+
+{% block content %}
+
+<div class="space-y-8">
+
+    <!-- Header -->
+
+    <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
+
+        <div>
+
+            <h1 class="text-3xl font-bold text-slate-800">
+
+                Quotes
+
+            </h1>
+
+            <p class="text-slate-500 mt-2">
+
+                View and manage all generated quotations.
+
+            </p>
+
+        </div>
+
+    </div>
+
+    <!-- Search -->
+
+    <div class="bg-white rounded-2xl shadow-sm p-6">
+
+        <form method="GET">
+
+            <div class="grid md:grid-cols-3 gap-4">
+
+                <input
+                    type="text"
+                    name="search"
+                    value="{{ request.GET.search }}"
+                    placeholder="Search client..."
+                    class="h-12 rounded-xl border border-slate-300 px-4">
+
+                <select
+                    name="status"
+                    class="h-12 rounded-xl border border-slate-300 px-4">
+
+                    <option value="">All Status</option>
+                    <option>Draft</option>
+                    <option>Pending</option>
+                    <option>Approved</option>
+                    <option>Rejected</option>
+
+                </select>
+
+                <button
+                    class="bg-slate-900 text-white rounded-xl">
+
+                    Search
+
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+    <!-- Quote Table -->
+
+    <div class="bg-white rounded-2xl shadow-sm overflow-hidden">
+
+        <div class="overflow-x-auto">
+
+            <table class="min-w-full">
+
+                <thead class="bg-slate-50">
+
+                    <tr>
+
+                        <th class="px-6 py-4 text-left">Quote No.</th>
+                        <th class="px-6 py-4 text-left">Client</th>
+                        <th class="px-6 py-4 text-left">Project</th>
+                        <th class="px-6 py-4 text-right">Amount</th>
+                        <th class="px-6 py-4 text-center">Status</th>
+                        <th class="px-6 py-4 text-center">Date</th>
+                        <th class="px-6 py-4 text-right">Actions</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                {% for quote in quotes %}
+
+                    <tr class="border-t hover:bg-slate-50">
+
+                        <td class="px-6 py-4 font-semibold">
+
+                            {{ quote.quote_number }}
+
+                        </td>
+
+                        <td class="px-6 py-4">
+
+                            {{ quote.project.client_name }}
+
+                        </td>
+
+                        <td class="px-6 py-4">
+
+                            {{ quote.project.location }}
+
+                        </td>
+
+                        <td class="px-6 py-4 text-right font-semibold">
+
+                            ₦{{ quote.total|floatformat:2 }}
+
+                        </td>
+
+                        <td class="px-6 py-4 text-center">
+
+                            <span class="px-3 py-1 rounded-full bg-green-100 text-green-700 text-sm">
+
+                                {{ quote.status }}
+
+                            </span>
+
+                        </td>
+
+                        <td class="px-6 py-4 text-center">
+
+                            {{ quote.created_at|date:"d M Y" }}
+
+                        </td>
+
+                        <td class="px-6 py-4 text-right space-x-3">
+
+                            <a
+                                href="{% url 'project_quote' quote.project.pk %}"
+                                class="text-blue-600">
+
+                                View
+
+                            </a>
+
+                            <a
+                                href="{% url 'quote_pdf' quote.project.pk %}"
+                                class="text-green-600">
+
+                                PDF
+
+                            </a>
+
+                        </td>
+
+                    </tr>
+
+                {% empty %}
+
+                    <tr>
+
+                        <td colspan="7" class="text-center py-20">
+
+                            <i class="fas fa-file-invoice-dollar text-6xl text-slate-300"></i>
+
+                            <p class="mt-4 text-slate-500">
+
+                                No quotations available.
+
+                            </p>
+
+                        </td>
+
+                    </tr>
+
+                {% endfor %}
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

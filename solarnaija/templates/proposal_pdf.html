@@ -1,0 +1,429 @@
+{% extends "base_pdf.html" %}
+
+{% block title %}
+
+Solar Proposal
+
+{% endblock %}
+
+{% block content %}
+
+<div style="text-align:center;margin-top:80px;">
+
+    <h1 style="font-size:42px;">
+
+        SOLAR POWER PROPOSAL
+
+    </h1>
+
+    <h2 style="margin-top:50px;">
+
+        Prepared For
+
+    </h2>
+
+    <h1>
+
+        {{ project.client_name }}
+
+    </h1>
+
+    <p>
+
+        {{ project.location }}
+
+    </p>
+
+    <br><br><br>
+
+    <h2>
+
+        Prepared By
+
+    </h2>
+
+    <h1>
+
+        SolarNaija Ltd
+
+    </h1>
+
+    <br>
+
+    <p>
+
+        {{ today|date:"d F Y" }}
+
+    </p>
+
+</div>
+
+<div style="page-break-after:always;"></div>
+
+<h1>
+
+Executive Summary
+
+</h1>
+
+<p>
+
+Thank you for choosing SolarNaija.
+
+This proposal presents a complete solar energy solution specifically designed
+to meet your electricity requirements while reducing dependence on grid power
+and fuel generators.
+
+</p>
+
+<h2>
+
+Project Information
+
+</h2>
+
+<table>
+
+<tr>
+
+<th>Client</th>
+
+<td>{{ project.client_name }}</td>
+
+</tr>
+
+<tr>
+
+<th>Location</th>
+
+<td>{{ project.location }}</td>
+
+</tr>
+
+<tr>
+
+<th>Project Date</th>
+
+<td>{{ today|date:"d M Y" }}</td>
+
+</tr>
+
+<tr>
+
+<th>Prepared By</th>
+
+<td>SolarNaija Engineering Team</td>
+
+</tr>
+
+</table>
+
+<div style="page-break-after:always;"></div>
+
+<h1>
+
+Energy Analysis
+
+</h1>
+
+<table>
+
+<tr>
+
+<th>Daily Energy Consumption</th>
+
+<td>{{ daily_energy }} Wh/day</td>
+
+</tr>
+
+<tr>
+
+<th>Peak Load</th>
+
+<td>{{ peak_load }} W</td>
+
+</tr>
+
+<tr>
+
+<th>Solar Array</th>
+
+<td>{{ solar_size }} kW</td>
+
+</tr>
+
+<tr>
+
+<th>Panels Required</th>
+
+<td>{{ number_of_panels }}</td>
+
+</tr>
+
+<tr>
+
+<th>Battery Capacity</th>
+
+<td>{{ battery_capacity }} Ah</td>
+
+</tr>
+
+<tr>
+
+<th>Battery Quantity</th>
+
+<td>{{ battery_quantity }}</td>
+
+</tr>
+
+<tr>
+
+<th>Recommended Inverter</th>
+
+<td>{{ inverter_size }} W</td>
+
+</tr>
+
+<tr>
+
+<th>Charge Controller</th>
+
+<td>{{ controller_size }} A</td>
+
+</tr>
+
+</table>
+
+<div style="page-break-after:always;"></div>
+
+<h1>
+
+Recommended Equipment
+
+</h1>
+
+<table>
+
+<tr>
+
+<th>Equipment</th>
+
+<th>Quantity</th>
+
+</tr>
+
+{% for item in bom_items %}
+
+<tr>
+
+<td>
+
+{{ item.name }}
+
+</td>
+
+<td>
+
+{{ item.quantity }}
+
+</td>
+
+</tr>
+
+{% endfor %}
+
+</table>
+
+<div style="page-break-after:always;"></div>
+
+<h1>
+
+Benefits of the Proposed System
+
+</h1>
+
+<ul>
+
+<li>Lower electricity bills.</li>
+
+<li>Reliable backup during outages.</li>
+
+<li>Clean renewable energy.</li>
+
+<li>Minimal maintenance.</li>
+
+<li>Long equipment lifespan.</li>
+
+<li>High return on investment.</li>
+
+<li>Reduced generator fuel costs.</li>
+
+<li>Environmentally friendly solution.</li>
+
+</ul>
+
+<div style="page-break-after:always;"></div>
+
+<h1>
+
+Project Timeline
+
+</h1>
+
+<table>
+
+<tr>
+
+<th>Stage</th>
+
+<th>Duration</th>
+
+</tr>
+
+<tr>
+
+<td>Site Verification</td>
+
+<td>1 Day</td>
+
+</tr>
+
+<tr>
+
+<td>Equipment Procurement</td>
+
+<td>3–7 Days</td>
+
+</tr>
+
+<tr>
+
+<td>Installation</td>
+
+<td>2–5 Days</td>
+
+</tr>
+
+<tr>
+
+<td>Testing & Commissioning</td>
+
+<td>1 Day</td>
+
+</tr>
+
+<tr>
+
+<td>Client Handover</td>
+
+<td>Same Day</td>
+
+</tr>
+
+</table>
+
+<div style="page-break-after:always;"></div>
+
+<h1>
+
+Warranty
+
+</h1>
+
+<p>
+
+• Solar Panels: Manufacturer Warranty
+
+</p>
+
+<p>
+
+• Batteries: Manufacturer Warranty
+
+</p>
+
+<p>
+
+• Inverter: Manufacturer Warranty
+
+</p>
+
+<p>
+
+• Installation: SolarNaija Workmanship Warranty
+
+</p>
+
+<h1>
+
+Terms & Conditions
+
+</h1>
+
+<ul>
+
+<li>Proposal valid for 30 days.</li>
+
+<li>70% advance payment before commencement.</li>
+
+<li>30% balance after commissioning.</li>
+
+<li>Equipment availability subject to stock.</li>
+
+<li>Changes requested after approval may affect pricing.</li>
+
+</ul>
+
+<div style="page-break-after:always;"></div>
+
+<h1>
+
+Acceptance
+
+</h1>
+
+<p>
+
+I hereby accept this proposal and authorize SolarNaija to commence the project.
+
+</p>
+
+<br><br><br><br>
+
+<table style="border:none;">
+
+<tr>
+
+<td style="border:none;">
+
+______________________________
+
+<br>
+
+Client Signature
+
+</td>
+
+<td style="border:none;text-align:right;">
+
+______________________________
+
+<br>
+
+SolarNaija Representative
+
+</td>
+
+</tr>
+
+</table>
+
+<br><br>
+
+<p>
+
+Date: ______________________
+
+</p>
+
+{% endblock %}

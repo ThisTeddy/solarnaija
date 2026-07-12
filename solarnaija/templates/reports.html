@@ -1,0 +1,310 @@
+
+{% extends "app.html" %}
+
+{% block title %}Reports{% endblock %}
+
+{% block content %}
+
+<div class="space-y-8">
+
+    <!-- Header -->
+
+    <div class="flex flex-col md:flex-row md:justify-between md:items-center gap-6">
+
+        <div>
+
+            <h1 class="text-3xl font-bold text-slate-800">
+
+                Reports & Analytics
+
+            </h1>
+
+            <p class="text-slate-500 mt-2">
+
+                Overview of your SolarNaija business performance.
+
+            </p>
+
+        </div>
+
+        <a
+            href="{% url 'export_reports' %}"
+            class="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-xl">
+
+            <i class="fas fa-download mr-2"></i>
+
+            Export Report
+
+        </a>
+
+    </div>
+
+    <!-- Statistics -->
+
+    <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
+
+        <div class="bg-white rounded-2xl shadow-sm p-6">
+
+            <p class="text-slate-500">Projects</p>
+
+            <h2 class="text-3xl font-bold mt-2">
+
+                {{ total_projects }}
+
+            </h2>
+
+        </div>
+
+        <div class="bg-white rounded-2xl shadow-sm p-6">
+
+            <p class="text-slate-500">Quotes</p>
+
+            <h2 class="text-3xl font-bold mt-2">
+
+                {{ total_quotes }}
+
+            </h2>
+
+        </div>
+
+        <div class="bg-white rounded-2xl shadow-sm p-6">
+
+            <p class="text-slate-500">Proposals</p>
+
+            <h2 class="text-3xl font-bold mt-2">
+
+                {{ total_proposals }}
+
+            </h2>
+
+        </div>
+
+        <div class="bg-green-600 rounded-2xl shadow-sm p-6 text-white">
+
+            <p>Total Revenue</p>
+
+            <h2 class="text-3xl font-bold mt-2">
+
+                ₦{{ total_revenue|floatformat:2 }}
+
+            </h2>
+
+        </div>
+
+    </div>
+
+    <!-- Extra Statistics -->
+
+    <div class="grid md:grid-cols-2 gap-6">
+
+        <div class="bg-white rounded-2xl shadow-sm p-8">
+
+            <h2 class="text-xl font-semibold mb-6">
+
+                Business Summary
+
+            </h2>
+
+            <div class="space-y-4">
+
+                <div class="flex justify-between">
+
+                    <span>Total Components</span>
+
+                    <strong>{{ total_components }}</strong>
+
+                </div>
+
+                <div class="flex justify-between">
+
+                    <span>Installed Capacity</span>
+
+                    <strong>{{ installed_capacity }} kW</strong>
+
+                </div>
+
+                <div class="flex justify-between">
+
+                    <span>Average Project Value</span>
+
+                    <strong>₦{{ average_project|floatformat:2 }}</strong>
+
+                </div>
+
+                <div class="flex justify-between">
+
+                    <span>Completed Projects</span>
+
+                    <strong>{{ completed_projects }}</strong>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="bg-white rounded-2xl shadow-sm p-8">
+
+            <h2 class="text-xl font-semibold mb-6">
+
+                Recent Activity
+
+            </h2>
+
+            <div class="space-y-4">
+
+                {% for project in recent_projects %}
+
+                    <div class="flex justify-between border-b pb-3">
+
+                        <div>
+
+                            <p class="font-semibold">
+
+                                {{ project.client_name }}
+
+                            </p>
+
+                            <p class="text-sm text-slate-500">
+
+                                {{ project.location }}
+
+                            </p>
+
+                        </div>
+
+                        <span class="text-sm text-slate-500">
+
+                            {{ project.created_at|date:"d M Y" }}
+
+                        </span>
+
+                    </div>
+
+                {% empty %}
+
+                    <p class="text-slate-500">
+
+                        No recent projects.
+
+                    </p>
+
+                {% endfor %}
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Revenue Chart Placeholder -->
+
+    <div class="bg-white rounded-2xl shadow-sm p-8">
+
+        <h2 class="text-xl font-semibold mb-6">
+
+            Revenue Trend
+
+        </h2>
+
+        <div class="h-80 rounded-xl border-2 border-dashed border-slate-300 flex items-center justify-center">
+
+            <div class="text-center">
+
+                <i class="fas fa-chart-line text-5xl text-slate-300"></i>
+
+                <p class="mt-4 text-slate-500">
+
+                    Chart.js revenue chart goes here
+
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Project Status -->
+
+    <div class="bg-white rounded-2xl shadow-sm p-8">
+
+        <h2 class="text-xl font-semibold mb-6">
+
+            Project Status Summary
+
+        </h2>
+
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+
+            <div>
+
+                <h3 class="text-3xl font-bold text-blue-600">
+
+                    {{ pending_projects }}
+
+                </h3>
+
+                <p class="text-slate-500">
+
+                    Pending
+
+                </p>
+
+            </div>
+
+            <div>
+
+                <h3 class="text-3xl font-bold text-yellow-500">
+
+                    {{ in_progress_projects }}
+
+                </h3>
+
+                <p class="text-slate-500">
+
+                    In Progress
+
+                </p>
+
+            </div>
+
+            <div>
+
+                <h3 class="text-3xl font-bold text-green-600">
+
+                    {{ completed_projects }}
+
+                </h3>
+
+                <p class="text-slate-500">
+
+                    Completed
+
+                </p>
+
+            </div>
+
+            <div>
+
+                <h3 class="text-3xl font-bold text-red-600">
+
+                    {{ cancelled_projects }}
+
+                </h3>
+
+                <p class="text-slate-500">
+
+                    Cancelled
+
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

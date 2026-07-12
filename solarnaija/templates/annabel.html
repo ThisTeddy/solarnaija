@@ -1,0 +1,216 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SEVENTEEN • Happy Birthday Annabel</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+html{scroll-behavior:smooth}
+body{font-family:Poppins,sans-serif;background:linear-gradient(180deg,#fff7fb,#fdf2f8,#faf5ff,#eef7ff);overflow-x:hidden}
+h1,h2,h3{font-family:"Playfair Display",serif}
+.glass{background:rgba(255,255,255,.58);backdrop-filter:blur(14px);border:1px solid rgba(255,255,255,.5)}
+.petal{position:fixed;top:-5vh;font-size:22px;opacity:.55;animation:fall linear infinite;pointer-events:none}
+@keyframes fall{from{transform:translateY(-10vh) rotate(0deg)}to{transform:translateY(120vh) rotate(360deg)}}
+.float{animation:f 5s ease-in-out infinite}@keyframes f{50%{transform:translateY(-10px)}}
+.fade{animation:fade 1.2s ease}@keyframes fade{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:none}}
+.star{animation:tw 2s ease-in-out infinite alternate}@keyframes tw{from{opacity:.4}to{opacity:1}}
+</style>
+</head>
+<body x-data="{letter:false,surprise:false}">
+<div class="petal" style="left:0.0%;animation-duration:10s;animation-delay:0.0s">🌸</div>
+<div class="petal" style="left:3.3%;animation-duration:11s;animation-delay:0.5s">🌸</div>
+<div class="petal" style="left:6.6%;animation-duration:12s;animation-delay:1.0s">🌸</div>
+<div class="petal" style="left:9.899999999999999%;animation-duration:13s;animation-delay:1.5s">🌸</div>
+<div class="petal" style="left:13.2%;animation-duration:14s;animation-delay:2.0s">🌸</div>
+<div class="petal" style="left:16.5%;animation-duration:15s;animation-delay:2.5s">🌸</div>
+<div class="petal" style="left:19.799999999999997%;animation-duration:16s;animation-delay:3.0s">🌸</div>
+<div class="petal" style="left:23.099999999999998%;animation-duration:17s;animation-delay:3.5s">🌸</div>
+<div class="petal" style="left:26.4%;animation-duration:10s;animation-delay:4.0s">🌸</div>
+<div class="petal" style="left:29.7%;animation-duration:11s;animation-delay:4.5s">🌸</div>
+<div class="petal" style="left:33.0%;animation-duration:12s;animation-delay:5.0s">🌸</div>
+<div class="petal" style="left:36.3%;animation-duration:13s;animation-delay:5.5s">🌸</div>
+<div class="petal" style="left:39.599999999999994%;animation-duration:14s;animation-delay:6.0s">🌸</div>
+<div class="petal" style="left:42.9%;animation-duration:15s;animation-delay:6.5s">🌸</div>
+<div class="petal" style="left:46.199999999999996%;animation-duration:16s;animation-delay:7.0s">🌸</div>
+<div class="petal" style="left:49.5%;animation-duration:17s;animation-delay:7.5s">🌸</div>
+<div class="petal" style="left:52.8%;animation-duration:10s;animation-delay:8.0s">🌸</div>
+<div class="petal" style="left:56.099999999999994%;animation-duration:11s;animation-delay:8.5s">🌸</div>
+<div class="petal" style="left:59.4%;animation-duration:12s;animation-delay:9.0s">🌸</div>
+<div class="petal" style="left:62.699999999999996%;animation-duration:13s;animation-delay:9.5s">🌸</div>
+<div class="petal" style="left:66.0%;animation-duration:14s;animation-delay:10.0s">🌸</div>
+<div class="petal" style="left:69.3%;animation-duration:15s;animation-delay:10.5s">🌸</div>
+<div class="petal" style="left:72.6%;animation-duration:16s;animation-delay:11.0s">🌸</div>
+<div class="petal" style="left:75.89999999999999%;animation-duration:17s;animation-delay:11.5s">🌸</div>
+<div class="petal" style="left:79.19999999999999%;animation-duration:10s;animation-delay:12.0s">🌸</div>
+<div class="petal" style="left:82.5%;animation-duration:11s;animation-delay:12.5s">🌸</div>
+<div class="petal" style="left:85.8%;animation-duration:12s;animation-delay:13.0s">🌸</div>
+<div class="petal" style="left:89.1%;animation-duration:13s;animation-delay:13.5s">🌸</div>
+<div class="petal" style="left:92.39999999999999%;animation-duration:14s;animation-delay:14.0s">🌸</div>
+<div class="petal" style="left:95.69999999999999%;animation-duration:15s;animation-delay:14.5s">🌸</div>
+
+<section class="min-h-screen flex items-center justify-center text-center px-6 relative">
+<div class="absolute inset-0 opacity-10 flex items-center justify-center text-[20rem] font-bold">17</div>
+<div class="relative fade">
+<p class="tracking-[0.5em] uppercase text-pink-500">July 17, 2026</p>
+<h1 class="text-6xl md:text-8xl mt-4">Happy Birthday</h1>
+<h2 class="text-5xl md:text-7xl text-rose-500 mt-3">Annabel ✨</h2>
+<p class="max-w-2xl mx-auto mt-8 text-lg text-gray-700">Some presents are wrapped in paper. This one is wrapped in code, stories, and little moments waiting for your photos.</p>
+<a href="#story" class="inline-block mt-10 rounded-full bg-rose-500 text-white px-8 py-4 shadow-xl hover:scale-105 transition">Begin the Story ↓</a>
+</div>
+</section>
+
+<section id="story" class="py-24 px-6">
+<div class="max-w-4xl mx-auto glass rounded-3xl p-10 text-center">
+<h2 class="text-5xl mb-8">Once Upon a Birthday</h2>
+<p class="text-xl leading-10">Every calendar has hundreds of ordinary days, but one of them belongs entirely to you. Today is that day. Welcome to your little corner of the internet.</p>
+</div>
+</section>
+
+<section class="py-24 px-6">
+<div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-10 items-center">
+<div class="aspect-[4/5] glass rounded-3xl border-2 border-dashed border-pink-300 flex items-center justify-center text-pink-400 text-2xl">Replace with<br>images/hero.jpg</div>
+<div>
+<h2 class="text-5xl mb-4">Today's Main Character</h2>
+<h3 class="text-3xl text-rose-500">Annabel 🌷</h3>
+<p class="mt-6 leading-8 text-gray-700">Write your own story here. Share a memory, a compliment, or a wish for her seventeenth year.</p>
+</div>
+</div>
+</section>
+
+<section class="py-24 px-6 bg-white/40">
+<h2 class="text-center text-5xl mb-12">Memory Lane 📸</h2>
+<div class="max-w-6xl mx-auto grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+
+<div class="glass rounded-3xl p-4 hover:scale-105 transition">
+<div class="aspect-[3/4] rounded-2xl border-2 border-dashed border-pink-300 flex items-center justify-center bg-pink-50">PHOTO 1<br>images/photo1.jpg</div>
+<p class="mt-3 text-center text-gray-600">Caption for memory #1</p>
+</div>
+
+<div class="glass rounded-3xl p-4 hover:scale-105 transition">
+<div class="aspect-[3/4] rounded-2xl border-2 border-dashed border-pink-300 flex items-center justify-center bg-pink-50">PHOTO 2<br>images/photo2.jpg</div>
+<p class="mt-3 text-center text-gray-600">Caption for memory #2</p>
+</div>
+
+<div class="glass rounded-3xl p-4 hover:scale-105 transition">
+<div class="aspect-[3/4] rounded-2xl border-2 border-dashed border-pink-300 flex items-center justify-center bg-pink-50">PHOTO 3<br>images/photo3.jpg</div>
+<p class="mt-3 text-center text-gray-600">Caption for memory #3</p>
+</div>
+
+<div class="glass rounded-3xl p-4 hover:scale-105 transition">
+<div class="aspect-[3/4] rounded-2xl border-2 border-dashed border-pink-300 flex items-center justify-center bg-pink-50">PHOTO 4<br>images/photo4.jpg</div>
+<p class="mt-3 text-center text-gray-600">Caption for memory #4</p>
+</div>
+
+<div class="glass rounded-3xl p-4 hover:scale-105 transition">
+<div class="aspect-[3/4] rounded-2xl border-2 border-dashed border-pink-300 flex items-center justify-center bg-pink-50">PHOTO 5<br>images/photo5.jpg</div>
+<p class="mt-3 text-center text-gray-600">Caption for memory #5</p>
+</div>
+
+<div class="glass rounded-3xl p-4 hover:scale-105 transition">
+<div class="aspect-[3/4] rounded-2xl border-2 border-dashed border-pink-300 flex items-center justify-center bg-pink-50">PHOTO 6<br>images/photo6.jpg</div>
+<p class="mt-3 text-center text-gray-600">Caption for memory #6</p>
+</div>
+
+<div class="glass rounded-3xl p-4 hover:scale-105 transition">
+<div class="aspect-[3/4] rounded-2xl border-2 border-dashed border-pink-300 flex items-center justify-center bg-pink-50">PHOTO 7<br>images/photo7.jpg</div>
+<p class="mt-3 text-center text-gray-600">Caption for memory #7</p>
+</div>
+
+<div class="glass rounded-3xl p-4 hover:scale-105 transition">
+<div class="aspect-[3/4] rounded-2xl border-2 border-dashed border-pink-300 flex items-center justify-center bg-pink-50">PHOTO 8<br>images/photo8.jpg</div>
+<p class="mt-3 text-center text-gray-600">Caption for memory #8</p>
+</div>
+
+<div class="glass rounded-3xl p-4 hover:scale-105 transition">
+<div class="aspect-[3/4] rounded-2xl border-2 border-dashed border-pink-300 flex items-center justify-center bg-pink-50">PHOTO 9<br>images/photo9.jpg</div>
+<p class="mt-3 text-center text-gray-600">Caption for memory #9</p>
+</div>
+
+</div>
+</section>
+
+<section class="py-24 px-6">
+<h2 class="text-center text-5xl mb-12">17 Little Wishes ⭐</h2>
+<div class="max-w-4xl mx-auto grid gap-4">
+<div class="glass rounded-2xl p-5"><strong>01.</strong> Replace this line with a personal wish, joke, or memory.</div>
+<div class="glass rounded-2xl p-5"><strong>02.</strong> Replace this line with a personal wish, joke, or memory.</div>
+<div class="glass rounded-2xl p-5"><strong>03.</strong> Replace this line with a personal wish, joke, or memory.</div>
+<div class="glass rounded-2xl p-5"><strong>04.</strong> Replace this line with a personal wish, joke, or memory.</div>
+<div class="glass rounded-2xl p-5"><strong>05.</strong> Replace this line with a personal wish, joke, or memory.</div>
+<div class="glass rounded-2xl p-5"><strong>06.</strong> Replace this line with a personal wish, joke, or memory.</div>
+<div class="glass rounded-2xl p-5"><strong>07.</strong> Replace this line with a personal wish, joke, or memory.</div>
+<div class="glass rounded-2xl p-5"><strong>08.</strong> Replace this line with a personal wish, joke, or memory.</div>
+<div class="glass rounded-2xl p-5"><strong>09.</strong> Replace this line with a personal wish, joke, or memory.</div>
+<div class="glass rounded-2xl p-5"><strong>10.</strong> Replace this line with a personal wish, joke, or memory.</div>
+<div class="glass rounded-2xl p-5"><strong>11.</strong> Replace this line with a personal wish, joke, or memory.</div>
+<div class="glass rounded-2xl p-5"><strong>12.</strong> Replace this line with a personal wish, joke, or memory.</div>
+<div class="glass rounded-2xl p-5"><strong>13.</strong> Replace this line with a personal wish, joke, or memory.</div>
+<div class="glass rounded-2xl p-5"><strong>14.</strong> Replace this line with a personal wish, joke, or memory.</div>
+<div class="glass rounded-2xl p-5"><strong>15.</strong> Replace this line with a personal wish, joke, or memory.</div>
+<div class="glass rounded-2xl p-5"><strong>16.</strong> Replace this line with a personal wish, joke, or memory.</div>
+<div class="glass rounded-2xl p-5"><strong>17.</strong> Replace this line with a personal wish, joke, or memory.</div>
+
+</div>
+</section>
+
+<section class="py-24 px-6">
+<h2 class="text-center text-5xl mb-10">A Secret Letter 💌</h2>
+<div class="text-center">
+<button @click="letter=!letter" class="rounded-full bg-rose-500 text-white px-8 py-3">Open</button>
+</div>
+<div x-show="letter" x-transition class="glass max-w-3xl mx-auto mt-8 p-8 rounded-3xl" style="display:none">
+<p class="leading-8 text-lg">
+Happy Birthday, Annabel.<br><br>
+May 17 bring new adventures, laughter, confidence, wonderful friendships, and unforgettable moments. Keep shining and keep being yourself.
+</p>
+</div>
+</section>
+
+<section class="py-24 px-6 bg-gradient-to-b from-transparent to-pink-100">
+<h2 class="text-center text-5xl mb-10">Countdown to the Surprise</h2>
+<div class="max-w-3xl mx-auto grid grid-cols-4 gap-3 text-center">
+<div class="glass rounded-xl p-4 text-2xl">17</div>
+<div class="glass rounded-xl p-4 text-2xl">16</div>
+<div class="glass rounded-xl p-4 text-2xl">15</div>
+<div class="glass rounded-xl p-4 text-2xl">14</div>
+<div class="glass rounded-xl p-4 text-2xl">13</div>
+<div class="glass rounded-xl p-4 text-2xl">12</div>
+<div class="glass rounded-xl p-4 text-2xl">11</div>
+<div class="glass rounded-xl p-4 text-2xl">10</div>
+<div class="glass rounded-xl p-4 text-2xl">9</div>
+<div class="glass rounded-xl p-4 text-2xl">8</div>
+<div class="glass rounded-xl p-4 text-2xl">7</div>
+<div class="glass rounded-xl p-4 text-2xl">6</div>
+<div class="glass rounded-xl p-4 text-2xl">5</div>
+<div class="glass rounded-xl p-4 text-2xl">4</div>
+<div class="glass rounded-xl p-4 text-2xl">3</div>
+<div class="glass rounded-xl p-4 text-2xl">2</div>
+<div class="glass rounded-xl p-4 text-2xl">1</div>
+
+</div>
+</section>
+
+<section class="min-h-screen flex items-center justify-center px-6 text-center">
+<div>
+<div class="text-6xl float">🎁</div>
+<h2 class="text-5xl mt-6 mb-6">Final Surprise</h2>
+<button @click="surprise=true" class="rounded-full bg-pink-600 text-white px-10 py-4 hover:scale-105 transition">Open Gift</button>
+<div x-show="surprise" x-transition.scale style="display:none" class="mt-10">
+<div class="text-7xl">🎉🎈✨💖🌸</div>
+<h2 class="text-6xl mt-6">Happy 17th Birthday</h2>
+<h3 class="text-5xl text-rose-500 mt-2">Annabel</h3>
+<p class="mt-6 text-xl max-w-xl mx-auto">May July 17, 2026 be filled with smiles, wonderful surprises, and memories you'll treasure for years to come.</p>
+</div>
+</div>
+</section>
+
+<footer class="py-12 text-center text-gray-500">
+Made especially for Annabel • Replace placeholders with your own images in an <code>images/</code> folder.
+</footer>
+</body>
+</html>

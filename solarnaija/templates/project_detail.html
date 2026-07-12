@@ -1,0 +1,373 @@
+{% extends "app.html" %}
+
+{% block content %}
+
+<div class="max-w-7xl mx-auto">
+
+    <!-- Header -->
+
+    <div class="flex flex-col lg:flex-row justify-between gap-4 mb-8">
+
+        <div>
+
+            <h1 class="text-3xl font-bold">
+
+                {{ project.client_name }}
+
+            </h1>
+
+            <p class="text-gray-500">
+
+                {{ project.project_number }}
+
+            </p>
+
+        </div>
+
+        <div class="flex flex-wrap gap-3">
+
+            <a href="{% url 'edit_project' project.id %}"
+               class="bg-yellow-500 text-white px-5 py-3 rounded-xl">
+
+                Edit
+
+            </a>
+
+            <a href="{% url 'add_appliance' project.id %}"
+               class="bg-green-600 text-white px-5 py-3 rounded-xl">
+
+                + Appliance
+
+            </a>
+
+            <form method="POST"
+                  action="{% url 'system_design' project.id %}">
+
+                {% csrf_token %}
+
+                <button
+                    class="bg-blue-600 text-white px-5 py-3 rounded-xl">
+
+                    ⚡ Calculate
+
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+    <!-- Project Info -->
+
+    <div class="grid md:grid-cols-4 gap-6 mb-8">
+
+        <div class="bg-white rounded-xl shadow p-6">
+
+            <p class="text-gray-500">
+
+                Location
+
+            </p>
+
+            <h2 class="font-bold">
+
+                {{ project.location }}
+
+            </h2>
+
+        </div>
+
+        <div class="bg-white rounded-xl shadow p-6">
+
+            <p class="text-gray-500">
+
+                System
+
+            </p>
+
+            <h2 class="font-bold">
+
+                {{ project.get_system_type_display }}
+
+            </h2>
+
+        </div>
+
+        <div class="bg-white rounded-xl shadow p-6">
+
+            <p class="text-gray-500">
+
+                Roof
+
+            </p>
+
+            <h2 class="font-bold">
+
+                {{ project.get_roof_type_display }}
+
+            </h2>
+
+        </div>
+
+        <div class="bg-white rounded-xl shadow p-6">
+
+            <p class="text-gray-500">
+
+                Status
+
+            </p>
+
+            <span class="px-3 py-1 bg-green-100 rounded-full">
+
+                {{ project.status }}
+
+            </span>
+
+        </div>
+
+    </div>
+
+    <!-- Appliances -->
+
+    <div class="bg-white rounded-xl shadow mb-8">
+
+        <div class="p-6 border-b">
+
+            <h2 class="text-xl font-bold">
+
+                Appliances
+
+            </h2>
+
+        </div>
+
+        <div class="overflow-x-auto">
+
+            <table class="min-w-full">
+
+                <thead class="bg-gray-100">
+
+                <tr>
+
+                    <th class="p-4 text-left">Name</th>
+
+                    <th class="p-4">Qty</th>
+
+                    <th class="p-4">Watts</th>
+
+                    <th class="p-4">Hours</th>
+
+                    <th class="p-4">Daily Wh</th>
+
+                </tr>
+
+                </thead>
+
+                <tbody>
+
+                {% for appliance in appliances %}
+
+                <tr class="border-t">
+
+                    <td class="p-4">
+
+                        {{ appliance.name }}
+
+                    </td>
+
+                    <td class="text-center">
+
+                        {{ appliance.quantity }}
+
+                    </td>
+
+                    <td class="text-center">
+
+                        {{ appliance.watts }}
+
+                    </td>
+
+                    <td class="text-center">
+
+                        {{ appliance.hours_per_day }}
+
+                    </td>
+
+                    <td class="text-center">
+
+                        {{ appliance.daily_consumption }}
+
+                    </td>
+
+                </tr>
+
+                {% empty %}
+
+                <tr>
+
+                    <td colspan="5"
+                        class="text-center py-10">
+
+                        No appliances added.
+
+                    </td>
+
+                </tr>
+
+                {% endfor %}
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+    <!-- Engineering Result -->
+
+    {% if calculation %}
+
+    <div class="bg-white rounded-xl shadow p-8 mb-8">
+
+        <h2 class="text-2xl font-bold mb-6">
+
+            Engineering Design
+
+        </h2>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+
+            <div>
+
+                <p>Daily Load</p>
+
+                <h2 class="text-3xl font-bold">
+
+                    {{ calculation.total_daily_load }} Wh
+
+                </h2>
+
+            </div>
+
+            <div>
+
+                <p>Peak Load</p>
+
+                <h2 class="text-3xl font-bold">
+
+                    {{ calculation.total_peak_load }} W
+
+                </h2>
+
+            </div>
+
+            <div>
+
+                <p>Panels</p>
+
+                <h2 class="text-3xl font-bold">
+
+                    {{ calculation.required_panels }}
+
+                </h2>
+
+            </div>
+
+            <div>
+
+                <p>Battery</p>
+
+                <h2 class="text-3xl font-bold">
+
+                    {{ calculation.battery_quantity }}
+
+                </h2>
+
+            </div>
+
+            <div>
+
+                <p>Battery Capacity</p>
+
+                <h2 class="text-3xl font-bold">
+
+                    {{ calculation.battery_capacity }}Ah
+
+                </h2>
+
+            </div>
+
+            <div>
+
+                <p>Inverter</p>
+
+                <h2 class="text-3xl font-bold">
+
+                    {{ calculation.inverter_size }}W
+
+                </h2>
+
+            </div>
+
+            <div>
+
+                <p>Controller</p>
+
+                <h2 class="text-3xl font-bold">
+
+                    {{ calculation.controller_size }}A
+
+                </h2>
+
+            </div>
+
+            <div>
+
+                <p>Estimated Cost</p>
+
+                <h2 class="text-3xl font-bold text-green-600">
+
+                    ₦{{ calculation.estimated_cost }}
+
+                </h2>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    {% endif %}
+
+    <!-- Documents -->
+
+    <div class="grid md:grid-cols-3 gap-6">
+
+        <a href="{% url 'project_bom' project.id %}"
+           class="bg-blue-600 text-white rounded-xl p-6 text-center">
+
+            Bill of Materials
+
+        </a>
+
+        <a href="{% url 'project_quote' project.id %}"
+           class="bg-green-600 text-white rounded-xl p-6 text-center">
+
+            Quote
+
+        </a>
+
+        <a href="{% url 'project_proposal' project.id %}"
+           class="bg-purple-600 text-white rounded-xl p-6 text-center">
+
+            Proposal
+
+        </a>
+
+    </div>
+
+</div>
+
+{% endblock %}

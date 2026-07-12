@@ -1,0 +1,432 @@
+{% extends "app.html" %}
+
+{% block title %}Project Proposal{% endblock %}
+
+{% block content %}
+
+<div class="max-w-6xl mx-auto space-y-8">
+
+    <!-- Header -->
+
+    <div class="bg-gradient-to-r from-green-600 to-emerald-700 rounded-3xl p-10 text-white">
+
+        <h1 class="text-4xl font-bold">
+
+            Solar Power Proposal
+
+        </h1>
+
+        <p class="mt-3 text-green-100">
+
+            Prepared for {{ project.client_name }}
+
+        </p>
+
+        <div class="grid md:grid-cols-3 gap-6 mt-8">
+
+            <div>
+
+                <p class="text-green-200 text-sm">
+
+                    Client
+
+                </p>
+
+                <p class="font-semibold">
+
+                    {{ project.client_name }}
+
+                </p>
+
+            </div>
+
+            <div>
+
+                <p class="text-green-200 text-sm">
+
+                    Location
+
+                </p>
+
+                <p class="font-semibold">
+
+                    {{ project.location }}
+
+                </p>
+
+            </div>
+
+            <div>
+
+                <p class="text-green-200 text-sm">
+
+                    Date
+
+                </p>
+
+                <p class="font-semibold">
+
+                    {{ today|date:"d M Y" }}
+
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Executive Summary -->
+
+    <div class="bg-white rounded-2xl shadow-sm p-8">
+
+        <h2 class="text-2xl font-bold mb-4">
+
+            Executive Summary
+
+        </h2>
+
+        <p class="text-slate-600 leading-8">
+
+            This proposal presents a complete solar power solution designed
+            specifically for your energy requirements. The recommended system
+            reduces electricity costs, improves energy reliability, and provides
+            clean renewable power using high-quality components.
+
+        </p>
+
+    </div>
+
+    <!-- System Overview -->
+
+    <div class="grid md:grid-cols-2 xl:grid-cols-4 gap-6">
+
+        <div class="bg-white rounded-2xl shadow-sm p-6">
+
+            <p class="text-slate-500">
+
+                Daily Energy
+
+            </p>
+
+            <h2 class="text-3xl font-bold mt-3">
+
+                {{ daily_energy }} Wh
+
+            </h2>
+
+        </div>
+
+        <div class="bg-white rounded-2xl shadow-sm p-6">
+
+            <p class="text-slate-500">
+
+                Peak Load
+
+            </p>
+
+            <h2 class="text-3xl font-bold mt-3">
+
+                {{ peak_load }} W
+
+            </h2>
+
+        </div>
+
+        <div class="bg-white rounded-2xl shadow-sm p-6">
+
+            <p class="text-slate-500">
+
+                Solar Capacity
+
+            </p>
+
+            <h2 class="text-3xl font-bold mt-3">
+
+                {{ solar_size }} kW
+
+            </h2>
+
+        </div>
+
+        <div class="bg-green-600 rounded-2xl shadow-sm p-6 text-white">
+
+            <p>
+
+                Investment
+
+            </p>
+
+            <h2 class="text-3xl font-bold mt-3">
+
+                ₦{{ grand_total }}
+
+            </h2>
+
+        </div>
+
+    </div>
+
+    <!-- Equipment -->
+
+    <div class="bg-white rounded-2xl shadow-sm p-8">
+
+        <h2 class="text-2xl font-bold mb-8">
+
+            Recommended Equipment
+
+        </h2>
+
+        <div class="grid md:grid-cols-2 gap-8">
+
+            <div>
+
+                <h3 class="font-semibold mb-4">
+
+                    Solar Panels
+
+                </h3>
+
+                <p>
+
+                    {{ number_of_panels }} × {{ panel_wattage }}W Solar Panels
+
+                </p>
+
+            </div>
+
+            <div>
+
+                <h3 class="font-semibold mb-4">
+
+                    Inverter
+
+                </h3>
+
+                <p>
+
+                    {{ inverter_size }}W Pure Sine Wave Inverter
+
+                </p>
+
+            </div>
+
+            <div>
+
+                <h3 class="font-semibold mb-4">
+
+                    Battery Bank
+
+                </h3>
+
+                <p>
+
+                    {{ battery_quantity }} Batteries
+
+                </p>
+
+            </div>
+
+            <div>
+
+                <h3 class="font-semibold mb-4">
+
+                    Charge Controller
+
+                </h3>
+
+                <p>
+
+                    {{ controller_size }}A MPPT Controller
+
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Benefits -->
+
+    <div class="bg-white rounded-2xl shadow-sm p-8">
+
+        <h2 class="text-2xl font-bold mb-6">
+
+            Benefits
+
+        </h2>
+
+        <div class="grid md:grid-cols-2 gap-6">
+
+            <div class="flex gap-4">
+
+                <div class="text-green-600 text-2xl">
+
+                    ✓
+
+                </div>
+
+                <div>
+
+                    <h3 class="font-semibold">
+
+                        Reduced Electricity Bills
+
+                    </h3>
+
+                    <p class="text-slate-600">
+
+                        Save significantly on utility costs.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+            <div class="flex gap-4">
+
+                <div class="text-green-600 text-2xl">
+
+                    ✓
+
+                </div>
+
+                <div>
+
+                    <h3 class="font-semibold">
+
+                        Reliable Backup Power
+
+                    </h3>
+
+                    <p class="text-slate-600">
+
+                        Enjoy uninterrupted electricity.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+            <div class="flex gap-4">
+
+                <div class="text-green-600 text-2xl">
+
+                    ✓
+
+                </div>
+
+                <div>
+
+                    <h3 class="font-semibold">
+
+                        Environmentally Friendly
+
+                    </h3>
+
+                    <p class="text-slate-600">
+
+                        Reduce your carbon footprint.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+            <div class="flex gap-4">
+
+                <div class="text-green-600 text-2xl">
+
+                    ✓
+
+                </div>
+
+                <div>
+
+                    <h3 class="font-semibold">
+
+                        Long-Term Investment
+
+                    </h3>
+
+                    <p class="text-slate-600">
+
+                        Durable components with long warranties.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Timeline -->
+
+    <div class="bg-white rounded-2xl shadow-sm p-8">
+
+        <h2 class="text-2xl font-bold mb-6">
+
+            Project Timeline
+
+        </h2>
+
+        <ol class="space-y-4">
+
+            <li>1. Site Inspection & Final Confirmation</li>
+            <li>2. Equipment Procurement</li>
+            <li>3. Installation</li>
+            <li>4. Testing & Commissioning</li>
+            <li>5. Client Training & Handover</li>
+
+        </ol>
+
+    </div>
+
+    <!-- Footer -->
+
+    <div class="bg-slate-900 rounded-2xl text-white p-8">
+
+        <h2 class="text-2xl font-bold">
+
+            Ready to Proceed?
+
+        </h2>
+
+        <p class="mt-4 text-slate-300">
+
+            Thank you for considering SolarNaija. We look forward to delivering a reliable, efficient, and long-lasting solar energy solution for you.
+
+        </p>
+
+        <div class="mt-8 flex flex-wrap gap-4">
+
+            <a
+                href="{% url 'proposal_pdf' project.pk %}"
+                class="bg-green-600 hover:bg-green-700 px-6 py-3 rounded-xl">
+
+                Download Proposal PDF
+
+            </a>
+
+            <a
+                href="{% url 'project_quote' project.pk %}"
+                class="bg-white text-slate-900 px-6 py-3 rounded-xl">
+
+                View Quote
+
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,242 @@
+{% extends "app.html" %}
+
+{% block title %}Project Quote{% endblock %}
+
+{% block content %}
+
+<div class="space-y-8">
+
+    <!-- Header -->
+
+    <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
+
+        <div>
+
+            <h1 class="text-3xl font-bold text-slate-800">
+
+                Project Quote
+
+            </h1>
+
+            <p class="text-slate-500 mt-2">
+
+                {{ project.client_name }} • {{ project.location }}
+
+            </p>
+
+        </div>
+
+        <div class="flex flex-wrap gap-3">
+
+            <a
+                href="{% url 'project_bom' project.pk %}"
+                class="px-6 py-3 rounded-xl bg-slate-200 hover:bg-slate-300">
+
+                ← BOM
+
+            </a>
+
+            <a
+                href="{% url 'quote_pdf' project.pk %}"
+                class="px-6 py-3 rounded-xl bg-red-600 hover:bg-red-700 text-white">
+
+                Download PDF
+
+            </a>
+
+        </div>
+
+    </div>
+
+    <!-- Quote Summary -->
+
+    <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
+
+        <div class="bg-white rounded-2xl shadow-sm p-6">
+
+            <p class="text-slate-500">
+
+                Material Cost
+
+            </p>
+
+            <h2 class="text-2xl font-bold mt-3">
+
+                ₦{{ material_cost|floatformat:2 }}
+
+            </h2>
+
+        </div>
+
+        <div class="bg-white rounded-2xl shadow-sm p-6">
+
+            <p class="text-slate-500">
+
+                Labour
+
+            </p>
+
+            <h2 class="text-2xl font-bold mt-3">
+
+                ₦{{ labour_cost|floatformat:2 }}
+
+            </h2>
+
+        </div>
+
+        <div class="bg-white rounded-2xl shadow-sm p-6">
+
+            <p class="text-slate-500">
+
+                VAT
+
+            </p>
+
+            <h2 class="text-2xl font-bold mt-3">
+
+                ₦{{ vat|floatformat:2 }}
+
+            </h2>
+
+        </div>
+
+        <div class="bg-green-600 rounded-2xl shadow-sm p-6 text-white">
+
+            <p>
+
+                Grand Total
+
+            </p>
+
+            <h2 class="text-3xl font-bold mt-3">
+
+                ₦{{ grand_total|floatformat:2 }}
+
+            </h2>
+
+        </div>
+
+    </div>
+
+    <!-- Quote Items -->
+
+    <div class="bg-white rounded-2xl shadow-sm overflow-hidden">
+
+        <div class="p-6 border-b">
+
+            <h2 class="text-xl font-semibold">
+
+                Quote Breakdown
+
+            </h2>
+
+        </div>
+
+        <div class="overflow-x-auto">
+
+            <table class="min-w-full">
+
+                <thead class="bg-slate-50">
+
+                    <tr>
+
+                        <th class="px-6 py-4 text-left">Description</th>
+                        <th class="px-6 py-4 text-center">Qty</th>
+                        <th class="px-6 py-4 text-right">Unit Price</th>
+                        <th class="px-6 py-4 text-right">Total</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                {% for item in quote_items %}
+
+                <tr class="border-t">
+
+                    <td class="px-6 py-4">
+
+                        {{ item.name }}
+
+                    </td>
+
+                    <td class="px-6 py-4 text-center">
+
+                        {{ item.quantity }}
+
+                    </td>
+
+                    <td class="px-6 py-4 text-right">
+
+                        ₦{{ item.unit_price|floatformat:2 }}
+
+                    </td>
+
+                    <td class="px-6 py-4 text-right font-semibold">
+
+                        ₦{{ item.total|floatformat:2 }}
+
+                    </td>
+
+                </tr>
+
+                {% endfor %}
+
+                </tbody>
+
+                <tfoot class="bg-slate-100">
+
+                    <tr>
+
+                        <td colspan="3" class="px-6 py-5 text-right font-bold">
+
+                            Grand Total
+
+                        </td>
+
+                        <td class="px-6 py-5 text-right font-bold text-green-700">
+
+                            ₦{{ grand_total|floatformat:2 }}
+
+                        </td>
+
+                    </tr>
+
+                </tfoot>
+
+            </table>
+
+        </div>
+
+    </div>
+
+    <!-- Terms -->
+
+    <div class="bg-white rounded-2xl shadow-sm p-8">
+
+        <h2 class="text-xl font-semibold mb-4">
+
+            Terms & Conditions
+
+        </h2>
+
+        <ul class="space-y-3 list-disc list-inside text-slate-600">
+
+            <li>Quote valid for 30 days.</li>
+
+            <li>70% payment before project commencement.</li>
+
+            <li>Balance payable after installation.</li>
+
+            <li>Equipment supplied with manufacturer's warranty.</li>
+
+            <li>Installation includes testing and commissioning.</li>
+
+        </ul>
+
+    </div>
+
+</div>
+
+{% endblock %}

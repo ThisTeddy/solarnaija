@@ -1,0 +1,256 @@
+
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<meta charset="utf-8">
+
+<title>{% block title %}{% endblock %}</title>
+
+<style>
+
+@page{
+
+    size:A4;
+
+    margin:25px;
+
+}
+
+body{
+
+    font-family:Arial,Helvetica,sans-serif;
+
+    color:#333;
+
+    font-size:13px;
+
+    line-height:1.6;
+
+}
+
+.header{
+
+    border-bottom:3px solid #16a34a;
+
+    padding-bottom:15px;
+
+    margin-bottom:30px;
+
+}
+
+.logo{
+
+    font-size:28px;
+
+    font-weight:bold;
+
+    color:#16a34a;
+
+}
+
+.company{
+
+    float:right;
+
+    text-align:right;
+
+    font-size:12px;
+
+}
+
+.clear{
+
+    clear:both;
+
+}
+
+h1{
+
+    color:#16a34a;
+
+    margin-bottom:10px;
+
+}
+
+h2{
+
+    color:#0f172a;
+
+    margin-top:25px;
+
+}
+
+table{
+
+    width:100%;
+
+    border-collapse:collapse;
+
+    margin-top:20px;
+
+}
+
+th{
+
+    background:#16a34a;
+
+    color:white;
+
+    padding:10px;
+
+    text-align:left;
+
+}
+
+td{
+
+    padding:10px;
+
+    border:1px solid #ddd;
+
+}
+
+.total{
+
+    background:#f0fdf4;
+
+    font-weight:bold;
+
+}
+
+.summary{
+
+    width:45%;
+
+    float:right;
+
+    margin-top:20px;
+
+}
+
+.badge{
+
+    display:inline-block;
+
+    background:#dcfce7;
+
+    color:#166534;
+
+    padding:5px 12px;
+
+    border-radius:20px;
+
+    font-size:11px;
+
+}
+
+.footer{
+
+    position:fixed;
+
+    bottom:0;
+
+    left:0;
+
+    right:0;
+
+    text-align:center;
+
+    font-size:11px;
+
+    color:#777;
+
+    border-top:1px solid #ddd;
+
+    padding-top:8px;
+
+}
+
+.signature{
+
+    margin-top:80px;
+
+}
+
+.signature-box{
+
+    width:250px;
+
+    border-top:1px solid #333;
+
+    text-align:center;
+
+    padding-top:10px;
+
+}
+
+.watermark{
+
+    position:fixed;
+
+    top:45%;
+
+    left:20%;
+
+    font-size:80px;
+
+    color:#efefef;
+
+    transform:rotate(-30deg);
+
+    opacity:.2;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="watermark">
+
+SOLARNAIJA
+
+</div>
+
+<div class="header">
+
+<div class="logo">
+
+SolarNaija
+
+</div>
+
+<div class="company">
+
+<strong>SolarNaija Ltd</strong><br>
+
+Lagos, Nigeria<br>
+
+support@solarnaija.com<br>
+
++234 XXX XXX XXXX
+
+</div>
+
+<div class="clear"></div>
+
+</div>
+
+{% block content %}
+
+{% endblock %}
+
+<div class="footer">
+
+SolarNaija • Professional Solar Design Software • Generated on
+{{ today|date:"d M Y H:i" }}
+
+</div>
+
+</body>
+
+</html>

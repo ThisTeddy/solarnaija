@@ -1,0 +1,158 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" x-data="{ sidebar: true, notification:false, profile:false }">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>{% block title %}SolarNaija{% endblock %}</title>
+
+    <!-- Google Font -->
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Tailwind -->
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <script>
+
+        tailwind.config = {
+
+            theme: {
+
+                extend: {
+
+                    colors: {
+
+                        primary: "#16A34A",
+
+                        dark: "#0F172A",
+
+                        body: "#F8FAFC"
+
+                    }
+
+                }
+
+            }
+
+        }
+
+    </script>
+
+    <!-- Alpine -->
+
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+    <!-- Font Awesome -->
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+</head>
+<body class="bg-slate-100" x-data="{ sidebar:false }">
+
+    <div class="min-h-screen flex">
+    
+        <!-- Desktop Sidebar -->
+    
+        <aside class="hidden lg:flex lg:flex-col w-72 bg-slate-900 text-white">
+    
+            {% include "sidebar.html" %}
+    
+        </aside>
+    
+        <!-- Mobile Sidebar -->
+    
+        <div
+            x-show="sidebar"
+            x-transition
+            class="fixed inset-0 z-50 lg:hidden">
+    
+            <div
+                class="absolute inset-0 bg-black/50"
+                @click="sidebar=false">
+            </div>
+    
+            <aside
+                class="relative w-72 h-full bg-slate-900 text-white">
+    
+                {% include "sidebar.html" %}
+    
+            </aside>
+    
+        </div>
+    
+        <!-- Main -->
+    
+        <div class="flex-1 flex flex-col overflow-hidden">
+    
+            <!-- Topbar -->
+    
+            <header
+                class="bg-white border-b px-4 md:px-8 py-4 flex justify-between items-center">
+    
+                <button
+                    class="lg:hidden text-2xl"
+                    @click="sidebar=true">
+    
+                    ☰
+    
+                </button>
+    
+                <h2 class="font-bold text-xl">
+    
+                    SolarNaija
+    
+                </h2>
+    
+                <div class="flex items-center gap-4">
+    
+                    <span>
+    
+                        {{ request.user.first_name }}
+    
+                    </span>
+    
+                    {% if request.user.avatar %}
+    
+                    <img
+                        src="{{ request.user.avatar.url }}"
+                        class="w-10 h-10 rounded-full object-cover">
+    
+                    {% else %}
+    
+                    <div class="w-10 h-10 rounded-full bg-green-600 text-white flex items-center justify-center">
+    
+                        {{ request.user.username|first|upper }}
+    
+                    </div>
+    
+                    {% endif %}
+    
+                </div>
+    
+            </header>
+    
+            <main class="flex-1 overflow-y-auto p-4 md:p-6 lg:p-8">
+    
+                {% block content %}
+    
+                {% endblock %}
+    
+            </main>
+    
+        </div>
+    
+    </div>
+    
+    </body>
+</html>

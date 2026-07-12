@@ -1,0 +1,226 @@
+{% extends "app.html" %}
+
+{% block title %}Components{% endblock %}
+
+{% block content %}
+
+<div class="space-y-8">
+
+    <!-- Header -->
+
+    <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
+
+        <div>
+
+            <h1 class="text-3xl font-bold text-slate-800">
+
+                Component Inventory
+
+            </h1>
+
+            <p class="text-slate-500 mt-2">
+
+                Manage all products used for system design and quotations.
+
+            </p>
+
+        </div>
+
+        <a
+            href="{% url 'create_component' %}"
+            class="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-xl">
+
+            <i class="fas fa-plus mr-2"></i>
+
+            Add Component
+
+        </a>
+
+    </div>
+
+    <!-- Search -->
+
+    <div class="bg-white rounded-2xl shadow-sm p-6">
+
+        <form method="GET">
+
+            <div class="grid md:grid-cols-3 gap-4">
+
+                <input
+                    type="text"
+                    name="search"
+                    placeholder="Search components..."
+                    value="{{ request.GET.search }}"
+                    class="h-12 rounded-xl border border-slate-300 px-4">
+
+                <select
+                    name="category"
+                    class="h-12 rounded-xl border border-slate-300 px-4">
+
+                    <option value="">All Categories</option>
+                    <option>Solar Panel</option>
+                    <option>Battery</option>
+                    <option>Inverter</option>
+                    <option>Charge Controller</option>
+                    <option>Cable</option>
+                    <option>Accessories</option>
+
+                </select>
+
+                <button
+                    class="bg-slate-900 text-white rounded-xl">
+
+                    Search
+
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+    <!-- Components Table -->
+
+    <div class="bg-white rounded-2xl shadow-sm overflow-hidden">
+
+        <div class="overflow-x-auto">
+
+            <table class="min-w-full">
+
+                <thead class="bg-slate-50">
+
+                    <tr>
+
+                        <th class="px-6 py-4 text-left">Name</th>
+                        <th class="px-6 py-4 text-left">Category</th>
+                        <th class="px-6 py-4 text-left">Brand</th>
+                        <th class="px-6 py-4 text-right">Price</th>
+                        <th class="px-6 py-4 text-center">Stock</th>
+                        <th class="px-6 py-4 text-right">Actions</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                {% for component in components %}
+
+                    <tr class="border-t hover:bg-slate-50">
+
+                        <td class="px-6 py-4 font-medium">
+
+                            {{ component.name }}
+
+                        </td>
+
+                        <td class="px-6 py-4">
+
+                            {{ component.category }}
+
+                        </td>
+
+                        <td class="px-6 py-4">
+
+                            {{ component.brand }}
+
+                        </td>
+
+                        <td class="px-6 py-4 text-right">
+
+                            ₦{{ component.price|floatformat:2 }}
+
+                        </td>
+
+                        <td class="px-6 py-4 text-center">
+
+                            {% if component.stock > 10 %}
+
+                                <span class="bg-green-100 text-green-700 px-3 py-1 rounded-full">
+
+                                    {{ component.stock }}
+
+                                </span>
+
+                            {% elif component.stock > 0 %}
+
+                                <span class="bg-yellow-100 text-yellow-700 px-3 py-1 rounded-full">
+
+                                    {{ component.stock }}
+
+                                </span>
+
+                            {% else %}
+
+                                <span class="bg-red-100 text-red-700 px-3 py-1 rounded-full">
+
+                                    Out of Stock
+
+                                </span>
+
+                            {% endif %}
+
+                        </td>
+
+                        <td class="px-6 py-4 text-right">
+
+                            <a
+                                href="{% url 'edit_component' component.pk %}"
+                                class="text-blue-600 mr-4">
+
+                                Edit
+
+                            </a>
+
+                            <a
+                                href="{% url 'delete_component' component.pk %}"
+                                class="text-red-600">
+
+                                Delete
+
+                            </a>
+
+                        </td>
+
+                    </tr>
+
+                {% empty %}
+
+                    <tr>
+
+                        <td colspan="6" class="py-20 text-center">
+
+                            <i class="fas fa-box-open text-6xl text-slate-300"></i>
+
+                            <p class="mt-4 text-slate-500">
+
+                                No components available.
+
+                            </p>
+
+                            <a
+                                href="{% url 'create_component' %}"
+                                class="inline-block mt-6 bg-green-600 text-white px-6 py-3 rounded-xl">
+
+                                Add First Component
+
+                            </a>
+
+                        </td>
+
+                    </tr>
+
+                {% endfor %}
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

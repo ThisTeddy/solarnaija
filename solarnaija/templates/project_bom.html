@@ -1,0 +1,255 @@
+{% extends "app.html" %}
+
+{% block title %}Bill of Materials{% endblock %}
+
+{% block content %}
+
+<div class="space-y-8">
+
+    <!-- Header -->
+
+    <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
+
+        <div>
+
+            <h1 class="text-3xl font-bold text-slate-800">
+
+                Bill of Materials
+
+            </h1>
+
+            <p class="text-slate-500 mt-2">
+
+                {{ project.client_name }} • {{ project.location }}
+
+            </p>
+
+        </div>
+
+        <div class="flex flex-wrap gap-3">
+
+            <a
+                href="{% url 'system_design' project.pk %}"
+                class="px-6 py-3 rounded-xl bg-slate-200 hover:bg-slate-300">
+
+                ← Design
+
+            </a>
+
+            <a
+                href="{% url 'project_quote' project.pk %}"
+                class="px-6 py-3 rounded-xl bg-green-600 hover:bg-green-700 text-white">
+
+                Generate Quote →
+
+            </a>
+
+        </div>
+
+    </div>
+
+    <!-- Summary -->
+
+    <div class="grid grid-cols-2 lg:grid-cols-4 gap-6">
+
+        <div class="bg-white rounded-2xl shadow-sm p-6">
+
+            <p class="text-slate-500">
+
+                Components
+
+            </p>
+
+            <h2 class="text-3xl font-bold mt-2">
+
+                {{ bom_items|length }}
+
+            </h2>
+
+        </div>
+
+        <div class="bg-white rounded-2xl shadow-sm p-6">
+
+            <p class="text-slate-500">
+
+                Panels
+
+            </p>
+
+            <h2 class="text-3xl font-bold mt-2">
+
+                {{ number_of_panels }}
+
+            </h2>
+
+        </div>
+
+        <div class="bg-white rounded-2xl shadow-sm p-6">
+
+            <p class="text-slate-500">
+
+                Batteries
+
+            </p>
+
+            <h2 class="text-3xl font-bold mt-2">
+
+                {{ battery_quantity }}
+
+            </h2>
+
+        </div>
+
+        <div class="bg-white rounded-2xl shadow-sm p-6">
+
+            <p class="text-slate-500">
+
+                Estimated Cost
+
+            </p>
+
+            <h2 class="text-2xl font-bold mt-2">
+
+                ₦{{ grand_total|floatformat:2 }}
+
+            </h2>
+
+        </div>
+
+    </div>
+
+    <!-- BOM Table -->
+
+    <div class="bg-white rounded-2xl shadow-sm overflow-hidden">
+
+        <div class="p-6 border-b">
+
+            <h2 class="text-xl font-semibold">
+
+                Component List
+
+            </h2>
+
+        </div>
+
+        <div class="overflow-x-auto">
+
+            <table class="min-w-full">
+
+                <thead class="bg-slate-50">
+
+                    <tr>
+
+                        <th class="px-6 py-4 text-left">Item</th>
+                        <th class="px-6 py-4 text-left">Category</th>
+                        <th class="px-6 py-4 text-center">Qty</th>
+                        <th class="px-6 py-4 text-right">Unit Price</th>
+                        <th class="px-6 py-4 text-right">Total</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                {% for item in bom_items %}
+
+                    <tr class="border-t hover:bg-slate-50">
+
+                        <td class="px-6 py-4">
+
+                            {{ item.name }}
+
+                        </td>
+
+                        <td class="px-6 py-4">
+
+                            {{ item.category }}
+
+                        </td>
+
+                        <td class="px-6 py-4 text-center">
+
+                            {{ item.quantity }}
+
+                        </td>
+
+                        <td class="px-6 py-4 text-right">
+
+                            ₦{{ item.unit_price|floatformat:2 }}
+
+                        </td>
+
+                        <td class="px-6 py-4 text-right font-semibold">
+
+                            ₦{{ item.total|floatformat:2 }}
+
+                        </td>
+
+                    </tr>
+
+                {% empty %}
+
+                    <tr>
+
+                        <td colspan="5" class="py-16 text-center text-slate-500">
+
+                            No components available.
+
+                        </td>
+
+                    </tr>
+
+                {% endfor %}
+
+                </tbody>
+
+                <tfoot class="bg-slate-100">
+
+                    <tr>
+
+                        <td colspan="4" class="px-6 py-5 text-right font-bold">
+
+                            Grand Total
+
+                        </td>
+
+                        <td class="px-6 py-5 text-right font-bold text-green-700">
+
+                            ₦{{ grand_total|floatformat:2 }}
+
+                        </td>
+
+                    </tr>
+
+                </tfoot>
+
+            </table>
+
+        </div>
+
+    </div>
+
+    <!-- Notes -->
+
+    <div class="bg-blue-50 border border-blue-200 rounded-2xl p-6">
+
+        <h3 class="font-semibold text-blue-900">
+
+            Engineering Notes
+
+        </h3>
+
+        <p class="mt-3 text-blue-700">
+
+            This Bill of Materials is automatically generated from the calculated
+            system size. Prices are based on the current inventory database and
+            may change over time.
+
+        </p>
+
+    </div>
+
+</div>
+
+{% endblock %}

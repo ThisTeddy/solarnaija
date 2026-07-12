@@ -1,0 +1,3315 @@
+<!DOCTYPE html>
+<html lang="en" x-data="{ mobileMenu:false }">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>SolarNaija</title>
+
+  <!-- Tailwind -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Alpine JS -->
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+  <!-- Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <style>
+    .hero-bg{
+      background:
+      linear-gradient(to right, rgba(11,24,49,.95), rgba(11,24,49,.75)),
+      url('https://images.unsplash.com/photo-1509391366360-2e959784a276?q=80&w=1200&auto=format&fit=crop');
+      background-size: cover;
+      background-position: center;
+    }
+
+    .glass{
+      backdrop-filter: blur(12px);
+    }
+  </style>
+</head>
+
+<body x-data="{ page: 'home' , mobileMenu: false }" class="bg-white text-gray-900 overflow-x-hidden">
+
+  <!-- NAVBAR -->
+  <header class="sticky top-0 z-50 bg-white border-b border-gray-100">
+    <div class="max-w-7xl mx-auto px-5 py-4 flex items-center justify-between">
+
+      <!-- Logo -->
+      <div class="flex items-center gap-3">
+        <div class="w-11 h-11 rounded-2xl bg-emerald-600 flex items-center justify-center shadow-lg">
+          <i data-lucide="sun" class="w-5 h-5 text-white"></i>
+        </div>
+
+        <h1  @click="page='home'; mobileMenu=false" class="text-2xl font-extrabold">
+          Solar<span class="text-emerald-600">Naija</span>
+        </h1>
+      </div>
+
+      <!-- Desktop Nav -->
+      <nav class="hidden md:flex items-center gap-8 font-medium">
+        <a href="#" class="hover:text-emerald-600 transition">Home</a>
+        <a href="#" class="hover:text-emerald-600 transition">Services</a>
+        <a href="#" class="hover:text-emerald-600 transition">Projects</a>
+        <a href="#" class="hover:text-emerald-600 transition">Contact</a>
+      </nav>
+
+      <!-- Mobile Button -->
+      <button 
+        @click="mobileMenu = true"
+        class="md:hidden"
+      >
+        <i data-lucide="menu" class="w-8 h-8"></i>
+      </button>
+    </div>
+
+    <!-- Mobile Menu -->
+    <!-- Full Screen Mobile Menu -->
+    <!-- Full Screen Mobile Menu -->
+<div
+    x-show="mobileMenu"
+    x-transition
+    class="fixed inset-0 bg-white z-[999] md:hidden flex flex-col"
+>
+
+    <!-- Header -->
+    <div class="flex items-center justify-between px-5 py-4 border-b border-gray-100">
+
+        <div class="flex items-center gap-3">
+
+            <div class="w-10 h-10 rounded-2xl bg-emerald-600 flex items-center justify-center">
+                <i data-lucide="sun" class="w-5 h-5 text-white"></i>
+            </div>
+
+            <h1
+            @click="page='home'; mobileMenu=false"
+            class="text-2xl font-extrabold">
+                Solar<span class="text-emerald-600">Naija</span>
+            </h1>
+
+        </div>
+
+        <button @click="mobileMenu = false">
+            <i data-lucide="x" class="w-7 h-7"></i>
+        </button>
+
+    </div>
+
+    <!-- Menu Links -->
+    <div class="flex-1 px-4 py-6">
+
+        <div class="space-y-2">
+
+            <a  @click="page='home'; mobileMenu=false"
+               class="block px-4 py-3 rounded-2xl bg-emerald-50 text-emerald-700 font-semibold">
+                Home
+            </a>
+
+            <a @click="page='about'; mobileMenu=false"
+              
+               class="block px-4 py-3 rounded-2xl text-gray-500 hover:bg-emerald-50">
+                About
+            </a>
+
+            <a @click="page='services'; mobileMenu=false"
+               class="block px-4 py-3 rounded-2xl text-gray-500 hover:bg-gray-50">
+                Services
+            </a>
+
+            <a   @click="page='portfolio'; mobileMenu=false"
+               class="block px-4 py-3 rounded-2xl text-gray-500 hover:bg-gray-50">
+                Portfolio
+            </a>
+
+            <a  @click="page='calculator'; mobileMenu=false"
+               class="block px-4 py-3 rounded-2xl text-gray-500 hover:bg-gray-50">
+                Calculator
+            </a>
+
+            <a href="#"  @click="page='solardesign'; mobileMenu=false"
+               class="block px-4 py-3 rounded-2xl text-gray-500 hover:bg-gray-50">
+                System Design
+            </a>
+
+            <a @click="page='blog'; mobileMenu=false"
+               class="block px-4 py-3 rounded-2xl text-gray-500 hover:bg-gray-50">
+                Blog
+            </a>
+
+            <a @click="page='contact'; mobileMenu=false"
+               class="block px-4 py-3 rounded-2xl text-gray-500 hover:bg-gray-50">
+                Contact
+            </a>
+            
+            <button @click="page='getfreequote'; mobileMenu=false"
+            class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-4 rounded-2xl transition">
+            Get Free Quote
+        </button>
+        </div>
+
+    </div>
+
+    <!-- CTA -->
+    <div class="p-4 border-t border-gray-100">
+
+        
+
+    </div>
+
+</div>
+  </header>
+
+  <section
+  x-show="page === 'home'" x-transition
+  x-data="{
+      testimonial:0,
+
+      testimonials:[
+          {
+              quote:'Professional installation and excellent support. My monthly electricity bill dropped from ₦45,000 to ₦8,000.',
+              name:'Dr. Bayo Adeyemi',
+              meta:'Lagos • 8kW System'
+          },
+          {
+              quote:'The installation was completed in just 4 days. Power outages are no longer a problem.',
+              name:'Mrs. Funmi Okoro',
+              meta:'Port Harcourt • 10kW System'
+          },
+          {
+              quote:'Best investment for our office. Generator expenses reduced dramatically.',
+              name:'GreenTech Ltd',
+              meta:'Abuja • 50kW Commercial'
+          }
+      ]
+  }"
+  class="bg-gray-100"
+>
+
+  <!-- HERO -->
+
+  <section class="relative overflow-hidden">
+
+      <img
+          src="https://images.unsplash.com/photo-1509391366360-2e959784a276?w=1800"
+          class="absolute inset-0 w-full h-full object-cover"
+      >
+
+      <div class="absolute inset-0 bg-slate-950/80"></div>
+
+      <div class="relative max-w-7xl mx-auto px-6 py-24">
+
+          <div class="max-w-2xl">
+
+              <div class="inline-flex items-center gap-2 bg-green-600/20 border border-green-500/20 text-green-400 px-5 py-3 rounded-full text-sm font-semibold">
+                  ⚡ #1 Solar Installer in Rivers State
+              </div>
+
+              <h1 class="mt-8 text-5xl md:text-7xl font-bold text-white leading-tight">
+                  Never Experience
+                  <span class="text-amber-400">
+                      Blackout
+                  </span>
+                  Again
+              </h1>
+
+              <p class="mt-6 text-lg text-slate-300 leading-8 max-w-xl">
+                  Reliable solar systems designed for Nigerian homes and businesses.
+                  Save up to 70% on electricity bills with premium installations backed by a 25-year warranty.
+              </p>
+
+              <div class="flex flex-wrap gap-4 mt-10">
+
+                  <button   class="bg-green-600 hover:bg-green-700 text-white px-8 py-4 rounded-xl font-semibold">
+                      <a href="{% url 'register' %}">Get Started</a>
+                  </button>
+
+                  <button class="bg-white/10 border border-white/10 backdrop-blur text-white px-8 py-4 rounded-xl font-semibold">
+                      Calculate Savings
+                  </button>
+
+              </div>
+
+              <div class="grid grid-cols-3 gap-8 mt-16 max-w-xl">
+
+                  <div>
+                      <div class="text-4xl font-bold text-white">
+                          500+
+                      </div>
+                      <div class="text-slate-400">
+                          Installations
+                      </div>
+                  </div>
+
+                  <div>
+                      <div class="text-4xl font-bold text-white">
+                          25 Yr
+                      </div>
+                      <div class="text-slate-400">
+                          Warranty
+                      </div>
+                  </div>
+
+                  <div>
+                      <div class="text-4xl font-bold text-white">
+                          70%
+                      </div>
+                      <div class="text-slate-400">
+                          Bill Reduction
+                      </div>
+                  </div>
+
+              </div>
+
+          </div>
+
+      </div>
+
+  </section>
+
+  <!-- WHY CHOOSE US -->
+
+  <section class="py-24">
+
+      <div class="max-w-7xl mx-auto px-6">
+
+          <div class="text-center max-w-3xl mx-auto">
+
+              <span class="uppercase tracking-[0.25em] text-green-600 font-semibold">
+                  Why Choose Us
+              </span>
+
+              <h2 class="mt-4 text-5xl font-bold text-slate-900">
+                  The Solar Advantage
+              </h2>
+
+              <p class="mt-5 text-lg text-slate-500 leading-8">
+                  Premium technology, certified engineers, and reliable support.
+              </p>
+
+          </div>
+
+          <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mt-14">
+
+              <template x-for="item in [
+                  ['☀️','Premium Solar Panels'],
+                  ['🔋','Battery Storage'],
+                  ['🏆','Certified Installers'],
+                  ['⏱️','Fast Installation'],
+                  ['🛠️','Lifetime Support'],
+                  ['🌱','Eco-Friendly']
+              ]">
+
+                  <div class="bg-white rounded-3xl border border-gray-200 p-8 hover:shadow-xl transition">
+
+                      <div class="w-16 h-16 rounded-2xl bg-green-50 flex items-center justify-center text-3xl">
+                          <span x-text="item[0]"></span>
+                      </div>
+
+                      <h3 class="mt-6 text-2xl font-bold">
+                          <span x-text="item[1]"></span>
+                      </h3>
+
+                      <p class="mt-3 text-slate-500 leading-7">
+                          Industry-leading equipment and engineering expertise for maximum performance.
+                      </p>
+
+                  </div>
+
+              </template>
+
+          </div>
+
+      </div>
+
+  </section>
+
+  <!-- FEATURED PROJECTS -->
+
+  <section class="pb-24">
+
+      <div class="max-w-7xl mx-auto px-6">
+
+          <div class="flex flex-wrap justify-between items-end gap-6">
+
+              <div>
+
+                  <span class="uppercase tracking-[0.25em] text-green-600 font-semibold">
+                      Our Work
+                  </span>
+
+                  <h2 class="mt-4 text-5xl font-bold">
+                      Featured Projects
+                  </h2>
+
+              </div>
+
+              <button class="bg-white border px-6 py-4 rounded-xl font-semibold">
+                  View All Projects →
+              </button>
+
+          </div>
+
+          <div class="grid lg:grid-cols-3 gap-8 mt-12">
+
+              <div class="bg-white rounded-3xl overflow-hidden border">
+                  <img src="https://images.unsplash.com/photo-1518780664697-55e3ad937233?w=1200" class="h-72 w-full object-cover">
+                  <div class="p-6">
+                      <span class="bg-green-600 text-white px-4 py-2 rounded-full text-sm">Residential</span>
+                      <h3 class="mt-5 text-3xl font-bold">Okafor Family Residence</h3>
+                      <p class="mt-2 text-slate-500">📍 Port Harcourt • ⚡ 10kW</p>
+                      <div class="mt-4 text-green-600 text-2xl font-bold">₦2.2M/year saved</div>
+                  </div>
+              </div>
+
+              <div class="bg-white rounded-3xl overflow-hidden border">
+                  <img src="https://images.unsplash.com/photo-1497436072909-60f360e1d4b1?w=1200" class="h-72 w-full object-cover">
+                  <div class="p-6">
+                      <span class="bg-green-600 text-white px-4 py-2 rounded-full text-sm">Commercial</span>
+                      <h3 class="mt-5 text-3xl font-bold">GreenTech Office Complex</h3>
+                      <p class="mt-2 text-slate-500">📍 Lagos • ⚡ 50kW</p>
+                      <div class="mt-4 text-green-600 text-2xl font-bold">₦8.4M/year saved</div>
+                  </div>
+              </div>
+
+              <div class="bg-white rounded-3xl overflow-hidden border">
+                  <img src="https://images.unsplash.com/photo-1466611653911-95081537e5b7?w=1200" class="h-72 w-full object-cover">
+                  <div class="p-6">
+                      <span class="bg-green-600 text-white px-4 py-2 rounded-full text-sm">Off-Grid</span>
+                      <h3 class="mt-5 text-3xl font-bold">Riverside Community Hub</h3>
+                      <p class="mt-2 text-slate-500">📍 Calabar • ⚡ 20kW</p>
+                      <div class="mt-4 text-green-600 text-2xl font-bold">₦3.6M/year saved</div>
+                  </div>
+              </div>
+
+          </div>
+
+      </div>
+
+  </section>
+
+  <!-- TESTIMONIALS -->
+
+  <section
+    x-data="{
+        testimonial: 0,
+
+        testimonials: [
+            {
+                quote: 'Professional installation and excellent support. My monthly electricity bill dropped from ₦45,000 to ₦8,000.',
+                name: 'Dr. Bayo Adeyemi',
+                meta: 'Lagos • 8kW System'
+            },
+            {
+                quote: 'The installation was completed in just 4 days. Power outages are no longer a problem.',
+                name: 'Mrs. Funmi Okoro',
+                meta: 'Port Harcourt • 10kW System'
+            },
+            {
+                quote: 'Best investment for our office. Generator expenses reduced dramatically.',
+                name: 'GreenTech Ltd',
+                meta: 'Abuja • 50kW Commercial'
+            }
+        ],
+
+        startSlider() {
+            setInterval(() => {
+                this.testimonial =
+                    (this.testimonial + 1) % this.testimonials.length
+            }, 5000)
+        }
+    }"
+
+    x-init="startSlider()"
+
+    class="bg-green-50 py-24"
+>
+
+    <div class="max-w-4xl mx-auto px-6 text-center">
+
+        <span class="uppercase tracking-[0.25em] text-green-600 font-semibold">
+            Testimonials
+        </span>
+
+        <h2 class="mt-4 text-5xl font-bold">
+            What Our Clients Say
+        </h2>
+
+        <div class="mt-12 bg-white rounded-3xl p-12 shadow">
+
+            <!-- Animated Content -->
+
+            <div
+                x-transition:enter="transition duration-700 ease-out"
+                x-transition:enter-start="opacity-0 translate-x-8"
+                x-transition:enter-end="opacity-100 translate-x-0"
+                :key="testimonial"
+            >
+
+                <div class="text-amber-400 text-3xl">
+                    ★★★★★
+                </div>
+
+                <p
+                    class="mt-8 text-2xl italic leading-10 text-slate-700"
+                    x-text="testimonials[testimonial].quote"
+                ></p>
+
+                <div class="mt-8">
+
+                    <h4
+                        class="text-2xl font-bold"
+                        x-text="testimonials[testimonial].name"
+                    ></h4>
+
+                    <p
+                        class="text-slate-500"
+                        x-text="testimonials[testimonial].meta"
+                    ></p>
+
+                </div>
+
+            </div>
+
+            <!-- Dots -->
+
+            <div class="flex justify-center gap-3 mt-8">
+
+                <template x-for="(item,index) in testimonials">
+
+                    <button
+                        @click="testimonial=index"
+                        class="h-3 rounded-full transition-all duration-300"
+                        :class="
+                            testimonial === index
+                            ? 'w-8 bg-green-600'
+                            : 'w-3 bg-gray-300'
+                        "
+                    ></button>
+
+                </template>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+</section>
+
+
+<section
+x-show="page === 'solardesign'" x-transition
+x-data="solarDesigner()"
+class="py-20 bg-slate-100"
+>
+<div class="max-w-7xl mx-auto px-5">
+
+    <!-- Header -->
+
+    <div class="text-center max-w-3xl mx-auto">
+
+        <span class="inline-flex items-center px-4 py-2 rounded-full bg-green-100 text-green-700 text-sm font-semibold">
+            ⚙️ AI-Powered Engineering Tool
+        </span>
+
+        <h2 class="mt-5 text-4xl md:text-6xl font-bold text-slate-900 leading-tight">
+            Solar System Design Generator
+        </h2>
+
+        <p class="mt-4 text-slate-500 text-lg">
+            Generate complete solar system designs including panel sizing,
+            inverter selection, battery bank calculations and bill of materials.
+        </p>
+
+    </div>
+
+    <div class="grid lg:grid-cols-2 gap-8 mt-14">
+
+        <!-- LEFT SIDE -->
+
+        <div class="space-y-6">
+
+            <div class="bg-white rounded-3xl border p-6 shadow-sm">
+
+                <h3 class="text-2xl font-bold mb-6">
+                    Site Information
+                </h3>
+
+                <div class="grid md:grid-cols-2 gap-4">
+
+                    <div>
+                        <label class="text-sm font-medium">
+                            Location
+                        </label>
+
+                        <select
+                            x-model="location"
+                            class="w-full mt-2 border rounded-xl p-3"
+                        >
+                            <option>Port Harcourt</option>
+                            <option>Lagos</option>
+                            <option>Abuja</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="text-sm font-medium">
+                            System Type
+                        </label>
+
+                        <select
+                            x-model="systemType"
+                            class="w-full mt-2 border rounded-xl p-3"
+                        >
+                            <option>Off-Grid</option>
+                            <option>Hybrid</option>
+                            <option>Grid-Tie</option>
+                        </select>
+                    </div>
+
+                </div>
+
+                <div class="grid md:grid-cols-2 gap-4 mt-4">
+
+                    <div>
+                        <label class="text-sm font-medium">
+                            Panel Size
+                        </label>
+
+                        <select
+                            x-model.number="panelSize"
+                            class="w-full mt-2 border rounded-xl p-3"
+                        >
+                            <option value="550">550W</option>
+                            <option value="600">600W</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="text-sm font-medium">
+                            System Voltage
+                        </label>
+
+                        <select
+                            x-model.number="systemVoltage"
+                            class="w-full mt-2 border rounded-xl p-3"
+                        >
+                            <option value="48">48V</option>
+                            <option value="24">24V</option>
+                        </select>
+                    </div>
+
+                </div>
+
+                <!-- Roof Tilt -->
+
+                <div class="mt-6">
+
+                    <div class="flex justify-between mb-2">
+                        <span>Roof Tilt</span>
+                        <span x-text="roofTilt + '°'"></span>
+                    </div>
+
+                    <input
+                        type="range"
+                        min="0"
+                        max="45"
+                        x-model="roofTilt"
+                        class="w-full"
+                    >
+
+                </div>
+
+                <!-- Battery -->
+
+                <div class="mt-6">
+
+                    <div class="flex justify-between mb-2">
+                        <span>Battery Autonomy</span>
+                        <span x-text="autonomy + ' Day(s)'"></span>
+                    </div>
+
+                    <input
+                        type="range"
+                        min="1"
+                        max="5"
+                        x-model="autonomy"
+                        class="w-full"
+                    >
+
+                </div>
+
+            </div>
+
+            <!-- LOAD TABLE -->
+
+            <div class="bg-white rounded-3xl border p-6 shadow-sm">
+
+                <div class="flex justify-between items-center mb-5">
+
+                    <h3 class="text-2xl font-bold">
+                        Load Schedule
+                    </h3>
+
+                    <button
+                        @click="addAppliance()"
+                        class="text-green-600 font-semibold"
+                    >
+                        + Add Appliance
+                    </button>
+
+                </div>
+
+                <template
+                    x-for="(item,index) in appliances"
+                    :key="index"
+                >
+
+                    <div
+                        class="grid grid-cols-5 gap-2 mb-3"
+                    >
+
+                        <input
+                            x-model="item.name"
+                            class="border rounded-lg p-2"
+                        >
+
+                        <input
+                            type="number"
+                            x-model.number="item.watts"
+                            class="border rounded-lg p-2"
+                        >
+
+                        <input
+                            type="number"
+                            x-model.number="item.hours"
+                            class="border rounded-lg p-2"
+                        >
+
+                        <input
+                            type="number"
+                            x-model.number="item.qty"
+                            class="border rounded-lg p-2"
+                        >
+
+                        <button
+                            @click="removeAppliance(index)"
+                            class="text-red-500"
+                        >
+                            ✕
+                        </button>
+
+                    </div>
+
+                </template>
+
+                <div class="mt-6 bg-green-50 rounded-xl p-4">
+
+                    <div class="flex justify-between">
+
+                        <span>Daily Load</span>
+
+                        <strong
+                            x-text="dailyLoad.toFixed(2)+' kWh/day'"
+                        ></strong>
+
+                    </div>
+
+                    <div class="flex justify-between mt-2">
+
+                        <span>Peak Load</span>
+
+                        <strong
+                            x-text="peakLoad + ' W'"
+                        ></strong>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <button
+                @click="generateDesign()"
+                class="w-full py-4 bg-green-600 text-white rounded-2xl font-semibold text-lg hover:bg-green-700 transition"
+            >
+                Generate System Design
+            </button>
+
+        </div>
+
+        <!-- RIGHT SIDE -->
+
+        <div
+            class="bg-white rounded-3xl border shadow-sm p-8"
+        >
+
+            <template x-if="!report">
+
+                <div class="h-full flex flex-col justify-center items-center text-center">
+
+                    <div class="text-8xl opacity-20">
+                        📄
+                    </div>
+
+                    <h3 class="text-3xl font-bold mt-4">
+                        Your Design Will Appear Here
+                    </h3>
+
+                    <p class="mt-3 text-slate-500">
+                        Complete the load schedule and click
+                        Generate System Design.
+                    </p>
+
+                </div>
+
+            </template>
+
+            <template x-if="report">
+
+                <div x-transition>
+
+                    <h3 class="text-3xl font-bold">
+                        System Design Report
+                    </h3>
+
+                    <div class="grid grid-cols-2 gap-4 mt-8">
+
+                        <div>
+                            <p class="text-slate-500">
+                                Daily Load
+                            </p>
+
+                            <h4 class="font-bold text-xl"
+                                x-text="report.dailyLoad.toFixed(2)+' kWh'"
+                            ></h4>
+                        </div>
+
+                        <div>
+                            <p class="text-slate-500">
+                                Solar Array
+                            </p>
+
+                            <h4 class="font-bold text-xl"
+                                x-text="report.arraySize.toFixed(2)+' kW'"
+                            ></h4>
+                        </div>
+
+                        <div>
+                            <p class="text-slate-500">
+                                Panels
+                            </p>
+
+                            <h4 class="font-bold text-xl"
+                                x-text="report.panels"
+                            ></h4>
+                        </div>
+
+                        <div>
+                            <p class="text-slate-500">
+                                Inverter
+                            </p>
+
+                            <h4 class="font-bold text-xl"
+                                x-text="report.inverter+' kVA'"
+                            ></h4>
+                        </div>
+
+                    </div>
+
+                    <div class="mt-8">
+
+                        <h4 class="font-bold text-xl">
+                            Bill of Materials
+                        </h4>
+
+                        <ul class="mt-4 space-y-2">
+
+                            <template
+                                x-for="item in report.bom"
+                            >
+
+                                <li>
+                                    ✅
+                                    <span x-text="item"></span>
+                                </li>
+
+                            </template>
+
+                        </ul>
+
+                    </div>
+
+                </div>
+
+            </template>
+
+        </div>
+
+    </div>
+
+</div>
+</section>
+
+<script>
+function solarDesigner(){
+
+return{
+
+location:'Port Harcourt',
+systemType:'Off-Grid',
+panelSize:550,
+systemVoltage:48,
+roofTilt:15,
+autonomy:1,
+
+report:null,
+
+appliances:[
+{
+name:'LED Lights',
+watts:50,
+hours:8,
+qty:10
+},
+{
+name:'TV',
+watts:80,
+hours:6,
+qty:1
+}
+],
+
+addAppliance(){
+
+this.appliances.push({
+name:'New Appliance',
+watts:100,
+hours:4,
+qty:1
+})
+
+},
+
+removeAppliance(index){
+
+this.appliances.splice(index,1)
+
+},
+
+get dailyLoad(){
+
+return this.appliances.reduce((sum,item)=>{
+
+return sum +
+(item.watts*item.hours*item.qty)/1000
+
+},0)
+
+},
+
+get peakLoad(){
+
+return this.appliances.reduce((sum,item)=>{
+
+return sum +
+(item.watts*item.qty)
+
+},0)
+
+},
+
+generateDesign(){
+
+const designLoad =
+this.dailyLoad * 1.25
+
+const arraySize =
+designLoad / 4.5
+
+const panels =
+Math.ceil(
+(arraySize*1000)/
+this.panelSize
+)
+
+const inverter =
+Math.ceil(
+(this.peakLoad*1.25)/1000
+)
+
+const batteryAh =
+(
+(designLoad*1000) *
+this.autonomy
+)
+/
+this.systemVoltage
+
+this.report = {
+
+dailyLoad:this.dailyLoad,
+
+arraySize,
+
+panels,
+
+inverter,
+
+batteryAh,
+
+bom:[
+`${panels} × ${this.panelSize}W Solar Panels`,
+`1 × ${inverter}kVA Inverter`,
+`${Math.ceil(batteryAh/200)} × 12V 200Ah Batteries`,
+`MPPT Charge Controller`,
+`Solar Mounting Structure`,
+`DC Protection Kit`,
+`Solar Cables`
+]
+
+}
+
+}
+
+}
+
+}
+</script>
+ 
+    <!-- ABOUT SECTION -->
+    <section 
+    x-show="page === 'about'"
+    x-transition
+    class="max-w-7xl mx-auto px-6 lg:px-10 py-20">
+
+        <p class="uppercase tracking-[4px] text-green-700 font-semibold mb-5">
+            About Us
+        </p>
+
+        <h1 class="text-4xl md:text-6xl font-black leading-tight mb-8">
+            Powering Nigeria's
+            <span class="text-green-600">
+                Clean Energy Future
+            </span>
+        </h1>
+
+        <div class="max-w-4xl space-y-8 text-zinc-600 text-lg leading-relaxed">
+
+            <p>
+                Founded in 2018, SolarNaija is a Port Harcourt-based solar energy company
+                committed to delivering reliable, affordable, and sustainable power
+                solutions across Nigeria. We believe every Nigerian home and business
+                deserves uninterrupted electricity.
+            </p>
+
+            <p>
+                From our humble beginnings with 5 residential installations,
+                we've grown to become one of Rivers State's most trusted solar providers,
+                with over 500 successful projects and a team of 40+ certified professionals.
+            </p>
+
+        </div>
+
+        <div class="mt-10">
+            <a href="#"
+               class="inline-flex items-center gap-3 bg-green-600 hover:bg-green-700 transition px-8 py-4 rounded-2xl text-white font-semibold">
+                Start Your Solar Journey
+                →
+            </a>
+        </div>
+
+    </section>
+
+    <section
+    x-show="page === 'getfreequote'"
+    x-transition
+    x-data="{
+        step: 1,
+        submitted: false,
+
+        form: {
+            name: '',
+            email: '',
+            phone: '',
+            property: '',
+            location: '',
+            roof: '',
+            bill: '',
+            timeline: '',
+            message: ''
+        },
+
+        next() {
+            if (this.step < 3) this.step++
+        },
+
+        prev() {
+            if (this.step > 1) this.step--
+        },
+
+        submit() {
+            this.submitted = true
+        }
+    }"
+    class="py-24 bg-slate-100 min-h-screen"
+>
+
+    <div class="max-w-3xl mx-auto px-5">
+
+        <!-- Header -->
+
+        <div class="text-center">
+
+            <span
+                class="inline-flex items-center px-4 py-2 rounded-full bg-green-100 text-green-700 text-sm font-semibold"
+            >
+                Free Quote
+            </span>
+
+            <h2
+                class="mt-6 text-4xl md:text-5xl font-bold text-slate-900"
+            >
+                Get Your Custom Solar Quote
+            </h2>
+
+            <p
+                class="mt-4 text-slate-500 text-lg max-w-xl mx-auto"
+            >
+                Complete the form below and receive a personalized proposal
+                within 24 hours.
+            </p>
+
+        </div>
+
+        <!-- Progress -->
+
+        <div
+            x-show="!submitted"
+            class="flex items-center justify-center mt-12"
+        >
+
+            <template x-for="n in 3">
+
+                <div class="flex items-center">
+
+                    <div
+                        class="w-12 h-12 rounded-full flex items-center justify-center font-semibold transition-all"
+                        :class="
+                            step >= n
+                            ? 'bg-green-600 text-white'
+                            : 'bg-white border text-slate-500'
+                        "
+                    >
+                        <span x-text="n"></span>
+                    </div>
+
+                    <div
+                        x-show="n < 3"
+                        class="w-16 h-1 bg-slate-200 mx-2 overflow-hidden rounded-full"
+                    >
+
+                        <div
+                            class="h-full bg-green-600 transition-all duration-500"
+                            :style="step > n ? 'width:100%' : 'width:0%'"
+                        ></div>
+
+                    </div>
+
+                </div>
+
+            </template>
+
+        </div>
+
+        <!-- Card -->
+
+        <div
+            x-show="!submitted"
+            x-transition
+            class="bg-white rounded-3xl shadow-xl mt-10 p-6 md:p-10"
+        >
+
+            <!-- STEP 1 -->
+
+            <div x-show="step === 1">
+
+                <h3
+                    class="text-2xl font-bold mb-6"
+                >
+                    Contact Information
+                </h3>
+
+                <div class="space-y-5">
+
+                    <div>
+
+                        <label class="font-medium">
+                            Full Name
+                        </label>
+
+                        <input
+                            x-model="form.name"
+                            type="text"
+                            placeholder="Chief Emeka Okafor"
+                            class="w-full h-14 border rounded-2xl px-4 mt-2"
+                        >
+
+                    </div>
+
+                    <div>
+
+                        <label class="font-medium">
+                            Email Address
+                        </label>
+
+                        <input
+                            x-model="form.email"
+                            type="email"
+                            placeholder="emeka@example.com"
+                            class="w-full h-14 border rounded-2xl px-4 mt-2"
+                        >
+
+                    </div>
+
+                    <div>
+
+                        <label class="font-medium">
+                            Phone Number
+                        </label>
+
+                        <input
+                            x-model="form.phone"
+                            type="text"
+                            placeholder="+234 801 234 5678"
+                            class="w-full h-14 border rounded-2xl px-4 mt-2"
+                        >
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- STEP 2 -->
+
+            <div x-show="step === 2">
+
+                <h3
+                    class="text-2xl font-bold mb-6"
+                >
+                    Project Information
+                </h3>
+
+                <div class="space-y-5">
+
+                    <div>
+
+                        <label class="font-medium">
+                            Property Type
+                        </label>
+
+                        <select
+                            x-model="form.property"
+                            class="w-full h-14 border rounded-2xl px-4 mt-2"
+                        >
+                            <option value="">
+                                Select Property Type
+                            </option>
+
+                            <option>
+                                Residential
+                            </option>
+
+                            <option>
+                                Commercial
+                            </option>
+
+                            <option>
+                                Industrial
+                            </option>
+
+                        </select>
+
+                    </div>
+
+                    <div>
+
+                        <label class="font-medium">
+                            Location
+                        </label>
+
+                        <input
+                            x-model="form.location"
+                            type="text"
+                            placeholder="Port Harcourt, Rivers State"
+                            class="w-full h-14 border rounded-2xl px-4 mt-2"
+                        >
+
+                    </div>
+
+                    <div>
+
+                        <label class="font-medium">
+                            Roof Type
+                        </label>
+
+                        <select
+                            x-model="form.roof"
+                            class="w-full h-14 border rounded-2xl px-4 mt-2"
+                        >
+                            <option value="">
+                                Select Roof Type
+                            </option>
+
+                            <option>
+                                Flat Roof
+                            </option>
+
+                            <option>
+                                Pitched Roof
+                            </option>
+
+                            <option>
+                                Metal Roof
+                            </option>
+
+                        </select>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- STEP 3 -->
+
+            <div x-show="step === 3">
+
+                <h3
+                    class="text-2xl font-bold mb-6"
+                >
+                    Energy Requirements
+                </h3>
+
+                <div class="space-y-5">
+
+                    <div>
+
+                        <label class="font-medium">
+                            Monthly Electricity Bill
+                        </label>
+
+                        <input
+                            x-model="form.bill"
+                            type="number"
+                            placeholder="50000"
+                            class="w-full h-14 border rounded-2xl px-4 mt-2"
+                        >
+
+                    </div>
+
+                    <div>
+
+                        <label class="font-medium">
+                            Installation Timeline
+                        </label>
+
+                        <select
+                            x-model="form.timeline"
+                            class="w-full h-14 border rounded-2xl px-4 mt-2"
+                        >
+                            <option value="">
+                                Select Timeline
+                            </option>
+
+                            <option>
+                                Immediately
+                            </option>
+
+                            <option>
+                                Within 1 Month
+                            </option>
+
+                            <option>
+                                Within 3 Months
+                            </option>
+
+                        </select>
+
+                    </div>
+
+                    <div>
+
+                        <label class="font-medium">
+                            Additional Message
+                        </label>
+
+                        <textarea
+                            x-model="form.message"
+                            rows="5"
+                            placeholder="Tell us about your power requirements..."
+                            class="w-full border rounded-2xl px-4 py-4 mt-2"
+                        ></textarea>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- Buttons -->
+
+            <div
+                class="flex justify-between mt-10"
+            >
+
+                <button
+                    x-show="step > 1"
+                    @click="prev()"
+                    class="px-6 py-3 border rounded-2xl"
+                >
+                    ← Back
+                </button>
+
+                <div
+                    x-show="step === 1"
+                ></div>
+
+                <button
+                    x-show="step < 3"
+                    @click="next()"
+                    class="px-8 py-3 rounded-2xl bg-green-600 text-white font-semibold"
+                >
+                    Next →
+                </button>
+
+                <button
+                    x-show="step === 3"
+                    @click="submit()"
+                    class="px-8 py-3 rounded-2xl bg-green-600 text-white font-semibold"
+                >
+                    Submit Request
+                </button>
+
+            </div>
+
+        </div>
+
+        <!-- Success -->
+
+        <div
+            x-show="submitted"
+            x-transition
+            class="bg-white rounded-3xl shadow-xl p-12 text-center mt-10"
+        >
+
+            <div
+                class="w-24 h-24 mx-auto rounded-full bg-green-100 flex items-center justify-center text-5xl"
+            >
+                ✅
+            </div>
+
+            <h3
+                class="text-4xl font-bold mt-8"
+            >
+                Quote Request Received!
+            </h3>
+
+            <p
+                class="mt-4 text-slate-500 text-lg"
+            >
+                Thank you for your interest. Our solar experts
+                will contact you within 24 hours with a
+                customized proposal.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+    <!-- STATS SECTION -->
+    <section 
+    x-show="page === 'about'"
+    x-transition
+    x-transition
+    class="bg-green-600 py-20">
+
+        <div class="max-w-6xl mx-auto px-6">
+
+            <div class="grid grid-cols-2 lg:grid-cols-4 gap-10 text-center">
+
+                <div>
+                    <div class="text-4xl mb-4">📅</div>
+                    <h2 class="text-5xl font-black text-white">
+                        2018
+                    </h2>
+                    <p class="text-green-100 mt-2">
+                        Founded
+                    </p>
+                </div>
+
+                <div>
+                    <div class="text-4xl mb-4">👥</div>
+                    <h2 class="text-5xl font-black text-white">
+                        500+
+                    </h2>
+                    <p class="text-green-100 mt-2">
+                        Happy Clients
+                    </p>
+                </div>
+
+                <div>
+                    <div class="text-4xl mb-4">🏅</div>
+                    <h2 class="text-5xl font-black text-white">
+                        15+
+                    </h2>
+                    <p class="text-green-100 mt-2">
+                        Certifications
+                    </p>
+                </div>
+
+                <div>
+                    <div class="text-4xl mb-4">🎯</div>
+                    <h2 class="text-5xl font-black text-white">
+                        50MW
+                    </h2>
+                    <p class="text-green-100 mt-2">
+                        Installed Capacity
+                    </p>
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- TEAM SECTION -->
+    <section 
+    x-show="page === 'about'"
+    x-transition
+    class="bg-zinc-50 py-24">
+
+        <div class="max-w-7xl mx-auto px-6 lg:px-10">
+
+            <p class="uppercase tracking-[4px] text-green-700 font-semibold text-center mb-5">
+                Our Team
+            </p>
+
+            <h1 class="text-4xl md:text-6xl font-black text-center mb-16">
+                Meet the Experts
+            </h1>
+
+            <div class="grid md:grid-cols-2 gap-8">
+
+                <!-- MEMBER 1 -->
+                <div class="bg-white border border-zinc-200 rounded-3xl p-8 hover:shadow-xl transition">
+
+                    <div class="w-16 h-16 rounded-full bg-green-100 flex items-center justify-center text-green-700 font-black text-3xl mb-6">
+                        EC
+                    </div>
+
+                    <h2 class="text-2xl font-bold mb-2">
+                        Engr. Chukwuma Obi
+                    </h2>
+
+                    <p class="text-green-700 font-medium mb-5">
+                        CEO & Founder
+                    </p>
+
+                    <p class="text-zinc-600 leading-relaxed">
+                        15+ years in renewable energy engineering with certifications
+                        from Solar Energy International.
+                    </p>
+
+                </div>
+
+                <!-- MEMBER 2 -->
+                <div class="bg-white border border-zinc-200 rounded-3xl p-8 hover:shadow-xl transition">
+
+                    <div class="w-16 h-16 rounded-full bg-green-100 flex items-center justify-center text-green-700 font-black text-3xl mb-6">
+                        MF
+                    </div>
+
+                    <h2 class="text-2xl font-bold mb-2">
+                        Mrs. Funmi Adebayo
+                    </h2>
+
+                    <p class="text-green-700 font-medium mb-5">
+                        Operations Director
+                    </p>
+
+                    <p class="text-zinc-600 leading-relaxed">
+                        Former project lead at Nigerian REA. Expert in solar project
+                        management and compliance.
+                    </p>
+
+                </div>
+                
+                <div class="bg-white border border-zinc-200 rounded-3xl p-8 hover:shadow-xl transition">
+
+                  <div class="w-16 h-16 rounded-full bg-green-100 flex items-center justify-center text-green-700 font-black text-3xl mb-6">
+                      MT
+                  </div>
+
+                  <h2 class="text-2xl font-bold mb-2">
+                      Mr. Tunde Bakare
+                  </h2>
+
+                  <p class="text-green-700 font-medium mb-5">
+                      Head of Engineering
+                  </p>
+
+                  <p class="text-zinc-600 leading-relaxed">
+                      Certified PV inst4aller with exerience across 200+
+                      residential and commercial projects.
+                  </p>
+
+              </div>
+
+              <div class="bg-white border border-zinc-200 rounded-3xl p-8 hover:shadow-xl transition">
+
+                <div class="w-16 h-16 rounded-full bg-green-100 flex items-center justify-center text-green-700 font-black text-3xl mb-6">
+                    MG
+                </div>
+
+                <h2 class="text-2xl font-bold mb-2">
+                    Mrs. Grace Uche
+                </h2>
+
+                <p class="text-green-700 font-medium mb-5">
+                    Client Relations Manager
+                </p>
+
+                <p class="text-zinc-600 leading-relaxed">
+                    Ensures every client receives world-class service from 
+                    first to post-installation support.
+                </p>
+
+              </div>
+            </div>
+
+        </div>
+        
+
+          
+              </h2>
+      
+          </div>
+      
+    </section>
+    <section 
+    x-show="page === 'about'"
+    x-transition
+    
+    class="px-6 lg:px-10 py-20 bg-white">
+
+      <!-- HEADER -->
+      <div class="text-center mb-10">
+  
+          <p class="text-green-600 font-semibold tracking-widest text-sm">
+              CREDENTIALS
+          </p>
+  
+          <h2 class="text-3xl lg:text-4xl font-black text-zinc-900 mt-2">
+              Certifications & Accreditations
+          </h2>
+  
+      </div>
+  
+      <!-- BADGES -->
+      <div class="flex flex-wrap justify-center gap-4 max-w-5xl mx-auto">
+  
+          <div class="flex items-center gap-2 px-5 py-3 rounded-full border border-zinc-200 bg-white shadow-sm">
+              <span class="text-green-600">🏅</span>
+              <span class="text-sm text-zinc-700">Nigerian REA Approved Installer</span>
+          </div>
+  
+          <div class="flex items-center gap-2 px-5 py-3 rounded-full border border-zinc-200 bg-white shadow-sm">
+              <span class="text-green-600">🏅</span>
+              <span class="text-sm text-zinc-700">ISO 9001:2015 Quality Management</span>
+          </div>
+  
+          <div class="flex items-center gap-2 px-5 py-3 rounded-full border border-zinc-200 bg-white shadow-sm">
+              <span class="text-green-600">🏅</span>
+              <span class="text-sm text-zinc-700">IEC 62446 PV System Testing</span>
+          </div>
+  
+          <div class="flex items-center gap-2 px-5 py-3 rounded-full border border-zinc-200 bg-white shadow-sm">
+              <span class="text-green-600">🏅</span>
+              <span class="text-sm text-zinc-700">NABCEP Certified (International)</span>
+          </div>
+  
+          <div class="flex items-center gap-2 px-5 py-3 rounded-full border border-zinc-200 bg-white shadow-sm">
+              <span class="text-green-600">🏅</span>
+              <span class="text-sm text-zinc-700">Standards Organisation of Nigeria (SON) Compliant</span>
+          </div>
+  
+      </div>
+  
+  </section>
+  <!-- ===========================
+  Blog & Resources Section
+  Tailwind CSS + Alpine.js
+============================ -->
+
+<section
+x-show="page === 'blog'"
+  x-transition
+ x-data="blogSection()"
+ class="py-20 bg-gray-100"
+>
+
+ <div class="max-w-7xl mx-auto px-6">
+
+     <!-- Heading -->
+
+     <div class="max-w-4xl mx-auto text-center">
+
+         <span
+             class="uppercase tracking-[0.25em] text-green-600 font-semibold"
+         >
+             Blog & Resources
+         </span>
+
+         <h2
+             class="mt-4 text-4xl md:text-6xl font-bold text-gray-900"
+         >
+             Solar Energy Insights
+         </h2>
+
+         <p
+             class="mt-6 text-lg text-gray-500 leading-8"
+         >
+             Expert articles, guides, and case studies to help you
+             make informed decisions about solar energy in Nigeria.
+         </p>
+
+     </div>
+
+     <!-- Categories -->
+
+     <div
+         class="flex flex-wrap justify-center gap-3 mt-12"
+     >
+
+         <template
+             x-for="category in categories"
+             :key="category"
+         >
+
+             <button
+
+                 @click="selected=category"
+
+                 class="px-5 py-3 rounded-xl border transition font-semibold"
+
+                 :class="selected==category
+                 ? 'bg-green-600 text-white border-green-600 shadow'
+                 : 'bg-white text-gray-700 hover:bg-green-50'"
+
+                 x-text="category"
+
+             ></button>
+
+         </template>
+
+     </div>
+
+     <!-- Articles -->
+
+     <div
+         class="grid lg:grid-cols-3 md:grid-cols-2 gap-8 mt-14"
+     >
+
+         <template
+
+             x-for="post in filteredPosts"
+
+             :key="post.title"
+
+         >
+
+             <article
+                 class="bg-white rounded-3xl overflow-hidden border border-gray-200 shadow-sm hover:shadow-xl hover:-translate-y-2 transition duration-300"
+             >
+
+                 <!-- Image -->
+
+                 <div class="relative h-64">
+
+                     <img
+
+                         :src="post.image"
+
+                         class="w-full h-full object-cover"
+
+                     >
+
+                     <span
+
+                         class="absolute top-5 left-5 bg-white px-4 py-2 rounded-full text-sm font-semibold shadow"
+
+                         x-text="post.category"
+
+                     ></span>
+
+                 </div>
+
+                 <!-- Content -->
+
+                 <div class="p-6">
+
+                     <div
+                         class="flex gap-4 text-gray-400 text-sm"
+                     >
+
+                         <span
+                             x-text="'📅 '+post.date"
+                         ></span>
+
+                         <span
+                             x-text="'👤 '+post.author"
+                         ></span>
+
+                     </div>
+
+                     <h3
+                         class="mt-4 text-3xl font-bold text-gray-900 leading-tight"
+                         x-text="post.title"
+                     ></h3>
+
+                     <p
+                         class="mt-4 text-gray-500 leading-7"
+                         x-text="post.excerpt"
+                     ></p>
+
+                     <button
+                         class="mt-6 text-green-600 font-bold flex items-center gap-2 hover:gap-3 transition"
+                     >
+
+                         Read More
+
+                         <span>
+                             →
+                         </span>
+
+                     </button>
+
+                 </div>
+
+             </article>
+
+         </template>
+
+     </div>
+
+ </div>
+
+</section>
+
+<script>
+
+function blogSection(){
+
+return{
+
+selected:'All',
+
+categories:[
+'All',
+'Solar Tips',
+'Industry News',
+'Case Studies',
+'Savings Guide',
+'Technology'
+],
+
+posts:[
+
+{
+
+category:'Savings Guide',
+
+image:'https://images.unsplash.com/photo-1509395176047-4a66953fd231?w=1200',
+
+date:'Mar 15, 2026',
+
+author:'Engr. Chukwuma Obi',
+
+title:'How Much Can You Save with 5kW Solar in Port Harcourt?',
+
+excerpt:'A detailed breakdown of costs, savings, and payback period for a typical 5kW residential solar installation in Port Harcourt.'
+
+},
+
+{
+
+category:'Industry News',
+
+image:'https://images.unsplash.com/photo-1497436072909-60f360e1d4b1?w=1200',
+
+date:'Mar 10, 2026',
+
+author:'Mrs. Funmi Adebayo',
+
+title:"Understanding Nigeria's New Net Metering Policy",
+
+excerpt:'The Federal Government recently announced net metering regulations. Here is what it means for solar panel owners.'
+
+},
+
+{
+
+category:'Solar Tips',
+
+image:'https://images.unsplash.com/photo-1509391366360-2e959784a276?w=1200',
+
+date:'Mar 5, 2026',
+
+author:'Mr. Tunde Bakare',
+
+title:'Solar Panel Maintenance: A Complete Guide for Nigerian Homeowners',
+
+excerpt:'Keep your solar system running at peak efficiency with these essential maintenance tips tailored for Nigerian conditions.'
+
+},
+
+{
+
+category:'Technology',
+
+image:'https://images.unsplash.com/photo-1466611653911-95081537e5b7?w=1200',
+
+date:'Feb 28, 2026',
+
+author:'Engr. Chukwuma Obi',
+
+title:'Battery Storage: Lithium-ion vs Lead-Acid for Nigerian Homes',
+
+excerpt:'Comparing the two most popular battery technologies for residential solar systems including cost, lifespan and performance.'
+
+},
+
+{
+
+category:'Case Studies',
+
+image:'https://images.unsplash.com/photo-1497436072909-60f360e1d4b1?w=1200',
+
+date:'Feb 20, 2026',
+
+author:'Mrs. Grace Uche',
+
+title:'Case Study: How Pacific Hotels Cut Diesel Costs by 90%',
+
+excerpt:'Learn how a Port Harcourt hotel chain eliminated diesel dependency through a 100kW commercial solar installation.'
+
+},
+
+{
+
+category:'Solar Tips',
+
+image:'https://images.unsplash.com/photo-1509395176047-4a66953fd231?w=1200',
+
+date:'Feb 15, 2026',
+
+author:'Mrs. Funmi Adebayo',
+
+title:'10 Questions to Ask Before Installing Solar Panels',
+
+excerpt:'Make an informed decision about going solar with these essential questions every homeowner should ask before installation.'
+
+}
+
+],
+
+get filteredPosts(){
+
+if(this.selected=='All'){
+
+return this.posts
+
+}
+
+return this.posts.filter(
+
+p=>p.category==this.selected
+
+)
+
+}
+
+}
+
+}
+
+</script>
+
+<!-- Include once -->
+
+  <!-- Services Section -->
+  <section
+  x-show="page === 'services'"
+  x-transition
+      x-data="{
+          services:[
+          {
+              title:'Residential Solar',
+              icon:'🏠',
+              image:'https://images.unsplash.com/photo-1509395176047-4a66953fd231?w=1200',
+              description:'Power your home with clean, reliable solar energy. Our residential systems are designed to eliminate your dependency on the unreliable grid and expensive generators.',
+              features:[
+                  '3kW – 15kW systems for any home size',
+                  'Lithium-ion battery backup included',
+                  'Smart energy monitoring app',
+                  '25-year panel warranty',
+                  'Installation in 3–5 business days'
+              ]
+          },
+          {
+              title:'Commercial Solar',
+              icon:'🏢',
+              image:'https://images.unsplash.com/photo-1497436072909-60f360e1d4b1?w=1200',
+              description:'Reduce operational costs and boost your bottom line with commercial solar installations for offices, factories, hotels, and retail spaces.',
+              features:[
+                  '20kW – 500kW+ commercial systems',
+                  'Custom energy audit & design',
+                  'ROI within 2–4 years',
+                  'Financing options available',
+                  'Dedicated account manager'
+              ]
+          },
+          {
+              title:'Off-Grid Systems',
+              icon:'⚡',
+              image:'https://images.unsplash.com/photo-1466611653911-95081537e5b7?w=1200',
+              description:'Complete energy independence for remote locations. Our off-grid solutions provide 24/7 power where the national grid does not reach.',
+              features:[
+                  'Community & farm power solutions',
+                  'High-capacity battery storage',
+                  'Generator hybrid integration',
+                  'Remote monitoring capabilities',
+                  'Scalable for future expansion'
+              ]
+          },
+          {
+              title:'Maintenance & Support',
+              icon:'🔧',
+              image:'https://images.unsplash.com/photo-1509391366360-2e959784a276?w=1200',
+              description:'Keep your solar system performing at peak efficiency with our comprehensive maintenance and support packages.',
+              features:[
+                  'Annual performance inspections',
+                  'Panel cleaning & optimization',
+                  'Inverter & battery health checks',
+                  '24/7 emergency support hotline',
+                  'Performance guarantee monitoring'
+              ]
+          }]
+      }"
+      class="py-20 bg-gray-100"
+  >
+  
+  <div class="max-w-7xl mx-auto px-6">
+  
+      <!-- Header -->
+  
+      <div class="max-w-4xl mx-auto text-center">
+  
+          <span class="uppercase tracking-[0.25em] text-green-600 font-semibold">
+              Our Services
+          </span>
+  
+          <h2 class="mt-4 text-4xl md:text-6xl font-bold text-gray-900">
+              Solar Solutions for Every Need
+          </h2>
+  
+          <p class="mt-6 text-lg text-gray-500 leading-8">
+              From homes to businesses, grid-connected to fully off-grid —
+              we design, install, and maintain solar systems that deliver
+              real results in Nigerian conditions.
+          </p>
+  
+      </div>
+  
+      <!-- Cards -->
+  
+      <div class="grid lg:grid-cols-2 gap-8 mt-16">
+  
+          <template
+              x-for="service in services"
+              :key="service.title"
+          >
+  
+              <div
+                  class="bg-white rounded-3xl overflow-hidden border border-gray-200 shadow-sm hover:shadow-xl transition duration-300"
+              >
+  
+                  <!-- Image -->
+  
+                  <div class="relative h-72">
+  
+                      <img
+                          :src="service.image"
+                          class="w-full h-full object-cover"
+                      >
+  
+                      <div
+                          class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"
+                      ></div>
+  
+                      <div
+                          class="absolute bottom-6 left-6 text-white"
+                      >
+  
+                          <div
+                              class="text-4xl"
+                              x-text="service.icon"
+                          ></div>
+  
+                          <h3
+                              class="text-4xl font-bold mt-2"
+                              x-text="service.title"
+                          ></h3>
+  
+                      </div>
+  
+                  </div>
+  
+                  <!-- Content -->
+  
+                  <div class="p-7">
+  
+                      <p
+                          class="text-gray-500 leading-8 text-lg"
+                          x-text="service.description"
+                      ></p>
+  
+                      <ul class="space-y-4 mt-7">
+  
+                          <template
+                              x-for="item in service.features"
+                          >
+  
+                              <li
+                                  class="flex gap-3 items-start"
+                              >
+  
+                                  <span
+                                      class="text-green-600 mt-1"
+                                  >
+                                      ●
+                                  </span>
+  
+                                  <span
+                                      class="text-gray-700 text-lg"
+                                      x-text="item"
+                                  ></span>
+  
+                              </li>
+  
+                          </template>
+  
+                      </ul>
+  
+                      <button
+                          class="mt-8 text-green-600 font-bold text-xl hover:translate-x-1 transition flex items-center gap-2"
+                      >
+                          Get a Quote
+  
+                          <span>
+                              →
+                          </span>
+  
+                      </button>
+  
+                  </div>
+  
+              </div>
+  
+          </template>
+  
+      </div>
+  
+  </div>
+  
+  </section>
+  
+  
+<!-- Solar Savings Calculator Section -->
+<section
+x-show="page === 'calculator'"
+x-transition
+    x-data="{
+        bill:50000,
+        roof:30,
+        location:'Port Harcourt',
+        calculated:false,
+
+        cities:{
+            'Port Harcourt':4.5,
+            'Lagos':4.8,
+            'Abuja':5.6,
+            'Kano':6.1,
+            'Enugu':4.9
+        },
+
+        get savings(){
+            return Math.round(this.bill*0.75)
+        },
+
+        get yearly(){
+            return this.savings*12
+        },
+
+        get system(){
+            return (this.bill/10000).toFixed(1)
+        },
+
+        calculate(){
+            this.calculated=true
+        }
+    }"
+    class="py-20 bg-gray-100"
+>
+
+    <div class="max-w-7xl mx-auto px-6">
+
+        <!-- Heading -->
+
+        <div class="max-w-3xl mx-auto text-center">
+
+            <span
+                class="uppercase tracking-[0.25em] text-green-600 font-semibold"
+            >
+                Solar Calculator
+            </span>
+
+            <h2
+                class="mt-4 text-4xl md:text-6xl font-bold text-gray-900"
+            >
+                How Much Can You Save?
+            </h2>
+
+            <p
+                class="mt-6 text-lg text-gray-500 leading-8"
+            >
+                Enter your details below to get an instant estimate
+                of your solar savings. Based on current Nigerian
+                electricity tariffs and local sunshine data.
+            </p>
+
+        </div>
+
+        <!-- Grid -->
+
+        <div
+            class="grid lg:grid-cols-2 gap-8 mt-14"
+        >
+
+            <!-- Left Card -->
+
+            <div
+                class="bg-white rounded-3xl border border-gray-200 p-7 shadow-sm"
+            >
+
+                <h3
+                    class="text-3xl font-bold flex items-center gap-3"
+                >
+                    🧮
+                    Your Details
+                </h3>
+
+                <!-- Bill -->
+
+                <div class="mt-8">
+
+                    <label
+                        class="font-medium text-gray-800"
+                    >
+                        Monthly Electricity Bill (₦)
+                    </label>
+
+                    <input
+                        type="number"
+                        x-model="bill"
+                        class="mt-3 w-full rounded-xl border border-gray-300 px-4 py-4 focus:ring-2 focus:ring-green-500 outline-none"
+                    >
+
+                    <p
+                        class="text-gray-400 mt-2"
+                    >
+                        Include generator fuel costs for accurate
+                        results
+                    </p>
+
+                </div>
+
+                <!-- Roof -->
+
+                <div class="mt-8">
+
+                    <label
+                        class="font-medium text-gray-800"
+                    >
+                        Available Roof Space:
+                        <span
+                            class="font-bold"
+                            x-text="roof"
+                        ></span>
+                        m²
+                    </label>
+
+                    <input
+                        type="range"
+                        min="10"
+                        max="200"
+                        x-model="roof"
+                        class="w-full mt-4 accent-green-600"
+                    >
+
+                    <div
+                        class="flex justify-between text-gray-400 text-sm"
+                    >
+                        <span>10 m²</span>
+                        <span>200 m²</span>
+                    </div>
+
+                </div>
+
+                <!-- Location -->
+
+                <div class="mt-8">
+
+                    <label
+                        class="font-medium text-gray-800"
+                    >
+                        Your Location
+                    </label>
+
+                    <select
+                        x-model="location"
+                        class="mt-3 w-full rounded-xl border border-gray-300 px-4 py-4"
+                    >
+
+                        <option>
+                            Port Harcourt
+                        </option>
+
+                        <option>
+                            Lagos
+                        </option>
+
+                        <option>
+                            Abuja
+                        </option>
+
+                        <option>
+                            Kano
+                        </option>
+
+                        <option>
+                            Enugu
+                        </option>
+
+                    </select>
+
+                </div>
+
+                <!-- Button -->
+
+                <button
+
+                    @click="calculate()"
+
+                    class="mt-8 w-full rounded-xl bg-green-600 hover:bg-green-700 text-white font-bold text-xl py-4 transition"
+
+                >
+
+                    Calculate My Savings
+
+                </button>
+
+            </div>
+
+            <!-- Right Card -->
+
+            <div
+                class="bg-white rounded-3xl border border-gray-200 p-10 shadow-sm flex items-center justify-center"
+            >
+
+                <template x-if="!calculated">
+
+                    <div class="text-center">
+
+                        <div
+                            class="text-7xl mb-6"
+                        >
+                            ☀️
+                        </div>
+
+                        <h3
+                            class="text-4xl font-bold text-gray-900"
+                        >
+                            Enter Your Details
+                        </h3>
+
+                        <p
+                            class="mt-5 text-lg text-gray-500 max-w-md"
+                        >
+                            Fill in the form on the left and click
+                            "Calculate My Savings" to see your
+                            personalized solar estimate.
+                        </p>
+
+                    </div>
+
+                </template>
+
+                <template x-if="calculated">
+
+                    <div
+                        class="w-full"
+                    >
+
+                        <h3
+                            class="text-3xl font-bold text-center"
+                        >
+                            Estimated Savings
+                        </h3>
+
+                        <div
+                            class="grid grid-cols-2 gap-4 mt-8"
+                        >
+
+                            <div
+                                class="bg-green-50 rounded-2xl p-5"
+                            >
+
+                                <p
+                                    class="text-gray-500"
+                                >
+                                    Monthly Savings
+                                </p>
+
+                                <h4
+                                    class="text-3xl font-bold text-green-700"
+                                >
+                                    ₦<span
+                                        x-text="savings.toLocaleString()"
+                                    ></span>
+                                </h4>
+
+                            </div>
+
+                            <div
+                                class="bg-green-50 rounded-2xl p-5"
+                            >
+
+                                <p
+                                    class="text-gray-500"
+                                >
+                                    Annual Savings
+                                </p>
+
+                                <h4
+                                    class="text-3xl font-bold text-green-700"
+                                >
+                                    ₦<span
+                                        x-text="yearly.toLocaleString()"
+                                    ></span>
+                                </h4>
+
+                            </div>
+
+                            <div
+                                class="bg-gray-50 rounded-2xl p-5"
+                            >
+
+                                <p
+                                    class="text-gray-500"
+                                >
+                                    Suggested System
+                                </p>
+
+                                <h4
+                                    class="text-2xl font-bold"
+                                >
+                                    <span
+                                        x-text="system"
+                                    ></span>
+                                    kW
+                                </h4>
+
+                            </div>
+
+                            <div
+                                class="bg-gray-50 rounded-2xl p-5"
+                            >
+
+                                <p
+                                    class="text-gray-500"
+                                >
+                                    Peak Sun Hours
+                                </p>
+
+                                <h4
+                                    class="text-2xl font-bold"
+                                >
+                                    <span
+                                        x-text="cities[location]"
+                                    ></span>
+                                    hrs/day
+                                </h4>
+
+                            </div>
+
+                        </div>
+
+                        <div
+                            class="mt-8 rounded-2xl bg-green-100 p-5"
+                        >
+
+                            <h4
+                                class="font-bold text-green-800 text-xl"
+                            >
+                                Recommendation
+                            </h4>
+
+                            <p
+                                class="mt-3 text-green-700 leading-7"
+                            >
+                                Based on your electricity bill,
+                                available roof space and your location,
+                                a solar system of approximately
+                                <strong
+                                    x-text="system"
+                                ></strong>
+                                kW could significantly reduce your
+                                monthly electricity expenses and save
+                                you approximately
+                                <strong>
+                                    ₦<span
+                                        x-text="yearly.toLocaleString()"
+                                    ></span>
+                                </strong>
+                                per year.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </template>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<section
+x-show="page === 'portfolio'"
+  x-transition
+x-data="portfolioSection()"
+class="py-20 bg-gray-100"
+>
+<div class="max-w-7xl mx-auto px-6">
+
+    <!-- Header -->
+
+    <div class="max-w-4xl mx-auto text-center">
+
+        <span class="uppercase tracking-[0.25em] text-green-600 font-semibold">
+            Portfolio
+        </span>
+
+        <h2 class="mt-4 text-4xl md:text-6xl font-bold text-slate-900">
+            Our Solar Projects
+        </h2>
+
+        <p class="mt-6 text-lg text-slate-500 leading-8">
+            Real installations, real savings. Browse our completed
+            projects across Nigeria.
+        </p>
+
+    </div>
+
+    <!-- Filters -->
+
+    <div class="flex flex-wrap justify-center gap-3 mt-12">
+
+        <template
+            x-for="category in categories"
+            :key="category"
+        >
+            <button
+                @click="selected=category"
+                class="px-5 py-3 rounded-xl border font-medium transition"
+
+                :class="selected===category
+                ? 'bg-green-600 text-white border-green-600'
+                : 'bg-white hover:bg-green-50'"
+                x-text="category"
+            ></button>
+        </template>
+
+    </div>
+
+    <!-- Projects -->
+
+    <div class="grid lg:grid-cols-3 md:grid-cols-2 gap-8 mt-14">
+
+        <template
+            x-for="project in filteredProjects"
+            :key="project.name"
+        >
+
+            <div
+                class="bg-white rounded-3xl overflow-hidden border border-gray-200 shadow-sm hover:shadow-xl hover:-translate-y-2 transition"
+            >
+
+                <!-- IMAGE -->
+
+                <div class="relative h-64">
+
+                    <img
+                        :src="project.image"
+                        class="w-full h-full object-cover"
+                    >
+
+                    <div
+                        class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"
+                    ></div>
+
+                    <span
+                        class="absolute top-5 left-5 bg-green-600 text-white text-sm px-4 py-2 rounded-full font-semibold"
+                        x-text="project.category"
+                    ></span>
+
+                </div>
+
+                <!-- Content -->
+
+                <div class="p-6">
+
+                    <h3
+                        class="text-3xl font-bold text-slate-900"
+                        x-text="project.name"
+                    ></h3>
+
+                    <p
+                        class="mt-3 text-slate-500 leading-7"
+                        x-text="project.description"
+                    ></p>
+
+                    <div
+                        class="flex flex-wrap gap-4 mt-5 text-sm text-slate-500"
+                    >
+                        <span>
+                            📍 <span x-text="project.location"></span>
+                        </span>
+
+                        <span>
+                            ⚡ <span x-text="project.size"></span>
+                        </span>
+
+                        <span>
+                            🌱 <span x-text="project.co2"></span>
+                        </span>
+                    </div>
+
+                    <div
+                        class="mt-5 text-2xl font-bold text-green-600"
+                        x-text="project.savings"
+                    ></div>
+
+                </div>
+
+            </div>
+
+        </template>
+
+    </div>
+
+</div>
+</section>
+
+<script>
+function portfolioSection(){
+
+return{
+
+selected:'All',
+
+categories:[
+'All',
+'Residential',
+'Commercial',
+'Off-Grid',
+'Maintenance'
+],
+
+projects:[
+
+{
+name:'Okafor Family Residence',
+category:'Residential',
+image:'https://images.unsplash.com/photo-1518780664697-55e3ad937233?w=1200',
+location:'Port Harcourt',
+size:'10kW',
+co2:'4.2t CO₂/yr',
+savings:'₦2.2M/year saved',
+description:'Complete 10kW rooftop system with 20kWh battery storage. Family of 6 now enjoys 24/7 power.'
+},
+
+{
+name:'GreenTech Office Complex',
+category:'Commercial',
+image:'https://images.unsplash.com/photo-1497436072909-60f360e1d4b1?w=1200',
+location:'Lagos',
+size:'50kW',
+co2:'21t CO₂/yr',
+savings:'₦8.4M/year saved',
+description:'50kW commercial installation powering a 3-story office building with over 100 employees.'
+},
+
+{
+name:'Riverside Community Hub',
+category:'Off-Grid',
+image:'https://images.unsplash.com/photo-1466611653911-95081537e5b7?w=1200',
+location:'Calabar',
+size:'20kW',
+co2:'8.4t CO₂/yr',
+savings:'₦3.6M/year saved',
+description:'Off-grid solar system powering a community center and surrounding homes.'
+},
+
+{
+name:'Factory Maintenance Program',
+category:'Maintenance',
+image:'https://images.unsplash.com/photo-1509391366360-2e959784a276?w=1200',
+location:'Abuja',
+size:'120kW',
+co2:'48t CO₂/yr',
+savings:'99% uptime achieved',
+description:'Comprehensive maintenance and monitoring package for a large industrial solar installation.'
+}
+
+],
+
+get filteredProjects(){
+
+if(this.selected==='All'){
+return this.projects
+}
+
+return this.projects.filter(
+p => p.category === this.selected
+)
+
+}
+
+}
+
+}
+</script>
+
+<!-- Contact Section -->
+<section
+x-show="page === 'contact'"
+x-transition
+
+    id="contact"
+    x-data="{
+        open:null,
+        faqs:[
+            {
+                q:'How long does installation take?',
+                a:'Most residential installations take between 1–3 days depending on the system size.'
+            },
+            {
+                q:'What warranty do you offer?',
+                a:'Our solar panels and inverters come with manufacturer warranties, plus installation support.'
+            },
+            {
+                q:'Do you offer financing?',
+                a:'Yes. We provide flexible payment plans for eligible customers.'
+            },
+            {
+                q:'Will solar work during rainy season?',
+                a:'Yes. Solar panels still generate electricity on cloudy days, though output is lower than on sunny days.'
+            },
+            {
+                q:'What size system do I need?',
+                a:'Our engineers will assess your energy consumption and recommend the ideal system size.'
+            }
+        ]
+    }"
+    class="bg-gray-100 py-20"
+>
+    <div class="max-w-7xl mx-auto px-6">
+
+        <!-- Heading -->
+
+        <div class="text-center max-w-3xl mx-auto">
+
+            <p
+                class="uppercase tracking-[0.25em] font-semibold text-green-600"
+            >
+                Contact Us
+            </p>
+
+            <h2
+                class="mt-3 text-4xl md:text-5xl font-bold text-gray-900"
+            >
+                Get In Touch
+            </h2>
+
+            <p
+                class="mt-5 text-lg text-gray-500 leading-8"
+            >
+                Have questions about solar energy? Want a free
+                consultation? We're here to help.
+            </p>
+
+        </div>
+
+        <!-- Grid -->
+
+        <div
+            class="grid lg:grid-cols-2 gap-10 mt-16"
+        >
+
+            <!-- Left -->
+
+            <div class="space-y-5">
+
+                <!-- Card -->
+
+                <div
+                    class="bg-white rounded-2xl border border-gray-200 p-5 flex gap-4"
+                >
+
+                    <div
+                        class="w-14 h-14 rounded-xl bg-green-100 flex items-center justify-center text-green-600 text-2xl"
+                    >
+                        📞
+                    </div>
+
+                    <div>
+
+                        <p class="text-gray-500">
+                            Phone
+                        </p>
+
+                        <h4
+                            class="font-semibold text-xl text-gray-900"
+                        >
+                            +234 801 234 5678
+                        </h4>
+
+                    </div>
+
+                </div>
+
+                <div
+                    class="bg-white rounded-2xl border border-gray-200 p-5 flex gap-4"
+                >
+
+                    <div
+                        class="w-14 h-14 rounded-xl bg-green-100 flex items-center justify-center text-green-600 text-2xl"
+                    >
+                        ✉️
+                    </div>
+
+                    <div>
+
+                        <p class="text-gray-500">
+                            Email
+                        </p>
+
+                        <h4
+                            class="font-semibold text-xl text-gray-900"
+                        >
+                            info@solarnaija.com
+                        </h4>
+
+                    </div>
+
+                </div>
+
+                <div
+                    class="bg-white rounded-2xl border border-gray-200 p-5 flex gap-4"
+                >
+
+                    <div
+                        class="w-14 h-14 rounded-xl bg-green-100 flex items-center justify-center text-green-600 text-2xl"
+                    >
+                        📍
+                    </div>
+
+                    <div>
+
+                        <p class="text-gray-500">
+                            Office
+                        </p>
+
+                        <h4
+                            class="font-semibold text-xl text-gray-900"
+                        >
+                            12 Aba Road, Port Harcourt, Rivers State
+                        </h4>
+
+                    </div>
+
+                </div>
+
+                <div
+                    class="bg-white rounded-2xl border border-gray-200 p-5 flex gap-4"
+                >
+
+                    <div
+                        class="w-14 h-14 rounded-xl bg-green-100 flex items-center justify-center text-green-600 text-2xl"
+                    >
+                        🕒
+                    </div>
+
+                    <div>
+
+                        <p class="text-gray-500">
+                            Hours
+                        </p>
+
+                        <h4
+                            class="font-semibold text-lg text-gray-900"
+                        >
+                            Mon – Fri: 8am – 6pm,
+                            Sat: 9am – 3pm
+                        </h4>
+
+                    </div>
+
+                </div>
+
+                <!-- WhatsApp -->
+
+                <a
+                    href="#"
+                    class="block bg-green-50 border border-green-200 rounded-2xl p-5 hover:bg-green-100 transition"
+                >
+
+                    <div class="flex gap-4 items-center">
+
+                        <div
+                            class="w-14 h-14 rounded-xl bg-green-500 text-white flex items-center justify-center text-2xl"
+                        >
+                            💬
+                        </div>
+
+                        <div>
+
+                            <h4
+                                class="font-bold text-2xl text-green-800"
+                            >
+                                Chat on WhatsApp
+                            </h4>
+
+                            <p
+                                class="text-green-700"
+                            >
+                                Get instant responses
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </a>
+
+            </div>
+
+            <!-- Right -->
+
+            <div>
+
+                <!-- Form -->
+
+                <div
+                    class="bg-white rounded-2xl border border-gray-200 p-7"
+                >
+
+                    <form class="space-y-5">
+
+                        <div>
+
+                            <label
+                                class="font-medium text-gray-800"
+                            >
+                                Full Name *
+                            </label>
+
+                            <input
+                                type="text"
+                                placeholder="Your name"
+                                class="mt-2 w-full rounded-xl border border-gray-300 px-4 py-4 focus:outline-none focus:ring-2 focus:ring-green-500"
+                            >
+
+                        </div>
+
+                        <div>
+
+                            <label
+                                class="font-medium text-gray-800"
+                            >
+                                Email *
+                            </label>
+
+                            <input
+                                type="email"
+                                placeholder="email@example.com"
+                                class="mt-2 w-full rounded-xl border border-gray-300 px-4 py-4 focus:outline-none focus:ring-2 focus:ring-green-500"
+                            >
+
+                        </div>
+
+                        <div>
+
+                            <label
+                                class="font-medium text-gray-800"
+                            >
+                                Phone
+                            </label>
+
+                            <input
+                                type="text"
+                                placeholder="+234 801 234 5678"
+                                class="mt-2 w-full rounded-xl border border-gray-300 px-4 py-4 focus:outline-none focus:ring-2 focus:ring-green-500"
+                            >
+
+                        </div>
+
+                        <div>
+
+                            <label
+                                class="font-medium text-gray-800"
+                            >
+                                Message *
+                            </label>
+
+                            <textarea
+                                rows="6"
+                                placeholder="How can we help you?"
+                                class="mt-2 w-full rounded-xl border border-gray-300 px-4 py-4 resize-none focus:outline-none focus:ring-2 focus:ring-green-500"
+                            ></textarea>
+
+                        </div>
+
+                        <button
+                            class="w-full rounded-xl bg-green-600 hover:bg-green-700 text-white font-semibold py-4 transition"
+                        >
+                            Send Message ✈️
+                        </button>
+
+                    </form>
+
+                </div>
+
+                <!-- FAQ -->
+
+                <div class="mt-16">
+
+                    <h2
+                        class="text-4xl font-bold text-center text-gray-900 mb-10"
+                    >
+                        Frequently Asked Questions
+                    </h2>
+
+                    <div class="space-y-4">
+
+                        <template
+                            x-for="(faq,index) in faqs"
+                            :key="index"
+                        >
+
+                            <div
+                                class="bg-white rounded-2xl border border-gray-200 overflow-hidden"
+                            >
+
+                                <button
+                                    @click="open===index?open=null:open=index"
+                                    class="w-full flex justify-between items-center p-6 text-left font-medium text-lg"
+                                >
+
+                                    <span x-text="faq.q"></span>
+
+                                    <span
+                                        x-text="open===index ? '−' : '+'"
+                                        class="text-2xl"
+                                    ></span>
+
+                                </button>
+
+                                <div
+                                    x-show="open===index"
+                                    x-transition
+                                    class="px-6 pb-6 text-gray-500 leading-7"
+                                >
+
+                                    <span x-text="faq.a"></span>
+
+                                </div>
+
+                            </div>
+
+                        </template>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+</section>
+<section
+    x-data="{}"
+    class="relative overflow-hidden bg-emerald-600 py-16 px-6 md:px-12"
+>
+    <!-- Background Shapes -->
+    <div
+        class="absolute -top-24 -right-20 h-72 w-72 rounded-full bg-white/5"
+    ></div>
+    <div
+        class="absolute -bottom-24 -left-20 h-64 w-64 rounded-full bg-white/5"
+    ></div>
+
+    <div class="relative z-10 mx-auto max-w-4xl text-center">
+        <h2 class="text-3xl font-bold text-white md:text-5xl">
+            Ready to Go Solar?
+        </h2>
+
+        <p
+            class="mx-auto mt-6 max-w-3xl text-base leading-8 text-white/90 md:text-2xl"
+        >
+            Get a free consultation and custom quote for your property.
+            Our solar experts will design the perfect system for your
+            needs and budget.
+        </p>
+
+        <div
+            class="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row"
+        >
+            <button
+                class="flex w-full max-w-[220px] items-center gap-3 rounded-xl bg-white px-8 py-4 font-semibold text-emerald-600 shadow transition hover:scale-105"
+            >
+                Get Free Quote
+                <span>→</span>
+            </button>
+
+            <button
+                class="flex w-full max-w-[220px] items-center gap-3 rounded-xl bg-white px-8 py-4 font-semibold text-emerald-600 shadow transition hover:scale-105"
+            >
+                📞 Call Us Now
+            </button>
+        </div>
+    </div>
+</section>
+
+
+    <footer  x-transition
+   class="bg-[#16263d] text-white">
+  
+      <div class="max-w-7xl mx-auto px-5 py-20">
+  
+          <div class="grid md:grid-cols-3 gap-16">
+  
+              <!-- Company Info -->
+              <div>
+  
+                  <div class="flex items-center gap-3 mb-8">
+  
+                      <div class="w-10 h-10 rounded-xl bg-emerald-600 flex items-center justify-center">
+                          <i data-lucide="sun" class="w-5 h-5 text-white"></i>
+                      </div>
+  
+                      <h3 class="text-3xl font-bold">
+                          Solar<span class="text-emerald-500">Naija</span>
+                      </h3>
+  
+                  </div>
+  
+                  <p class="text-slate-300 text-lg leading-relaxed mb-8">
+                      Nigeria's trusted solar energy partner. We deliver reliable,
+                      affordable solar solutions to power your home and business —
+                      even when the grid fails.
+                  </p>
+  
+                  <div class="space-y-5">
+  
+                      <div class="flex items-center gap-4 text-slate-300">
+                          <i data-lucide="phone" class="w-5 h-5 text-emerald-500"></i>
+                          <span>+234 801 234 5678</span>
+                      </div>
+  
+                      <div class="flex items-center gap-4 text-slate-300">
+                          <i data-lucide="mail" class="w-5 h-5 text-emerald-500"></i>
+                          <span>info@solarnaija.com</span>
+                      </div>
+  
+                      <div class="flex items-start gap-4 text-slate-300">
+                          <i data-lucide="map-pin" class="w-5 h-5 text-emerald-500 mt-1"></i>
+                          <span>
+                              12 Aba Road, Port Harcourt,
+                              Rivers State, Nigeria
+                          </span>
+                      </div>
+  
+                  </div>
+  
+              </div>
+  
+  
+              <!-- Services -->
+              <div>
+  
+                  <h4 class="font-bold text-xl mb-8 uppercase">
+                      Services
+                  </h4>
+  
+                  <div class="space-y-5">
+  
+                      <a href="#" class="block text-slate-300 hover:text-emerald-500 transition">
+                          Residential Solar
+                      </a>
+  
+                      <a href="#" class="block text-slate-300 hover:text-emerald-500 transition">
+                          Commercial Solar
+                      </a>
+  
+                      <a href="#" class="block text-slate-300 hover:text-emerald-500 transition">
+                          Off-Grid Systems
+                      </a>
+  
+                      <a href="#" class="block text-slate-300 hover:text-emerald-500 transition">
+                          Maintenance
+                      </a>
+  
+                  </div>
+  
+              </div>
+  
+  
+              <!-- Resources -->
+              <div>
+  
+                  <h4 class="font-bold text-xl mb-8 uppercase">
+                      Resources
+                  </h4>
+  
+                  <div class="space-y-5">
+  
+                      <a href="#" class="block text-slate-300 hover:text-emerald-500 transition">
+                          Solar Calculator
+                      </a>
+  
+                      <a href="#" class="block text-slate-300 hover:text-emerald-500 transition">
+                          Get a Quote
+                      </a>
+  
+                      <a href="#" class="block text-slate-300 hover:text-emerald-500 transition">
+                          FAQ
+                      </a>
+  
+                      <a href="#" class="block text-slate-300 hover:text-emerald-500 transition">
+                          Support
+                      </a>
+  
+                  </div>
+  
+              </div>
+  
+          </div>
+  
+  
+          <!-- Second Row -->
+          <div class="grid md:grid-cols-3 gap-16 mt-16">
+  
+              <!-- Company -->
+              <div>
+  
+                  <h4 class="font-bold text-xl mb-8 uppercase">
+                      Company
+                  </h4>
+  
+                  <div class="space-y-5">
+  
+                      <a href="#" class="block text-slate-300 hover:text-emerald-500 transition">
+                          About Us
+                      </a>
+  
+                      <a href="#" class="block text-slate-300 hover:text-emerald-500 transition">
+                          Portfolio
+                      </a>
+  
+                      <a href="#" class="block text-slate-300 hover:text-emerald-500 transition">
+                          Blog
+                      </a>
+  
+                  </div>
+  
+              </div>
+  
+          </div>
+  
+  
+          <!-- Bottom Bar -->
+          <div class="border-t border-slate-700 mt-16 pt-8">
+  
+              <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+  
+                  <p class="text-slate-400">
+                      © 2026 SolarNaija. All rights reserved.
+                  </p>
+  
+                  <div class="flex gap-6 text-slate-400">
+  
+                      <a href="#" class="hover:text-emerald-500 transition">
+                          Privacy Policy
+                      </a>
+  
+                      <a href="#" class="hover:text-emerald-500 transition">
+                          Terms of Service
+                      </a>
+  
+                  </div>
+  
+              </div>
+  
+          </div>
+  
+      </div>
+  
+  </footer>
+
+
+
+  <script>
+    lucide.createIcons();
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,277 @@
+
+{% extends "base_pdf.html" %}
+
+{% block title %}
+
+Quotation
+
+{% endblock %}
+
+{% block content %}
+
+<h1>
+
+QUOTATION
+
+</h1>
+
+<table style="margin-bottom:30px;">
+
+<tr>
+
+<td>
+
+<strong>Quote No:</strong><br>
+
+{{ quote.quote_number }}
+
+</td>
+
+<td>
+
+<strong>Date:</strong><br>
+
+{{ today|date:"d M Y" }}
+
+</td>
+
+</tr>
+
+<tr>
+
+<td>
+
+<strong>Client:</strong><br>
+
+{{ project.client_name }}
+
+</td>
+
+<td>
+
+<strong>Location:</strong><br>
+
+{{ project.location }}
+
+</td>
+
+</tr>
+
+<tr>
+
+<td colspan="2">
+
+<strong>Status:</strong>
+
+<span class="badge">
+
+{{ quote.status }}
+
+</span>
+
+</td>
+
+</tr>
+
+</table>
+
+<h2>
+
+Quotation Breakdown
+
+</h2>
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>Description</th>
+
+<th>Qty</th>
+
+<th>Unit Price</th>
+
+<th>Total</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+{% for item in quote_items %}
+
+<tr>
+
+<td>
+
+{{ item.name }}
+
+</td>
+
+<td>
+
+{{ item.quantity }}
+
+</td>
+
+<td>
+
+₦{{ item.unit_price|floatformat:2 }}
+
+</td>
+
+<td>
+
+₦{{ item.total|floatformat:2 }}
+
+</td>
+
+</tr>
+
+{% endfor %}
+
+</tbody>
+
+</table>
+
+<div class="summary">
+
+<table>
+
+<tr>
+
+<td>
+
+Materials
+
+</td>
+
+<td>
+
+₦{{ material_cost|floatformat:2 }}
+
+</td>
+
+</tr>
+
+<tr>
+
+<td>
+
+Labour
+
+</td>
+
+<td>
+
+₦{{ labour_cost|floatformat:2 }}
+
+</td>
+
+</tr>
+
+<tr>
+
+<td>
+
+VAT
+
+</td>
+
+<td>
+
+₦{{ vat|floatformat:2 }}
+
+</td>
+
+</tr>
+
+<tr class="total">
+
+<td>
+
+Grand Total
+
+</td>
+
+<td>
+
+₦{{ grand_total|floatformat:2 }}
+
+</td>
+
+</tr>
+
+</table>
+
+</div>
+
+<div style="clear:both;"></div>
+
+<h2>
+
+Payment Terms
+
+</h2>
+
+<ul>
+
+<li>70% advance payment before commencement.</li>
+
+<li>30% balance after installation.</li>
+
+<li>Quote valid for 30 days.</li>
+
+<li>Prices are subject to stock availability.</li>
+
+</ul>
+
+<h2>
+
+Warranty
+
+</h2>
+
+<p>
+
+All supplied equipment carries the manufacturer's warranty.
+Installation workmanship is covered according to our installation policy.
+
+</p>
+
+<div class="signature">
+
+<table style="border:none;">
+
+<tr>
+
+<td style="border:none; width:50%;">
+
+<div class="signature-box">
+
+Prepared By
+
+</div>
+
+</td>
+
+<td style="border:none; width:50%; text-align:right;">
+
+<div style="display:inline-block;" class="signature-box">
+
+Client Signature
+
+</div>
+
+</td>
+
+</tr>
+
+</table>
+
+</div>
+
+{% endblock %}

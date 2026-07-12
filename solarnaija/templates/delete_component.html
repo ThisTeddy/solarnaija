@@ -1,0 +1,55 @@
+{% extends "app.html" %}
+
+{% block title %}Delete Component{% endblock %}
+
+{% block content %}
+
+<div class="max-w-xl mx-auto">
+
+    <div class="bg-white rounded-2xl shadow-sm p-8">
+
+        <h1 class="text-2xl font-bold text-red-600">
+
+            Delete Component
+
+        </h1>
+
+        <p class="mt-4 text-slate-600">
+
+            Are you sure you want to delete
+
+            <strong>{{ component.name }}</strong>?
+
+        </p>
+
+        <form method="POST" class="mt-8">
+
+            {% csrf_token %}
+
+            <div class="flex gap-4">
+
+                <button
+                    type="submit"
+                    class="flex-1 bg-red-600 hover:bg-red-700 text-white py-3 rounded-xl">
+
+                    Delete
+
+                </button>
+
+                <a
+                    href="{% url 'components' %}"
+                    class="flex-1 bg-slate-200 hover:bg-slate-300 py-3 rounded-xl text-center">
+
+                    Cancel
+
+                </a>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+{% endblock %}
