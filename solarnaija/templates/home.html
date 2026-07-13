@@ -290,34 +290,65 @@
 
           <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mt-14">
 
-              <template x-for="item in [
-                  ['☀️','Premium Solar Panels'],
-                  ['🔋','Battery Storage'],
-                  ['🏆','Certified Installers'],
-                  ['⏱️','Fast Installation'],
-                  ['🛠️','Lifetime Support'],
-                  ['🌱','Eco-Friendly']
-              ]">
-
-                  <div class="bg-white rounded-3xl border border-gray-200 p-8 hover:shadow-xl transition">
-
-                      <div class="w-16 h-16 rounded-2xl bg-green-50 flex items-center justify-center text-3xl">
-                          <span x-text="item[0]"></span>
-                      </div>
-
-                      <h3 class="mt-6 text-2xl font-bold">
-                          <span x-text="item[1]"></span>
-                      </h3>
-
-                      <p class="mt-3 text-slate-500 leading-7">
-                          Industry-leading equipment and engineering expertise for maximum performance.
-                      </p>
-
-                  </div>
-
-              </template>
-
-          </div>
+            <template x-for="item in [
+        
+                [
+                    '☀️',
+                    'Premium Solar Panels',
+                    'High-efficiency Tier-1 solar panels designed to maximize energy production and reduce electricity costs.'
+                ],
+        
+                [
+                    '🔋',
+                    'Battery Storage',
+                    'Store excess solar energy for use at night or during power outages with reliable lithium battery systems.'
+                ],
+        
+                [
+                    '🏆',
+                    'Certified Installers',
+                    'Our experienced engineers ensure every installation meets international safety and quality standards.'
+                ],
+        
+                [
+                    '⏱️',
+                    'Fast Installation',
+                    'Most residential systems are professionally installed and commissioned within just a few days.'
+                ],
+        
+                [
+                    '🛠️',
+                    'Lifetime Support',
+                    'Enjoy ongoing maintenance, remote monitoring, warranty assistance, and expert technical support.'
+                ],
+        
+                [
+                    '🌱',
+                    'Eco-Friendly',
+                    'Reduce your carbon footprint while generating clean, renewable energy for your home or business.'
+                ]
+        
+            ]">
+        
+                <div class="bg-white rounded-3xl border border-gray-200 p-8 hover:shadow-xl transition duration-300 hover:-translate-y-1">
+        
+                    <div class="w-16 h-16 rounded-2xl bg-green-50 flex items-center justify-center text-3xl">
+                        <span x-text="item[0]"></span>
+                    </div>
+        
+                    <h3 class="mt-6 text-2xl font-bold text-slate-900">
+                        <span x-text="item[1]"></span>
+                    </h3>
+        
+                    <p class="mt-3 text-slate-500 leading-7">
+                        <span x-text="item[2]"></span>
+                    </p>
+        
+                </div>
+        
+            </template>
+        
+        </div>
 
       </div>
 
@@ -498,486 +529,1382 @@
 
 </section>
 
-
 <section
-x-show="page === 'solardesign'" x-transition
-x-data="solarDesigner()"
-class="py-20 bg-slate-100"
->
-<div class="max-w-7xl mx-auto px-5">
+    x-data="solarDesigner()"
+    class="bg-slate-50 min-h-screen py-20 px-5">
 
-    <!-- Header -->
+    <div class="max-w-7xl mx-auto">
 
-    <div class="text-center max-w-3xl mx-auto">
+        <!-- AI Badge -->
 
-        <span class="inline-flex items-center px-4 py-2 rounded-full bg-green-100 text-green-700 text-sm font-semibold">
-            ⚙️ AI-Powered Engineering Tool
-        </span>
+        <div class="flex justify-center">
 
-        <h2 class="mt-5 text-4xl md:text-6xl font-bold text-slate-900 leading-tight">
-            Solar System Design Generator
-        </h2>
+            <div
+                class="inline-flex items-center gap-2 rounded-full bg-emerald-50 border border-emerald-100 px-5 py-3">
 
-        <p class="mt-4 text-slate-500 text-lg">
-            Generate complete solar system designs including panel sizing,
-            inverter selection, battery bank calculations and bill of materials.
-        </p>
+                <svg xmlns="http://www.w3.org/2000/svg"
+                     class="w-5 h-5 text-emerald-600"
+                     fill="none"
+                     viewBox="0 0 24 24"
+                     stroke="currentColor">
+
+                    <path stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                          d="M9.75 3a2.25 2.25 0 00-2.25 2.25V6H6.75A2.25 2.25 0 004.5 8.25v1.5A2.25 2.25 0 006.75 12H7.5v.75A2.25 2.25 0 009.75 15h1.5A2.25 2.25 0 0013.5 12.75V12h.75a2.25 2.25 0 002.25-2.25v-1.5A2.25 2.25 0 0014.25 6h-.75v-.75A2.25 2.25 0 0011.25 3h-1.5z"/>
+
+                </svg>
+
+                <span
+                    class="text-sm font-semibold text-emerald-700">
+
+                    AI-Powered Engineering Tool
+
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <!-- Heading -->
+
+        <div
+            class="max-w-3xl mx-auto mt-10 text-center">
+
+            <h1
+                class="text-5xl md:text-6xl font-black text-slate-900 leading-tight">
+
+                Solar System Design
+
+                <br>
+
+                Generator
+
+            </h1>
+
+            <p
+                class="mt-8 text-xl leading-9 text-slate-500">
+
+                For solar technicians and engineers.
+
+                Input your site data and load requirements
+
+                to automatically generate a complete,
+
+                professional solar system design with
+
+                BOM, wiring specifications and
+
+                installation notes.
+
+            </p>
+
+        </div>
+
+
+        <!-- Two Column Layout -->
+
+        <div
+            class="grid lg:grid-cols-2 gap-10 mt-16">
+
+            <!-- LEFT COLUMN -->
+
+            <div class="space-y-8">
+
+                <!-- ========================= -->
+<!-- SITE INFORMATION CARD -->
+<!-- ========================= -->
+
+<div class="bg-white rounded-[28px] border border-slate-200 shadow-sm overflow-hidden">
+
+    <!-- Card Header -->
+
+    <button
+        @click="siteOpen=!siteOpen"
+        class="w-full flex items-center justify-between px-7 py-6">
+
+        <div class="flex items-center gap-4">
+
+            <div class="w-12 h-12 rounded-2xl bg-emerald-50 flex items-center justify-center">
+
+                <span class="text-2xl">☀️</span>
+
+            </div>
+
+            <h2 class="text-2xl font-bold text-slate-900">
+
+                Site Information
+
+            </h2>
+
+        </div>
+
+        <svg
+            class="w-6 h-6 text-slate-500 transition duration-300"
+            :class="siteOpen ? 'rotate-180':''"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24">
+
+            <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M19 9l-7 7-7-7"/>
+
+        </svg>
+
+    </button>
+
+
+    <div
+        x-show="siteOpen"
+        x-transition
+        class="px-7 pb-8 space-y-7">
+
+        <!-- Location -->
+
+        <div>
+
+            <label class="font-semibold text-slate-800">
+
+                Location
+
+            </label>
+
+            <select
+                x-model="location"
+                class="mt-3 w-full h-14 rounded-2xl border border-slate-200 px-5 outline-none focus:ring-2 focus:ring-emerald-500">
+
+                <option>Port Harcourt</option>
+
+                <option>Lagos</option>
+
+                <option>Abuja</option>
+
+                <option>Benin</option>
+
+                <option>Calabar</option>
+
+            </select>
+
+            <p class="mt-2 text-slate-400">
+
+                Peak sun hours:
+
+                <strong
+                    class="text-slate-700"
+                    x-text="sunHours+' hrs/day'"></strong>
+
+            </p>
+
+        </div>
+
+
+        <!-- System Type -->
+
+        <div>
+
+            <label class="font-semibold text-slate-800">
+
+                System Type
+
+            </label>
+
+            <select
+                x-model="systemType"
+                class="mt-3 w-full h-14 rounded-2xl border border-slate-200 px-5">
+
+                <option>Off-Grid</option>
+
+                <option>Hybrid</option>
+
+                <option>Grid-Tie</option>
+
+            </select>
+
+        </div>
+
+
+        <!-- Voltage + Panel -->
+
+        <div class="grid grid-cols-2 gap-5">
+
+            <div>
+
+                <label class="font-semibold">
+
+                    System Voltage
+
+                </label>
+
+                <select
+                    x-model="voltage"
+                    class="mt-3 w-full h-14 rounded-2xl border border-slate-200 px-5">
+
+                    <option>12V</option>
+
+                    <option>24V</option>
+
+                    <option selected>48V</option>
+
+                </select>
+
+            </div>
+
+            <div>
+
+                <label class="font-semibold">
+
+                    Panel Size (W)
+
+                </label>
+
+                <select
+                    x-model="panelSize"
+                    class="mt-3 w-full h-14 rounded-2xl border border-slate-200 px-5">
+
+                    <option>450W</option>
+
+                    <option>550W</option>
+
+                    <option>600W</option>
+
+                </select>
+
+            </div>
+
+        </div>
+
+
+        <!-- Roof -->
+
+        <div>
+
+            <label class="font-semibold">
+
+                Roof Type
+
+            </label>
+
+            <select
+                x-model="roofType"
+                class="mt-3 w-full h-14 rounded-2xl border border-slate-200 px-5">
+
+                <option>Pitched / Sloped</option>
+
+                <option>Flat Roof</option>
+
+                <option>Ground Mount</option>
+
+            </select>
+
+        </div>
+
+
+        <!-- Roof Tilt -->
+
+        <div>
+
+            <div class="flex justify-between">
+
+                <label class="font-semibold">
+
+                    Roof Tilt Angle:
+
+                    <span
+                        class="text-emerald-600"
+                        x-text="roofTilt+'°'"></span>
+
+                </label>
+
+            </div>
+
+            <input
+                type="range"
+                min="0"
+                max="45"
+                x-model="roofTilt"
+                class="w-full mt-4 accent-emerald-600">
+
+            <div class="flex justify-between text-sm text-slate-400">
+
+                <span>0° (Flat)</span>
+
+                <span>45°</span>
+
+            </div>
+
+        </div>
+
+
+        <!-- Battery -->
+
+        <div>
+
+            <label class="font-semibold">
+
+                Battery Autonomy:
+
+                <span
+                    class="text-emerald-600"
+                    x-text="batteryDays+' day(s)'"></span>
+
+            </label>
+
+            <input
+                type="range"
+                min="1"
+                max="5"
+                x-model="batteryDays"
+                class="w-full mt-4 accent-emerald-600">
+
+            <div class="flex justify-between text-sm text-slate-400">
+
+                <span>1 day</span>
+
+                <span>5 days</span>
+
+            </div>
+
+        </div>
+
+
+        <!-- Budget -->
+
+        <div>
+
+            <label class="font-semibold">
+
+                Budget (₦) — Optional
+
+            </label>
+
+            <input
+                x-model="budget"
+                placeholder="e.g. 3000000"
+                class="mt-3 w-full h-14 rounded-2xl border border-slate-200 px-5">
+
+        </div>
+
+
+        <!-- Notes -->
+
+        <div>
+
+            <label class="font-semibold">
+
+                Special Requirements / Notes
+
+            </label>
+
+            <textarea
+                rows="4"
+                x-model="notes"
+                placeholder="e.g. Sensitive medical equipment, high inrush loads, future expansion..."
+                class="mt-3 w-full rounded-2xl border border-slate-200 p-5 resize-none"></textarea>
+
+        </div>
 
     </div>
 
-    <div class="grid lg:grid-cols-2 gap-8 mt-14">
+</div><!-- Site Information Card -->
 
-        <!-- LEFT SIDE -->
+<!-- ======================================= -->
+<!-- LOAD SCHEDULE -->
+<!-- ======================================= -->
 
-        <div class="space-y-6">
+<div class="bg-white rounded-[28px] border border-slate-200 shadow-sm overflow-hidden">
 
-            <div class="bg-white rounded-3xl border p-6 shadow-sm">
+    <!-- Header -->
 
-                <h3 class="text-2xl font-bold mb-6">
-                    Site Information
-                </h3>
+    <button
+        @click="loadOpen=!loadOpen"
+        class="w-full flex items-center justify-between px-7 py-6">
 
-                <div class="grid md:grid-cols-2 gap-4">
+        <div class="flex items-center gap-4">
 
-                    <div>
-                        <label class="text-sm font-medium">
-                            Location
-                        </label>
+            <div class="w-12 h-12 rounded-2xl bg-emerald-50 flex items-center justify-center">
 
-                        <select
-                            x-model="location"
-                            class="w-full mt-2 border rounded-xl p-3"
-                        >
-                            <option>Port Harcourt</option>
-                            <option>Lagos</option>
-                            <option>Abuja</option>
-                        </select>
-                    </div>
+                <span class="text-2xl">⚡</span>
 
-                    <div>
-                        <label class="text-sm font-medium">
-                            System Type
-                        </label>
+            </div>
 
-                        <select
-                            x-model="systemType"
-                            class="w-full mt-2 border rounded-xl p-3"
-                        >
-                            <option>Off-Grid</option>
-                            <option>Hybrid</option>
-                            <option>Grid-Tie</option>
-                        </select>
-                    </div>
+            <h2 class="text-2xl font-bold">
 
-                </div>
+                Load Schedule
 
-                <div class="grid md:grid-cols-2 gap-4 mt-4">
+            </h2>
 
-                    <div>
-                        <label class="text-sm font-medium">
-                            Panel Size
-                        </label>
+        </div>
 
-                        <select
-                            x-model.number="panelSize"
-                            class="w-full mt-2 border rounded-xl p-3"
-                        >
-                            <option value="550">550W</option>
-                            <option value="600">600W</option>
-                        </select>
-                    </div>
+        <svg
+            class="w-6 h-6 transition"
+            :class="loadOpen ? 'rotate-180':''"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24">
 
-                    <div>
-                        <label class="text-sm font-medium">
-                            System Voltage
-                        </label>
+            <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M19 9l-7 7-7-7"/>
 
-                        <select
-                            x-model.number="systemVoltage"
-                            class="w-full mt-2 border rounded-xl p-3"
-                        >
-                            <option value="48">48V</option>
-                            <option value="24">24V</option>
-                        </select>
-                    </div>
+        </svg>
 
-                </div>
+    </button>
 
-                <!-- Roof Tilt -->
 
-                <div class="mt-6">
+    <div
+        x-show="loadOpen"
+        x-transition
+        class="px-7 pb-8">
 
-                    <div class="flex justify-between mb-2">
-                        <span>Roof Tilt</span>
-                        <span x-text="roofTilt + '°'"></span>
-                    </div>
+        <!-- Desktop Header -->
+
+        <div
+            class="hidden md:grid grid-cols-12 gap-3 text-xs font-bold uppercase text-slate-500 mb-4">
+
+            <div class="col-span-4">
+
+                Appliance
+
+            </div>
+
+            <div class="col-span-2">
+
+                Watts
+
+            </div>
+
+            <div class="col-span-2">
+
+                Hrs/Day
+
+            </div>
+
+            <div class="col-span-2">
+
+                Qty
+
+            </div>
+
+            <div class="col-span-1">
+
+                kWh
+
+            </div>
+
+            <div class="col-span-1"></div>
+
+        </div>
+
+
+        <!-- Appliances -->
+
+        <template
+            x-for="(item,index) in appliances"
+            :key="index">
+
+            <div
+                class="border-t first:border-0 py-4">
+
+                <!-- Desktop -->
+
+                <div
+                    class="hidden md:grid grid-cols-12 gap-3 items-center">
 
                     <input
-                        type="range"
-                        min="0"
-                        max="45"
-                        x-model="roofTilt"
-                        class="w-full"
-                    >
+                        x-model="item.name"
+                        class="col-span-4 h-12 rounded-xl border border-slate-200 px-4">
+
+                    <input
+                        type="number"
+                        x-model.number="item.watts"
+                        class="col-span-2 h-12 rounded-xl border border-slate-200 px-3">
+
+                    <input
+                        type="number"
+                        x-model.number="item.hours"
+                        class="col-span-2 h-12 rounded-xl border border-slate-200 px-3">
+
+                    <input
+                        type="number"
+                        x-model.number="item.qty"
+                        class="col-span-2 h-12 rounded-xl border border-slate-200 px-3">
+
+                    <div
+                        class="col-span-1 font-semibold text-slate-700">
+
+                        <span
+                            x-text="((item.watts*item.hours*item.qty)/1000).toFixed(2)">
+                        </span>
+
+                    </div>
+
+                    <button
+                        @click="removeAppliance(index)"
+                        class="text-slate-400 hover:text-red-500 text-xl">
+
+                        🗑️
+
+                    </button>
 
                 </div>
 
-                <!-- Battery -->
 
-                <div class="mt-6">
+                <!-- Mobile -->
 
-                    <div class="flex justify-between mb-2">
-                        <span>Battery Autonomy</span>
-                        <span x-text="autonomy + ' Day(s)'"></span>
-                    </div>
+                <div
+                    class="md:hidden bg-slate-50 rounded-2xl p-4 space-y-3">
 
                     <input
-                        type="range"
-                        min="1"
-                        max="5"
-                        x-model="autonomy"
-                        class="w-full"
-                    >
+                        x-model="item.name"
+                        class="w-full h-12 rounded-xl border border-slate-200 px-4">
+
+                    <div class="grid grid-cols-3 gap-3">
+
+                        <input
+                            type="number"
+                            x-model.number="item.watts"
+                            placeholder="Watts"
+                            class="h-12 rounded-xl border border-slate-200 px-3">
+
+                        <input
+                            type="number"
+                            x-model.number="item.hours"
+                            placeholder="Hours"
+                            class="h-12 rounded-xl border border-slate-200 px-3">
+
+                        <input
+                            type="number"
+                            x-model.number="item.qty"
+                            placeholder="Qty"
+                            class="h-12 rounded-xl border border-slate-200 px-3">
+
+                    </div>
+
+                    <div
+                        class="flex justify-between items-center">
+
+                        <span
+                            class="font-semibold text-emerald-600">
+
+                            <span
+                                x-text="((item.watts*item.hours*item.qty)/1000).toFixed(2)">
+                            </span>
+
+                            kWh
+
+                        </span>
+
+                        <button
+                            @click="removeAppliance(index)"
+                            class="text-red-500">
+
+                            Delete
+
+                        </button>
+
+                    </div>
 
                 </div>
 
             </div>
 
-            <!-- LOAD TABLE -->
+        </template>
 
-            <div class="bg-white rounded-3xl border p-6 shadow-sm">
 
-                <div class="flex justify-between items-center mb-5">
+        <!-- Add Appliance -->
 
-                    <h3 class="text-2xl font-bold">
-                        Load Schedule
-                    </h3>
+        <button
+            @click="addAppliance()"
+            class="mt-4 flex items-center gap-3 text-emerald-600 font-semibold">
 
-                    <button
-                        @click="addAppliance()"
-                        class="text-green-600 font-semibold"
-                    >
-                        + Add Appliance
-                    </button>
+            <span class="text-2xl">
+
+                +
+
+            </span>
+
+            Add Appliance
+
+        </button>
+
+
+        <!-- Summary -->
+
+        <div
+            class="mt-8 rounded-3xl border border-emerald-200 bg-emerald-50 p-6">
+
+            <div
+                class="grid md:grid-cols-2 gap-8">
+
+                <div>
+
+                    <p class="text-slate-500">
+
+                        Total Daily Load
+
+                    </p>
+
+                    <h2
+                        class="text-4xl font-black mt-2">
+
+                        <span
+                            x-text="totalLoad.toFixed(2)">
+                        </span>
+
+                        kWh/day
+
+                    </h2>
 
                 </div>
 
+                <div>
+
+                    <p class="text-slate-500">
+
+                        Peak Load
+
+                    </p>
+
+                    <h2
+                        class="text-4xl font-black mt-2">
+
+                        <span
+                            x-text="peakLoad">
+                        </span>
+
+                        W
+
+                    </h2>
+
+                </div>
+
+                <div>
+
+                    <p class="text-slate-500">
+
+                        Design Load (×1.25)
+
+                    </p>
+
+                    <h2
+                        class="text-3xl font-bold text-emerald-600 mt-2">
+
+                        <span
+                            x-text="(totalLoad*1.25).toFixed(2)">
+                        </span>
+
+                        kWh/day
+
+                    </h2>
+
+                </div>
+
+                <div>
+
+                    <p class="text-slate-500">
+
+                        Minimum Inverter Size
+
+                    </p>
+
+                    <h2
+                        class="text-3xl font-bold text-emerald-600 mt-2">
+
+                        <span
+                            x-text="(peakLoad/1000*1.2).toFixed(1)">
+                        </span>
+
+                        kVA
+
+                    </h2>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- Generate Button -->
+
+        <button
+            @click="generateDesign()"
+            class="mt-8 w-full h-16 rounded-2xl bg-emerald-600 hover:bg-emerald-700 text-white text-xl font-bold transition">
+
+            ⚙️ Generate System Design
+
+        </button>
+
+        <p
+            class="text-center text-slate-400 mt-4">
+
+            Powered by advanced AI. Generation takes ~15–20 seconds.
+
+        </p>
+
+    </div>
+
+</div><!-- NEXT -->
+
+            </div>
+
+
+            <!-- RIGHT COLUMN -->
+
+            <div>
+
+                <!-- ========================================== -->
+<!-- AI GENERATED DESIGN -->
+<!-- ========================================== -->
+
+<div
+    class="sticky top-8 bg-white rounded-[28px] border border-slate-200 shadow-sm overflow-hidden">
+
+    <!-- Header -->
+
+    <div
+        class="flex items-center justify-between px-7 py-6 border-b">
+
+        <div class="flex items-center gap-4">
+
+            <div
+                class="w-12 h-12 rounded-2xl bg-emerald-50 flex items-center justify-center">
+
+                🤖
+
+            </div>
+
+            <div>
+
+                <h2 class="text-2xl font-bold">
+
+                    Generated Design
+
+                </h2>
+
+                <p class="text-slate-500">
+
+                    AI Solar Engineer
+
+                </p>
+
+            </div>
+
+        </div>
+
+        <span
+            x-show="designGenerated"
+            class="bg-green-100 text-green-700 text-xs px-3 py-1 rounded-full font-semibold">
+
+            READY
+
+        </span>
+
+    </div>
+
+
+    <!-- EMPTY STATE -->
+
+    <div
+        x-show="!designGenerated"
+        class="py-24 px-10 text-center">
+
+        <div
+            class="w-28 h-28 mx-auto rounded-full bg-slate-100 flex items-center justify-center text-6xl">
+
+            ⚡
+
+        </div>
+
+        <h3
+            class="mt-8 text-3xl font-bold text-slate-900">
+
+            Ready to Design
+
+        </h3>
+
+        <p
+            class="mt-5 text-slate-500 leading-8">
+
+            Fill in your site information and load
+            schedule, then click
+
+            <strong>Generate System Design</strong>
+
+            to receive a professional engineering
+            report.
+
+        </p>
+
+    </div>
+
+
+    <!-- LOADING -->
+
+    <div
+        x-show="loading"
+        x-transition
+        class="py-20 px-10 text-center">
+
+        <div
+            class="w-20 h-20 mx-auto border-4 border-emerald-600 border-t-transparent rounded-full animate-spin">
+
+        </div>
+
+        <h3
+            class="text-2xl font-bold mt-8">
+
+            AI is Designing...
+
+        </h3>
+
+        <p
+            class="text-slate-500 mt-3">
+
+            Calculating panel array...
+
+            <br>
+
+            Battery bank...
+
+            <br>
+
+            Inverter sizing...
+
+        </p>
+
+    </div>
+
+
+    <!-- GENERATED RESULT -->
+
+    <div
+        x-show="designGenerated"
+        x-transition
+        class="p-7 space-y-8">
+
+        <!-- Recommendation -->
+
+        <div
+            class="rounded-2xl bg-emerald-50 border border-emerald-100 p-6">
+
+            <h3
+                class="text-xl font-bold">
+
+                Recommended System
+
+            </h3>
+
+            <p
+                class="mt-2 text-slate-600">
+
+                Based on your energy profile,
+                this configuration provides
+                excellent reliability and future
+                expansion.
+
+            </p>
+
+        </div>
+
+
+        <!-- System Specs -->
+
+        <div
+            class="grid grid-cols-2 gap-4">
+
+            <div class="rounded-2xl bg-slate-50 p-5">
+
+                <p class="text-slate-500">
+
+                    Solar Panels
+
+                </p>
+
+                <h2
+                    class="text-3xl font-black mt-2">
+
+                    <span
+                        x-text="recommendedPanels"></span>
+
+                </h2>
+
+            </div>
+
+            <div class="rounded-2xl bg-slate-50 p-5">
+
+                <p class="text-slate-500">
+
+                    Inverter
+
+                </p>
+
+                <h2
+                    class="text-3xl font-black mt-2">
+
+                    <span
+                        x-text="recommendedInverter"></span>
+
+                    kVA
+
+                </h2>
+
+            </div>
+
+            <div class="rounded-2xl bg-slate-50 p-5">
+
+                <p class="text-slate-500">
+
+                    Battery Bank
+
+                </p>
+
+                <h2
+                    class="text-3xl font-black mt-2">
+
+                    <span
+                        x-text="recommendedBattery"></span>
+
+                </h2>
+
+            </div>
+
+            <div class="rounded-2xl bg-slate-50 p-5">
+
+                <p class="text-slate-500">
+
+                    Charge Controller
+
+                </p>
+
+                <h2
+                    class="text-3xl font-black mt-2">
+
+                    MPPT
+
+                </h2>
+
+            </div>
+
+        </div>
+
+
+        <!-- BOM -->
+
+        <div>
+
+            <h3
+                class="text-xl font-bold mb-4">
+
+                Bill of Materials
+
+            </h3>
+
+            <div
+                class="space-y-3">
+
                 <template
-                    x-for="(item,index) in appliances"
-                    :key="index"
-                >
+                    x-for="item in billOfMaterials">
 
                     <div
-                        class="grid grid-cols-5 gap-2 mb-3"
-                    >
+                        class="flex justify-between rounded-xl bg-slate-50 p-4">
 
-                        <input
-                            x-model="item.name"
-                            class="border rounded-lg p-2"
-                        >
+                        <span
+                            x-text="item.name"></span>
 
-                        <input
-                            type="number"
-                            x-model.number="item.watts"
-                            class="border rounded-lg p-2"
-                        >
-
-                        <input
-                            type="number"
-                            x-model.number="item.hours"
-                            class="border rounded-lg p-2"
-                        >
-
-                        <input
-                            type="number"
-                            x-model.number="item.qty"
-                            class="border rounded-lg p-2"
-                        >
-
-                        <button
-                            @click="removeAppliance(index)"
-                            class="text-red-500"
-                        >
-                            ✕
-                        </button>
+                        <span
+                            class="font-bold"
+                            x-text="item.qty"></span>
 
                     </div>
 
                 </template>
 
-                <div class="mt-6 bg-green-50 rounded-xl p-4">
-
-                    <div class="flex justify-between">
-
-                        <span>Daily Load</span>
-
-                        <strong
-                            x-text="dailyLoad.toFixed(2)+' kWh/day'"
-                        ></strong>
-
-                    </div>
-
-                    <div class="flex justify-between mt-2">
-
-                        <span>Peak Load</span>
-
-                        <strong
-                            x-text="peakLoad + ' W'"
-                        ></strong>
-
-                    </div>
-
-                </div>
-
             </div>
-
-            <button
-                @click="generateDesign()"
-                class="w-full py-4 bg-green-600 text-white rounded-2xl font-semibold text-lg hover:bg-green-700 transition"
-            >
-                Generate System Design
-            </button>
 
         </div>
 
-        <!-- RIGHT SIDE -->
+
+        <!-- Engineering Notes -->
 
         <div
-            class="bg-white rounded-3xl border shadow-sm p-8"
-        >
+            class="rounded-2xl border border-slate-200 p-6">
 
-            <template x-if="!report">
+            <h3
+                class="font-bold text-lg">
 
-                <div class="h-full flex flex-col justify-center items-center text-center">
+                Engineering Notes
 
-                    <div class="text-8xl opacity-20">
-                        📄
-                    </div>
+            </h3>
 
-                    <h3 class="text-3xl font-bold mt-4">
-                        Your Design Will Appear Here
-                    </h3>
+            <ul
+                class="mt-4 space-y-3 text-slate-600">
 
-                    <p class="mt-3 text-slate-500">
-                        Complete the load schedule and click
-                        Generate System Design.
-                    </p>
+                <li>✔ Use 6mm² PV cable.</li>
 
-                </div>
+                <li>✔ Install DC surge protection.</li>
 
-            </template>
+                <li>✔ Earth all metal structures.</li>
 
-            <template x-if="report">
+                <li>✔ Install AC isolator.</li>
 
-                <div x-transition>
+                <li>✔ Follow IEC wiring standards.</li>
 
-                    <h3 class="text-3xl font-bold">
-                        System Design Report
-                    </h3>
+            </ul>
 
-                    <div class="grid grid-cols-2 gap-4 mt-8">
+        </div>
 
-                        <div>
-                            <p class="text-slate-500">
-                                Daily Load
-                            </p>
 
-                            <h4 class="font-bold text-xl"
-                                x-text="report.dailyLoad.toFixed(2)+' kWh'"
-                            ></h4>
-                        </div>
+        <!-- Buttons -->
 
-                        <div>
-                            <p class="text-slate-500">
-                                Solar Array
-                            </p>
+        <div
+            class="grid gap-4">
 
-                            <h4 class="font-bold text-xl"
-                                x-text="report.arraySize.toFixed(2)+' kW'"
-                            ></h4>
-                        </div>
+            <button
+                class="h-14 rounded-2xl bg-emerald-600 text-white font-bold hover:bg-emerald-700">
 
-                        <div>
-                            <p class="text-slate-500">
-                                Panels
-                            </p>
+                📄 Download PDF Report
 
-                            <h4 class="font-bold text-xl"
-                                x-text="report.panels"
-                            ></h4>
-                        </div>
+            </button>
 
-                        <div>
-                            <p class="text-slate-500">
-                                Inverter
-                            </p>
+            <button
+                class="h-14 rounded-2xl border border-slate-300 hover:bg-slate-50 font-semibold">
 
-                            <h4 class="font-bold text-xl"
-                                x-text="report.inverter+' kVA'"
-                            ></h4>
-                        </div>
+                📦 Export Bill of Materials
 
-                    </div>
-
-                    <div class="mt-8">
-
-                        <h4 class="font-bold text-xl">
-                            Bill of Materials
-                        </h4>
-
-                        <ul class="mt-4 space-y-2">
-
-                            <template
-                                x-for="item in report.bom"
-                            >
-
-                                <li>
-                                    ✅
-                                    <span x-text="item"></span>
-                                </li>
-
-                            </template>
-
-                        </ul>
-
-                    </div>
-
-                </div>
-
-            </template>
+            </button>
 
         </div>
 
     </div>
 
-</div>
+</div><!-- Result Card -->
+
+                <!-- NEXT -->
+
+            </div>
+
+        </div>
+
+    </div>
+
 </section>
-
 <script>
-function solarDesigner(){
-
-return{
-
-location:'Port Harcourt',
-systemType:'Off-Grid',
-panelSize:550,
-systemVoltage:48,
-roofTilt:15,
-autonomy:1,
-
-report:null,
-
-appliances:[
-{
-name:'LED Lights',
-watts:50,
-hours:8,
-qty:10
-},
-{
-name:'TV',
-watts:80,
-hours:6,
-qty:1
-}
-],
-
-addAppliance(){
-
-this.appliances.push({
-name:'New Appliance',
-watts:100,
-hours:4,
-qty:1
-})
-
-},
-
-removeAppliance(index){
-
-this.appliances.splice(index,1)
-
-},
-
-get dailyLoad(){
-
-return this.appliances.reduce((sum,item)=>{
-
-return sum +
-(item.watts*item.hours*item.qty)/1000
-
-},0)
-
-},
-
-get peakLoad(){
-
-return this.appliances.reduce((sum,item)=>{
-
-return sum +
-(item.watts*item.qty)
-
-},0)
-
-},
-
-generateDesign(){
-
-const designLoad =
-this.dailyLoad * 1.25
-
-const arraySize =
-designLoad / 4.5
-
-const panels =
-Math.ceil(
-(arraySize*1000)/
-this.panelSize
-)
-
-const inverter =
-Math.ceil(
-(this.peakLoad*1.25)/1000
-)
-
-const batteryAh =
-(
-(designLoad*1000) *
-this.autonomy
-)
-/
-this.systemVoltage
-
-this.report = {
-
-dailyLoad:this.dailyLoad,
-
-arraySize,
-
-panels,
-
-inverter,
-
-batteryAh,
-
-bom:[
-`${panels} × ${this.panelSize}W Solar Panels`,
-`1 × ${inverter}kVA Inverter`,
-`${Math.ceil(batteryAh/200)} × 12V 200Ah Batteries`,
-`MPPT Charge Controller`,
-`Solar Mounting Structure`,
-`DC Protection Kit`,
-`Solar Cables`
-]
-
-}
-
-}
-
-}
-
-}
-</script>
+    function solarDesigner(){
+    
+    return{
+    
+    /* ===========================
+       UI
+    =========================== */
+    
+    siteOpen:true,
+    loadOpen:true,
+    
+    loading:false,
+    designGenerated:false,
+    
+    /* ===========================
+       SITE INFO
+    =========================== */
+    
+    location:"Port Harcourt",
+    systemType:"Off-Grid",
+    voltage:"48V",
+    panelSize:550,
+    roofType:"Pitched / Sloped",
+    roofTilt:15,
+    batteryDays:2,
+    budget:"",
+    notes:"",
+    
+    sunHours:4.8,
+    
+    /* ===========================
+       APPLIANCES
+    =========================== */
+    
+    appliances:[
+    
+    {
+    name:"LED Lights (10)",
+    watts:100,
+    hours:8,
+    qty:1
+    },
+    
+    {
+    name:"Refrigerator",
+    watts:180,
+    hours:18,
+    qty:1
+    },
+    
+    {
+    name:"Television",
+    watts:120,
+    hours:6,
+    qty:1
+    }
+    
+    ],
+    
+    /* ===========================
+       RESULT
+    =========================== */
+    
+    recommendedPanels:0,
+    recommendedBattery:"",
+    recommendedInverter:0,
+    
+    billOfMaterials:[],
+    
+    /* ===========================
+       LOCATION SUN HOURS
+    =========================== */
+    
+    locationMap:{
+    
+    "Port Harcourt":4.8,
+    "Lagos":5.0,
+    "Abuja":5.8,
+    "Benin":4.9,
+    "Calabar":4.6
+    
+    },
+    
+    /* ===========================
+       COMPUTED
+    =========================== */
+    
+    get totalLoad(){
+    
+    let total=0;
+    
+    this.appliances.forEach(item=>{
+    
+    total+=((item.watts*item.hours*item.qty)/1000);
+    
+    });
+    
+    return total;
+    
+    },
+    
+    get peakLoad(){
+    
+    let total=0;
+    
+    this.appliances.forEach(item=>{
+    
+    total+=(item.watts*item.qty);
+    
+    });
+    
+    return total;
+    
+    },
+    
+    /* ===========================
+       WATCH LOCATION
+    =========================== */
+    
+    init(){
+    
+    this.$watch("location",(value)=>{
+    
+    this.sunHours=this.locationMap[value];
+    
+    });
+    
+    },
+    
+    /* ===========================
+       APPLIANCES
+    =========================== */
+    
+    addAppliance(){
+    
+    this.appliances.push({
+    
+    name:"New Appliance",
+    
+    watts:100,
+    
+    hours:5,
+    
+    qty:1
+    
+    });
+    
+    },
+    
+    removeAppliance(index){
+    
+    this.appliances.splice(index,1);
+    
+    },
+    
+    /* ===========================
+       AI GENERATOR
+    =========================== */
+    
+    generateDesign(){
+    
+    this.loading=true;
+    
+    this.designGenerated=false;
+    
+    /* simulate AI */
+    
+    setTimeout(()=>{
+    
+    this.loading=false;
+    
+    this.designGenerated=true;
+    
+    /* Solar Array */
+    
+    let designLoad=this.totalLoad*1.25;
+    
+    let panelEnergy=this.panelSize*this.sunHours*0.8/1000;
+    
+    this.recommendedPanels=Math.ceil(
+    
+    designLoad/panelEnergy
+    
+    );
+    
+    /* Battery */
+    
+    let batteryWh=
+    
+    designLoad*
+    1000*
+    this.batteryDays;
+    
+    let batteryAh=Math.ceil(
+    
+    batteryWh/48
+    
+    );
+    
+    this.recommendedBattery=
+    
+    batteryAh+"Ah @48V";
+    
+    /* Inverter */
+    
+    this.recommendedInverter=
+    
+    Math.ceil(
+    
+    (this.peakLoad*1.2)/1000
+    
+    );
+    
+    /* BOM */
+    
+    this.billOfMaterials=[
+    
+    {
+    
+    name:this.panelSize+"W Solar Panel",
+    
+    qty:this.recommendedPanels
+    
+    },
+    
+    {
+    
+    name:"48V Lithium Battery",
+    
+    qty:this.recommendedBattery
+    
+    },
+    
+    {
+    
+    name:this.recommendedInverter+
+    
+    "kVA Hybrid Inverter",
+    
+    qty:1
+    
+    },
+    
+    {
+    
+    name:"MPPT Charge Controller",
+    
+    qty:1
+    
+    },
+    
+    {
+    
+    name:"PV Combiner Box",
+    
+    qty:1
+    
+    },
+    
+    {
+    
+    name:"DC Isolator",
+    
+    qty:1
+    
+    },
+    
+    {
+    
+    name:"AC Breaker",
+    
+    qty:1
+    
+    },
+    
+    {
+    
+    name:"6mm² Solar Cable",
+    
+    qty:"100m"
+    
+    },
+    
+    {
+    
+    name:"MC4 Connectors",
+    
+    qty:"12"
+    
+    },
+    
+    {
+    
+    name:"Roof Mounting Kit",
+    
+    qty:this.recommendedPanels
+    
+    }
+    
+    ];
+    
+    },1800);
+    
+    }
+    
+    }
+    
+    }
+    </script>
  
     <!-- ABOUT SECTION -->
     <section 
