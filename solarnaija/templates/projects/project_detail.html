@@ -1,0 +1,444 @@
+{% extends "base.html" %}
+
+{% block title %}{{ project.client_name }}{% endblock %}
+
+{% block page_title %}
+{{ project.client_name }}
+{% endblock %}
+
+{% block subtitle %}
+{{ project.project_number }}
+{% endblock %}
+
+{% block content %}
+
+<!-- Header -->
+
+<div class="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-6">
+
+    <div>
+
+        <h1 class="text-3xl font-bold text-gray-800">
+
+            {{ project.client_name }}
+
+        </h1>
+
+        <div class="flex flex-wrap gap-3 mt-4">
+
+            <span class="px-4 py-2 rounded-full bg-green-100 text-green-700 text-sm font-semibold">
+
+                {{ project.get_system_type_display }}
+
+            </span>
+
+            <span class="px-4 py-2 rounded-full bg-blue-100 text-blue-700 text-sm font-semibold">
+
+                {{ project.location }}
+
+            </span>
+
+            <span class="px-4 py-2 rounded-full bg-yellow-100 text-yellow-700 text-sm font-semibold">
+
+                {{ project.get_status_display }}
+
+            </span>
+
+        </div>
+
+    </div>
+
+    <div>
+
+        <a href="{% url 'projects' %}"
+           class="px-6 py-3 rounded-xl border border-gray-300 hover:bg-gray-100 transition">
+
+            ← Back to Projects
+
+        </a>
+
+    </div>
+
+</div>
+
+<!-- ======================= -->
+<!-- INFO -->
+<!-- ======================= -->
+
+<div class="grid lg:grid-cols-2 gap-8 mt-10">
+
+    <!-- Client -->
+
+    <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-8">
+
+        <h2 class="text-xl font-bold mb-6">
+
+            Client Information
+
+        </h2>
+
+        <div class="space-y-4">
+
+            <div class="flex justify-between">
+
+                <span class="text-gray-500">Email</span>
+
+                <span>{{ project.email|default:"-" }}</span>
+
+            </div>
+
+            <div class="flex justify-between">
+
+                <span class="text-gray-500">Phone</span>
+
+                <span>{{ project.phone|default:"-" }}</span>
+
+            </div>
+
+            <div class="flex justify-between">
+
+                <span class="text-gray-500">Company</span>
+
+                <span>{{ project.company|default:"-" }}</span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Project -->
+
+    <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-8">
+
+        <h2 class="text-xl font-bold mb-6">
+
+            Project Information
+
+        </h2>
+
+        <div class="space-y-4">
+
+            <div class="flex justify-between">
+
+                <span class="text-gray-500">
+
+                    Roof Area
+
+                </span>
+
+                <span>
+
+                    {{ project.roof_area }} m²
+
+                </span>
+
+            </div>
+
+            <div class="flex justify-between">
+
+                <span class="text-gray-500">
+
+                    Roof Tilt
+
+                </span>
+
+                <span>
+
+                    {{ project.roof_tilt }}°
+
+                </span>
+
+            </div>
+
+            <div class="flex justify-between">
+
+                <span class="text-gray-500">
+
+                    Sun Hours
+
+                </span>
+
+                <span>
+
+                    {{ project.sun_hours }}
+
+                </span>
+
+            </div>
+
+            <div class="flex justify-between">
+
+                <span class="text-gray-500">
+
+                    Voltage
+
+                </span>
+
+                <span>
+
+                    {{ project.system_voltage }}V
+
+                </span>
+
+            </div>
+
+            <div class="flex justify-between">
+
+                <span class="text-gray-500">
+
+                    Battery Autonomy
+
+                </span>
+
+                <span>
+
+                    {{ project.battery_autonomy }} day(s)
+
+                </span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- ======================= -->
+<!-- APPLIANCES -->
+<!-- ======================= -->
+
+<div class="bg-white rounded-2xl shadow-sm border border-gray-100 mt-10 overflow-hidden">
+
+    <div class="flex flex-col md:flex-row justify-between items-center gap-4 p-6 border-b">
+
+        <h2 class="text-2xl font-bold">
+
+            Appliances
+
+        </h2>
+
+        <a href="{% url 'add_appliance' project.id %}"
+
+           class="bg-primary hover:bg-green-700 text-white px-6 py-3 rounded-xl transition">
+
+            + Add Appliance
+
+        </a>
+
+    </div>
+
+    <div class="overflow-x-auto">
+
+        <table class="w-full">
+
+            <thead class="bg-gray-50">
+
+                <tr>
+
+                    <th class="p-4 text-left">Name</th>
+
+                    <th class="p-4 text-left">Qty</th>
+
+                    <th class="p-4 text-left">Watts</th>
+
+                    <th class="p-4 text-left">Surge</th>
+
+                    <th class="p-4 text-left">Hours</th>
+
+                    <th class="p-4 text-left">Daily Load</th>
+
+                    <th class="p-4 text-right">Action</th>
+
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+                {% for appliance in appliances %}
+
+                <tr class="border-t hover:bg-gray-50">
+
+                    <td class="p-4">
+
+                        {{ appliance.name }}
+
+                    </td>
+
+                    <td class="p-4">
+
+                        {{ appliance.quantity }}
+
+                    </td>
+
+                    <td class="p-4">
+
+                        {{ appliance.watts }} W
+
+                    </td>
+
+                    <td class="p-4">
+
+                        {{ appliance.surge_watts }} W
+
+                    </td>
+
+                    <td class="p-4">
+
+                        {{ appliance.hours_per_day }}
+
+                    </td>
+
+                    <td class="p-4 font-semibold text-primary">
+
+                        {{ appliance.daily_consumption }} Wh
+
+                    </td>
+
+                    <td class="p-4 text-right">
+
+                        <a href="{% url 'edit_appliance' appliance.id %}"
+
+                           class="text-primary font-semibold mr-4">
+
+                            Edit
+
+                        </a>
+
+                        <a href="{% url 'delete_appliance' appliance.id %}"
+
+                           class="text-red-600">
+
+                            Delete
+
+                        </a>
+
+                    </td>
+
+                </tr>
+
+                {% empty %}
+
+                <tr>
+
+                    <td colspan="7" class="text-center py-12 text-gray-500">
+
+                        No appliances added yet.
+
+                    </td>
+
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+<!-- ======================= -->
+<!-- ENGINEERING RESULTS -->
+<!-- ======================= -->
+
+{% if calculation %}
+
+<div class="mt-10">
+
+    <h2 class="text-2xl font-bold mb-6">
+
+        Engineering Results
+
+    </h2>
+
+    <div class="grid md:grid-cols-2 xl:grid-cols-4 gap-6">
+
+        <div class="bg-white rounded-2xl shadow-sm p-6 border-l-4 border-green-500">
+            <p class="text-gray-500">Daily Load</p>
+            <h3 class="text-3xl font-bold mt-2">{{ calculation.total_daily_load }} Wh</h3>
+        </div>
+
+        <div class="bg-white rounded-2xl shadow-sm p-6 border-l-4 border-blue-500">
+            <p class="text-gray-500">Peak Load</p>
+            <h3 class="text-3xl font-bold mt-2">{{ calculation.total_peak_load }} W</h3>
+        </div>
+
+        <div class="bg-white rounded-2xl shadow-sm p-6 border-l-4 border-yellow-500">
+            <p class="text-gray-500">Solar Panels</p>
+            <h3 class="text-3xl font-bold mt-2">{{ calculation.required_panels }}</h3>
+        </div>
+
+        <div class="bg-white rounded-2xl shadow-sm p-6 border-l-4 border-purple-500">
+            <p class="text-gray-500">Battery Capacity</p>
+            <h3 class="text-3xl font-bold mt-2">{{ calculation.battery_capacity }} Ah</h3>
+        </div>
+
+        <div class="bg-white rounded-2xl shadow-sm p-6 border-l-4 border-pink-500">
+            <p class="text-gray-500">Inverter</p>
+            <h3 class="text-3xl font-bold mt-2">{{ calculation.inverter_size }} W</h3>
+        </div>
+
+        <div class="bg-white rounded-2xl shadow-sm p-6 border-l-4 border-indigo-500">
+            <p class="text-gray-500">Controller</p>
+            <h3 class="text-3xl font-bold mt-2">{{ calculation.controller_size }} A</h3>
+        </div>
+
+        <div class="bg-white rounded-2xl shadow-sm p-6 border-l-4 border-orange-500">
+            <p class="text-gray-500">Cable Size</p>
+            <h3 class="text-3xl font-bold mt-2">{{ calculation.cable_size }}</h3>
+        </div>
+
+        <div class="bg-green-50 rounded-2xl shadow-sm p-6 border-l-4 border-green-600">
+            <p class="text-green-700">Estimated Cost</p>
+            <h3 class="text-3xl font-bold text-green-700 mt-2">
+                ₦{{ calculation.estimated_cost }}
+            </h3>
+        </div>
+
+    </div>
+
+</div>
+
+{% endif %}
+
+<!-- ======================= -->
+<!-- ACTIONS -->
+<!-- ======================= -->
+
+<div class="flex flex-wrap gap-4 mt-12">
+
+    <form method="POST"
+          action="{% url 'calculate_system' project.id %}">
+
+        {% csrf_token %}
+
+        <button
+            class="bg-primary hover:bg-green-700 text-white px-8 py-4 rounded-xl font-semibold">
+
+            ⚡ Calculate System
+
+        </button>
+
+    </form>
+
+    <a href="{% url 'generate_quote' project.id %}"
+       class="px-8 py-4 rounded-xl border border-gray-300 hover:bg-gray-100">
+
+        📄 Generate Quote
+
+    </a>
+
+    <a href="{% url 'generate_proposal' project.id %}"
+       class="px-8 py-4 rounded-xl border border-gray-300 hover:bg-gray-100">
+
+        📑 Generate Proposal
+
+    </a>
+
+</div>
+
+{% endblock %}

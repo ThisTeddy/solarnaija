@@ -1,0 +1,274 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" x-data="{show:false, loading:false}">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Login | SolarNaija</title>
+
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#16a34a"
+                    }
+                }
+            }
+        }
+    </script>
+
+</head>
+
+<body class="min-h-screen bg-slate-50">
+
+<!-- Background -->
+
+<div class="fixed inset-0 -z-10">
+
+    <div class="absolute inset-0 bg-gradient-to-br from-green-50 via-white to-emerald-100"></div>
+
+    <div class="absolute -top-40 -left-32 h-96 w-96 rounded-full bg-green-300/20 blur-3xl"></div>
+
+    <div class="absolute bottom-0 right-0 h-[500px] w-[500px] rounded-full bg-green-200/30 blur-3xl"></div>
+
+</div>
+
+
+<div class="min-h-screen flex items-center justify-center px-6 py-10">
+
+<div
+x-transition
+class="w-full max-w-md rounded-3xl bg-white/90 backdrop-blur-xl border border-green-100 shadow-2xl p-8">
+
+<!-- Logo -->
+
+<div class="text-center">
+
+<div class="inline-flex items-center gap-3">
+
+<div class="h-14 w-14 rounded-2xl bg-green-600 flex items-center justify-center text-white">
+
+<i data-lucide="sun-medium"></i>
+
+</div>
+
+<div>
+
+<h2 class="text-2xl font-bold">
+
+Solar<span class="text-green-600">Naija</span>
+
+</h2>
+
+<p class="text-slate-500 text-sm">
+
+Welcome Back
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+
+<h1 class="text-3xl font-bold text-center mt-8">
+
+Sign In
+
+</h1>
+
+<p class="text-center text-slate-500 mt-2">
+
+Login to manage your solar projects.
+
+</p>
+
+
+{% if messages %}
+
+<div class="mt-6 space-y-2">
+
+{% for message in messages %}
+
+<div class="rounded-xl bg-red-50 border border-red-200 text-red-600 px-4 py-3">
+
+{{ message }}
+
+</div>
+
+{% endfor %}
+
+</div>
+
+{% endif %}
+
+
+<form
+method="POST"
+class="space-y-5 mt-8"
+@submit="loading=true"
+>
+
+{% csrf_token %}
+
+<div>
+
+<label class="font-semibold">
+
+Username
+
+</label>
+
+<input
+type="text"
+name="username"
+required
+class="mt-2 w-full h-14 rounded-2xl border border-slate-200 px-5 focus:ring-2 focus:ring-green-500 outline-none"
+placeholder="Enter username">
+
+</div>
+
+
+<div>
+
+<label class="font-semibold">
+
+Password
+
+</label>
+
+<div class="relative mt-2">
+
+<input
+:type="show ? 'text' : 'password'"
+name="password"
+required
+class="w-full h-14 rounded-2xl border border-slate-200 px-5 pr-14 focus:ring-2 focus:ring-green-500 outline-none"
+placeholder="••••••••">
+
+<button
+type="button"
+@click="show=!show"
+class="absolute right-4 top-4 text-slate-500">
+
+<i x-show="!show" data-lucide="eye"></i>
+
+<i x-show="show" data-lucide="eye-off"></i>
+
+</button>
+
+</div>
+
+</div>
+
+
+<div class="flex justify-between items-center">
+
+<label class="flex items-center gap-2 text-sm">
+
+<input
+type="checkbox"
+name="remember"
+class="rounded border-slate-300">
+
+Remember Me
+
+</label>
+
+<a
+href="#"
+class="text-green-600 font-medium hover:underline">
+
+Forgot Password?
+
+</a>
+
+</div>
+
+
+<button
+class="w-full h-14 rounded-2xl bg-green-600 hover:bg-green-700 transition text-white font-semibold">
+
+<span x-show="!loading">
+
+Login
+
+</span>
+
+<span
+x-show="loading"
+class="flex items-center justify-center gap-2">
+
+<svg
+class="animate-spin h-5 w-5"
+viewBox="0 0 24 24"
+fill="none">
+
+<circle
+cx="12"
+cy="12"
+r="10"
+stroke="white"
+stroke-width="3"
+opacity=".3"/>
+
+<path
+d="M22 12A10 10 0 0 1 12 22"
+stroke="white"
+stroke-width="3"/>
+
+</svg>
+
+Signing In...
+
+</span>
+
+</button>
+
+</form>
+
+
+<div class="mt-8 text-center">
+
+<p class="text-slate-500">
+
+Don't have an account?
+
+<a
+href="{% url 'register' %}"
+class="text-green-600 font-semibold">
+
+Create Account
+
+</a>
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+<script>
+
+lucide.createIcons()
+
+</script>
+
+</body>
+
+</html>

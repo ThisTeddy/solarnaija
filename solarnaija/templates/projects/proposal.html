@@ -1,0 +1,477 @@
+{% extends "base.html" %}
+
+{% block title %}Solar Proposal{% endblock %}
+
+{% block page_title %}
+Solar Proposal
+{% endblock %}
+
+{% block subtitle %}
+{{ project.project_number }}
+{% endblock %}
+
+{% block content %}
+
+<div class="max-w-6xl mx-auto space-y-8">
+
+    <!-- Proposal Header -->
+
+    <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-8">
+
+        <div class="flex flex-col md:flex-row justify-between">
+
+            <div>
+
+                <h1 class="text-4xl font-bold text-primary">
+
+                    SOLAR SYSTEM PROPOSAL
+
+                </h1>
+
+                <p class="text-gray-500 mt-2">
+
+                    {{ project.project_number }}
+
+                </p>
+
+            </div>
+
+            <div class="text-right mt-6 md:mt-0">
+
+                <h2 class="text-2xl font-bold">
+
+                    SolarNaija
+
+                </h2>
+
+                <p class="text-gray-500">
+
+                    Engineering • Procurement • Installation
+
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Client -->
+
+    <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-8">
+
+        <h2 class="text-2xl font-bold mb-6">
+
+            Client Information
+
+        </h2>
+
+        <div class="grid md:grid-cols-2 gap-6">
+
+            <div>
+
+                <p class="text-gray-500">
+
+                    Client
+
+                </p>
+
+                <h3 class="font-semibold text-lg">
+
+                    {{ project.client_name }}
+
+                </h3>
+
+            </div>
+
+            <div>
+
+                <p class="text-gray-500">
+
+                    Company
+
+                </p>
+
+                <h3>
+
+                    {{ project.company|default:"-" }}
+
+                </h3>
+
+            </div>
+
+            <div>
+
+                <p class="text-gray-500">
+
+                    Email
+
+                </p>
+
+                <h3>
+
+                    {{ project.email }}
+
+                </h3>
+
+            </div>
+
+            <div>
+
+                <p class="text-gray-500">
+
+                    Phone
+
+                </p>
+
+                <h3>
+
+                    {{ project.phone }}
+
+                </h3>
+
+            </div>
+
+            <div>
+
+                <p class="text-gray-500">
+
+                    Location
+
+                </p>
+
+                <h3>
+
+                    {{ project.location }}
+
+                </h3>
+
+            </div>
+
+            <div>
+
+                <p class="text-gray-500">
+
+                    System
+
+                </p>
+
+                <h3>
+
+                    {{ project.get_system_type_display }}
+
+                </h3>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Engineering Design -->
+
+    <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-8">
+
+        <h2 class="text-2xl font-bold mb-6">
+
+            Recommended System Design
+
+        </h2>
+
+        <div class="grid md:grid-cols-2 xl:grid-cols-4 gap-6">
+
+            <div class="bg-gray-50 rounded-xl p-5">
+
+                <p class="text-gray-500">
+
+                    Daily Load
+
+                </p>
+
+                <h3 class="text-3xl font-bold">
+
+                    {{ proposal.design.total_wh }} Wh
+
+                </h3>
+
+            </div>
+
+            <div class="bg-gray-50 rounded-xl p-5">
+
+                <p class="text-gray-500">
+
+                    Peak Load
+
+                </p>
+
+                <h3 class="text-3xl font-bold">
+
+                    {{ proposal.design.peak_load }} W
+
+                </h3>
+
+            </div>
+
+            <div class="bg-gray-50 rounded-xl p-5">
+
+                <p class="text-gray-500">
+
+                    Solar Panels
+
+                </p>
+
+                <h3 class="text-3xl font-bold">
+
+                    {{ proposal.design.required_panels }}
+
+                </h3>
+
+            </div>
+
+            <div class="bg-gray-50 rounded-xl p-5">
+
+                <p class="text-gray-500">
+
+                    Battery Bank
+
+                </p>
+
+                <h3 class="text-3xl font-bold">
+
+                    {{ proposal.design.battery_quantity }}
+
+                </h3>
+
+            </div>
+
+            <div class="bg-gray-50 rounded-xl p-5">
+
+                <p class="text-gray-500">
+
+                    Battery Capacity
+
+                </p>
+
+                <h3 class="text-3xl font-bold">
+
+                    {{ proposal.design.battery_capacity }} Ah
+
+                </h3>
+
+            </div>
+
+            <div class="bg-gray-50 rounded-xl p-5">
+
+                <p class="text-gray-500">
+
+                    Inverter
+
+                </p>
+
+                <h3 class="text-3xl font-bold">
+
+                    {{ proposal.design.inverter_size }} W
+
+                </h3>
+
+            </div>
+
+            <div class="bg-gray-50 rounded-xl p-5">
+
+                <p class="text-gray-500">
+
+                    Controller
+
+                </p>
+
+                <h3 class="text-3xl font-bold">
+
+                    {{ proposal.design.controller_size }} A
+
+                </h3>
+
+            </div>
+
+            <div class="bg-gray-50 rounded-xl p-5">
+
+                <p class="text-gray-500">
+
+                    Cable
+
+                </p>
+
+                <h3 class="text-3xl font-bold">
+
+                    {{ proposal.design.cable_size }}
+
+                </h3>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Bill of Materials -->
+
+    <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-8">
+
+        <h2 class="text-2xl font-bold mb-6">
+
+            Bill of Materials
+
+        </h2>
+
+        <table class="w-full">
+
+            <thead class="border-b">
+
+                <tr>
+
+                    <th class="text-left py-3">
+
+                        Item
+
+                    </th>
+
+                    <th class="text-center">
+
+                        Qty
+
+                    </th>
+
+                    <th class="text-right">
+
+                        Unit Price
+
+                    </th>
+
+                    <th class="text-right">
+
+                        Subtotal
+
+                    </th>
+
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+                {% for item in proposal.bom.items %}
+
+                <tr class="border-b">
+
+                    <td class="py-4">
+
+                        {{ item.category }}
+
+                    </td>
+
+                    <td class="text-center">
+
+                        {{ item.quantity }}
+
+                    </td>
+
+                    <td class="text-right">
+
+                        ₦{{ item.price }}
+
+                    </td>
+
+                    <td class="text-right font-semibold">
+
+                        ₦{{ item.subtotal }}
+
+                    </td>
+
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+    <!-- Pricing -->
+
+    <div class="bg-primary text-white rounded-2xl p-8">
+
+        <div class="flex justify-between items-center">
+
+            <div>
+
+                <h2 class="text-2xl font-bold">
+
+                    Total Project Cost
+
+                </h2>
+
+                <p class="opacity-80 mt-2">
+
+                    Including equipment, installation, labour and VAT.
+
+                </p>
+
+            </div>
+
+            <div class="text-5xl font-bold">
+
+                ₦{{ proposal.quote.total }}
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Notes -->
+
+    <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-8">
+
+        <h2 class="text-2xl font-bold mb-4">
+
+            Notes
+
+        </h2>
+
+        <ul class="list-disc pl-6 space-y-2 text-gray-600">
+
+            <li>Proposal validity: 30 days.</li>
+
+            <li>Installation period: 5–10 working days after payment.</li>
+
+            <li>Equipment includes manufacturer warranty.</li>
+
+            <li>Final installation may vary slightly after site inspection.</li>
+
+        </ul>
+
+    </div>
+
+    <!-- Actions -->
+
+    <div class="flex flex-wrap gap-4">
+
+        <a href="{% url 'project_detail' project.id %}"
+           class="border border-gray-300 px-6 py-3 rounded-xl hover:bg-gray-100">
+
+            ← Back to Project
+
+        </a>
+
+        <a href="{% url 'generate_quote' project.id %}"
+           class="bg-primary text-white px-6 py-3 rounded-xl">
+
+            View Quote
+
+        </a>
+
+    </div>
+
+</div>
+
+{% endblock %}
