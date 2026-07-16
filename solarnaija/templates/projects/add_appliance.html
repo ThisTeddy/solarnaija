@@ -1,289 +1,831 @@
 {% extends "base.html" %}
 
-{% block title %}Quotation{% endblock %}
 
-{% block page_title %}
-Project Quotation
+{% block title %}
+Add Appliance | SolarNaija
 {% endblock %}
 
-{% block subtitle %}
-{{ project.project_number }}
-{% endblock %}
+
 
 {% block content %}
 
-<div class="max-w-5xl mx-auto">
 
-    <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-8">
 
-        <div class="flex justify-between items-start">
+<div
+class="max-w-5xl mx-auto space-y-8"
+x-data="{
+ watts:0,
+ quantity:1,
+ hours:0,
 
-            <div>
+ get daily(){
+    return this.watts*this.quantity*this.hours
+ }
+}"
+>
 
-                <h1 class="text-3xl font-bold">
 
-                    SOLAR QUOTATION
 
-                </h1>
 
-                <p class="text-gray-500 mt-2">
+<!-- HEADER -->
 
-                    {{ project.project_number }}
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-5">
 
-                </p>
 
-            </div>
+<div>
 
-            <div class="text-right">
 
-                <h3 class="font-semibold">
+<h1 class="text-3xl md:text-4xl font-extrabold">
 
-                    SolarNaija
+Add Appliance
 
-                </h3>
+</h1>
 
-                <p class="text-gray-500">
 
-                    Professional Solar Engineering
+<p class="text-gray-500 mt-2">
 
-                </p>
+Add appliances to calculate solar requirements.
 
-            </div>
+</p>
 
-        </div>
-
-    </div>
-
-    <!-- Client -->
-
-    <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-8 mt-8">
-
-        <h2 class="text-xl font-bold mb-6">
-
-            Client Details
-
-        </h2>
-
-        <div class="grid md:grid-cols-2 gap-6">
-
-            <div>
-
-                <p class="text-gray-500">
-
-                    Client
-
-                </p>
-
-                <h3 class="font-semibold">
-
-                    {{ project.client_name }}
-
-                </h3>
-
-            </div>
-
-            <div>
-
-                <p class="text-gray-500">
-
-                    Location
-
-                </p>
-
-                <h3 class="font-semibold">
-
-                    {{ project.location }}
-
-                </h3>
-
-            </div>
-
-            <div>
-
-                <p class="text-gray-500">
-
-                    Email
-
-                </p>
-
-                <h3>
-
-                    {{ project.email }}
-
-                </h3>
-
-            </div>
-
-            <div>
-
-                <p class="text-gray-500">
-
-                    Phone
-
-                </p>
-
-                <h3>
-
-                    {{ project.phone }}
-
-                </h3>
-
-            </div>
-
-        </div>
-
-    </div>
-
-    <!-- Cost Breakdown -->
-
-    <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-8 mt-8">
-
-        <h2 class="text-xl font-bold mb-6">
-
-            Cost Breakdown
-
-        </h2>
-
-        <table class="w-full">
-
-            <tbody>
-
-                <tr class="border-b">
-
-                    <td class="py-4">
-
-                        Equipment
-
-                    </td>
-
-                    <td class="text-right">
-
-                        ₦{{ quote.equipment }}
-
-                    </td>
-
-                </tr>
-
-                <tr class="border-b">
-
-                    <td class="py-4">
-
-                        Installation
-
-                    </td>
-
-                    <td class="text-right">
-
-                        ₦{{ quote.installation }}
-
-                    </td>
-
-                </tr>
-
-                <tr class="border-b">
-
-                    <td class="py-4">
-
-                        Labour
-
-                    </td>
-
-                    <td class="text-right">
-
-                        ₦{{ quote.labour }}
-
-                    </td>
-
-                </tr>
-
-                <tr class="border-b">
-
-                    <td class="py-4">
-
-                        Logistics
-
-                    </td>
-
-                    <td class="text-right">
-
-                        ₦{{ quote.logistics }}
-
-                    </td>
-
-                </tr>
-
-                <tr class="border-b">
-
-                    <td class="py-4">
-
-                        Markup
-
-                    </td>
-
-                    <td class="text-right">
-
-                        ₦{{ quote.markup }}
-
-                    </td>
-
-                </tr>
-
-                <tr class="border-b">
-
-                    <td class="py-4">
-
-                        VAT
-
-                    </td>
-
-                    <td class="text-right">
-
-                        ₦{{ quote.vat }}
-
-                    </td>
-
-                </tr>
-
-                <tr class="bg-green-50">
-
-                    <td class="py-6 text-xl font-bold">
-
-                        TOTAL
-
-                    </td>
-
-                    <td class="text-right text-3xl font-bold text-green-700">
-
-                        ₦{{ quote.total }}
-
-                    </td>
-
-                </tr>
-
-            </tbody>
-
-        </table>
-
-    </div>
-
-    <div class="flex gap-4 mt-8">
-
-        <a href="{% url 'project_detail' project.id %}"
-           class="border px-6 py-3 rounded-xl">
-
-            Back
-
-        </a>
-
-        <a href="{% url 'generate_proposal' project.id %}"
-           class="bg-primary text-white px-6 py-3 rounded-xl">
-
-            Generate Proposal →
-
-        </a>
-
-    </div>
 
 </div>
+
+
+
+
+<button
+
+onclick="window.location.href='{% url 'project_detail' project.id %}'"
+
+class="px-5 py-3 rounded-2xl bg-slate-200 dark:bg-slate-800 flex items-center gap-2">
+
+
+<i data-lucide="arrow-left"></i>
+
+Back
+
+
+</button>
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+<!-- PROJECT CARD -->
+
+
+<div
+
+class="bg-gradient-to-r from-blue-600 to-cyan-500 text-white rounded-3xl p-6 shadow-xl">
+
+
+<div class="flex items-center gap-3">
+
+
+<i data-lucide="folder-kanban"></i>
+
+
+<div>
+
+
+<p class="text-sm opacity-80">
+
+Project
+
+</p>
+
+
+<h2 class="font-bold text-xl">
+
+{{ project.client_name }}
+
+</h2>
+
+
+</div>
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+
+
+
+
+<form
+
+method="POST"
+
+class="space-y-8">
+
+
+{% csrf_token %}
+
+
+
+
+
+
+
+
+
+<!-- APPLIANCE INFO -->
+
+<section
+
+class="bg-white dark:bg-slate-900 rounded-3xl border p-6 md:p-8 animate-slide">
+
+
+<div class="flex items-center gap-3 mb-6">
+
+
+<div class="p-3 rounded-2xl bg-blue-100 text-blue-600">
+
+<i data-lucide="plug"></i>
+
+</div>
+
+
+
+<h2 class="text-xl font-bold">
+
+Appliance Details
+
+</h2>
+
+
+
+</div>
+
+
+
+
+
+
+
+<div class="grid md:grid-cols-2 gap-6">
+
+
+
+<div>
+
+
+<label class="label">
+
+Category
+
+</label>
+
+
+
+<select
+
+name="category"
+
+class="input">
+
+
+<option value="lighting">
+
+💡 Lighting
+
+</option>
+
+
+<option value="cooling">
+
+❄ Cooling
+
+</option>
+
+
+<option value="kitchen">
+
+🍳 Kitchen
+
+</option>
+
+
+<option value="office">
+
+💻 Office
+
+</option>
+
+
+<option value="entertainment">
+
+🎮 Entertainment
+
+</option>
+
+
+<option value="pump">
+
+🚰 Water Pump
+
+</option>
+
+
+<option value="security">
+
+🔒 Security
+
+</option>
+
+
+<option value="other">
+
+Other
+
+</option>
+
+
+
+</select>
+
+
+</div>
+
+
+
+
+
+
+
+<div>
+
+
+<label class="label">
+
+Appliance Name
+
+</label>
+
+
+<input
+
+name="name"
+
+required
+
+class="input"
+
+placeholder="Example: Refrigerator">
+
+
+</div>
+
+
+
+
+
+
+
+<div>
+
+
+<label class="label">
+
+Brand
+
+</label>
+
+
+<input
+
+name="brand"
+
+class="input"
+
+placeholder="LG, Samsung...">
+
+
+</div>
+
+
+
+
+
+
+
+<div>
+
+
+<label class="label">
+
+Model
+
+</label>
+
+
+<input
+
+name="model"
+
+class="input"
+
+placeholder="Model number">
+
+
+</div>
+
+
+
+</div>
+
+
+</section>
+
+
+
+
+
+
+
+
+
+<!-- ELECTRICAL -->
+
+
+<section
+
+class="bg-white dark:bg-slate-900 rounded-3xl border p-6 md:p-8">
+
+
+<div class="flex items-center gap-3 mb-6">
+
+
+<div class="p-3 rounded-2xl bg-yellow-100 text-yellow-600">
+
+
+<i data-lucide="zap"></i>
+
+
+</div>
+
+
+<h2 class="text-xl font-bold">
+
+Electrical Specification
+
+</h2>
+
+
+</div>
+
+
+
+
+
+
+
+<div class="grid md:grid-cols-3 gap-5">
+
+
+
+
+
+<div>
+
+
+<label class="label">
+
+Quantity
+
+</label>
+
+
+<input
+
+type="number"
+
+min="1"
+
+value="1"
+
+x-model="quantity"
+
+name="quantity"
+
+class="input">
+
+
+</div>
+
+
+
+
+
+
+
+
+<div>
+
+
+<label class="label">
+
+Rated Watts
+
+</label>
+
+
+<input
+
+type="number"
+
+required
+
+x-model="watts"
+
+name="watts"
+
+class="input"
+
+placeholder="500">
+
+
+</div>
+
+
+
+
+
+
+
+
+<div>
+
+
+<label class="label">
+
+Surge Watts
+
+</label>
+
+
+<input
+
+type="number"
+
+name="surge_watts"
+
+value="0"
+
+class="input">
+
+</div>
+
+
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+<div class="grid md:grid-cols-3 gap-5 mt-6">
+
+
+
+<div>
+
+
+<label class="label">
+
+Hours Per Day
+
+</label>
+
+
+<input
+
+type="number"
+
+step="0.5"
+
+x-model="hours"
+
+name="hours_per_day"
+
+class="input"
+
+placeholder="5">
+
+
+</div>
+
+
+
+
+
+
+<div>
+
+
+<label class="label">
+
+Days Per Week
+
+</label>
+
+
+<input
+
+type="number"
+
+name="days_per_week"
+
+value="7"
+
+class="input">
+
+
+</div>
+
+
+
+
+
+
+
+<div>
+
+
+<label class="label">
+
+Power Factor
+
+</label>
+
+
+<input
+
+type="number"
+
+step="0.01"
+
+name="power_factor"
+
+value="1"
+
+class="input">
+
+
+</div>
+
+
+
+
+</div>
+
+
+</section>
+
+
+
+
+
+
+
+
+
+<!-- PREVIEW -->
+
+
+<section
+
+class="bg-slate-900 text-white rounded-3xl p-6 md:p-8">
+
+
+<div class="flex items-center gap-3">
+
+
+<i data-lucide="activity"></i>
+
+
+<h2 class="text-xl font-bold">
+
+Energy Preview
+
+</h2>
+
+
+</div>
+
+
+
+
+
+<div class="mt-6 grid md:grid-cols-3 gap-5">
+
+
+
+<div>
+
+
+<p class="opacity-70">
+
+Daily Consumption
+
+</p>
+
+
+<h3 class="text-3xl font-bold">
+
+<span x-text="daily">
+
+</span>
+
+Wh
+
+</h3>
+
+
+</div>
+
+
+
+
+
+
+<div>
+
+
+<p class="opacity-70">
+
+Monthly Estimate
+
+</p>
+
+
+<h3 class="text-3xl font-bold">
+
+
+<span x-text="daily*30">
+
+</span>
+
+Wh
+
+
+</h3>
+
+
+</div>
+
+
+
+
+
+
+<div>
+
+
+<p class="opacity-70">
+
+Solar Impact
+
+</p>
+
+
+<h3 class="text-3xl font-bold">
+
+<span x-text="Math.ceil(daily/1000)">
+
+</span>
+
+kWh
+
+
+</h3>
+
+
+</div>
+
+
+</div>
+
+
+</section>
+
+
+
+
+
+
+
+
+
+<!-- NOTES -->
+
+
+<section
+
+class="bg-white dark:bg-slate-900 rounded-3xl border p-6">
+
+
+<label class="label">
+
+Notes
+
+</label>
+
+
+<textarea
+
+name="notes"
+
+rows="4"
+
+class="input"
+
+placeholder="Additional appliance details"></textarea>
+
+
+</section>
+
+
+
+
+
+
+
+
+
+<!-- BUTTONS -->
+
+
+<div class="flex flex-col md:flex-row gap-4">
+
+
+<button
+
+type="submit"
+
+class="flex-1 py-4 rounded-2xl bg-blue-600 text-white font-bold flex justify-center items-center gap-2 hover:scale-105 transition">
+
+
+<i data-lucide="save"></i>
+
+
+Save Appliance
+
+
+</button>
+
+
+
+
+
+
+<button
+
+type="button"
+
+onclick="window.location.href='{% url 'project_detail' project.id %}'"
+
+class="px-8 py-4 rounded-2xl bg-slate-200 dark:bg-slate-800">
+
+
+Cancel
+
+
+</button>
+
+
+</div>
+
+
+
+
+
+
+</form>
+
+
+</div>
+
 
 {% endblock %}

@@ -78,7 +78,7 @@ def register(request):
 
             return redirect("register")
 
-        User.objects.create_user(
+        user = User.objects.create_user(
 
             first_name=first_name,
 
@@ -101,8 +101,8 @@ def register(request):
             "Account created successfully."
 
         )
-
-        return redirect("login")
+        login(request, user)
+        return redirect("dashboard")
 
     return render(
 
@@ -520,6 +520,8 @@ def calculate_system(request, pk):
 
     calculation.total_daily_load = results["total_wh"]
 
+    calculation.panel_strings = results["panel_strings"]
+    
     calculation.total_peak_load = results["peak_load"]
 
     calculation.required_panel_watts = results["panel_watts"]
@@ -547,10 +549,15 @@ def calculate_system(request, pk):
         "Solar system calculated successfully."
     )
 
-    return redirect(
-        "project_detail",
-        pk=project.pk
-    )
+    
+    return render(
+    request,
+    "calculations/calculate_system.html",
+    {
+        "project": project,
+        "calculation": calculation,
+    },
+)
 
 @login_required
 def generate_quote(request, pk):
@@ -565,7 +572,7 @@ def generate_quote(request, pk):
 
     return render(
         request,
-        "projects/quote.html",
+        "quotes/quote.html",
         {
             "project": project,
             "quote": quote,
@@ -585,7 +592,7 @@ def generate_proposal(request, pk):
 
     return render(
         request,
-        "projects/proposal.html",
+        "proposals/proposal.html",
         {
             "project": project,
             "proposal": proposal,

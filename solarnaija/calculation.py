@@ -267,7 +267,7 @@ def generate_system_design(project):
     panels = calculate_required_panels(
         panel_watts
     )
-
+    panel_strings = calculate_panel_strings(panels)
     battery_capacity = calculate_battery_capacity(
         total_wh,
         project.system_voltage,
@@ -309,6 +309,8 @@ def generate_system_design(project):
 
         "peak_load": peak_load,
 
+        "panel_strings": panel_strings,
+        
         "panel_watts": panel_watts,
 
         "required_panels": panels,
@@ -344,3 +346,12 @@ def calculate_number_of_panels(total_wh, sun_hours, panel_wattage=PANEL_WATTAGE)
     energy_per_panel = panel_wattage * sun_hours
 
     return math.ceil(total_wh / energy_per_panel)
+
+import math
+
+def calculate_panel_strings(required_panels, panels_per_string=4):
+    """
+    Calculate the number of panel strings.
+    Default assumes 4 panels per string.
+    """
+    return math.ceil(required_panels / panels_per_string)

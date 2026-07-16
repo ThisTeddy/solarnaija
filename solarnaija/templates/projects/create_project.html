@@ -1,299 +1,817 @@
 {% extends "base.html" %}
 
-{% block title %}New Project | SolarNaija{% endblock %}
 
-{% block page_title %}
-New Solar Project
+{% block title %}
+Create Project | SolarNaija
 {% endblock %}
 
-{% block subtitle %}
-Create a new client project
-{% endblock %}
+
 
 {% block content %}
 
-<form method="POST">
 
-    {% csrf_token %}
+<div
+class="max-w-5xl mx-auto space-y-8"
+x-data="{
+    tilt:20,
+    autonomy:1
+}">
 
-    <div class="grid lg:grid-cols-3 gap-8">
 
-        <!-- LEFT -->
+<!-- HEADER -->
 
-        <div class="lg:col-span-2 space-y-8">
 
-            <!-- Client Information -->
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-5">
 
-            <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-8">
 
-                <h2 class="text-xl font-bold mb-6">
-                    Client Information
-                </h2>
+<div>
 
-                <div class="grid md:grid-cols-2 gap-6">
+<h1 class="text-3xl md:text-4xl font-extrabold">
 
-                    <div>
-                        <label class="block mb-2 font-medium">
-                            Client Name
-                        </label>
+Create Solar Project
 
-                        <input
-                            type="text"
-                            name="client_name"
-                            required
-                            class="w-full rounded-xl border border-gray-200 px-4 py-3 focus:ring-2 focus:ring-primary outline-none">
-                    </div>
+</h1>
 
-                    <div>
-                        <label class="block mb-2 font-medium">
-                            Company
-                        </label>
 
-                        <input
-                            type="text"
-                            name="company"
-                            class="w-full rounded-xl border border-gray-200 px-4 py-3">
-                    </div>
+<p class="text-gray-500 dark:text-gray-400 mt-2">
 
-                    <div>
-                        <label class="block mb-2 font-medium">
-                            Email
-                        </label>
+Setup a new solar installation.
 
-                        <input
-                            type="email"
-                            name="email"
-                            class="w-full rounded-xl border border-gray-200 px-4 py-3">
-                    </div>
+</p>
 
-                    <div>
-                        <label class="block mb-2 font-medium">
-                            Phone
-                        </label>
 
-                        <input
-                            type="text"
-                            name="phone"
-                            class="w-full rounded-xl border border-gray-200 px-4 py-3">
-                    </div>
+</div>
 
-                </div>
 
-            </div>
 
-            <!-- Project -->
 
-            <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-8">
+<button
 
-                <h2 class="text-xl font-bold mb-6">
-                    Project Details
-                </h2>
+onclick="window.location.href='{% url 'projects' %}'"
 
-                <div class="grid md:grid-cols-2 gap-6">
+class="px-5 py-3 rounded-2xl bg-slate-200 dark:bg-slate-800 flex items-center gap-2">
 
-                    <div>
-                        <label class="block mb-2">
-                            Location
-                        </label>
 
-                        <input
-                            type="text"
-                            name="location"
-                            required
-                            class="w-full rounded-xl border border-gray-200 px-4 py-3">
-                    </div>
+<i data-lucide="arrow-left"></i>
 
-                    <div>
+Back
 
-                        <label class="block mb-2">
-                            System Type
-                        </label>
 
-                        <select
-                            name="system_type"
-                            class="w-full rounded-xl border border-gray-200 px-4 py-3">
+</button>
 
-                            <option value="offgrid">Off Grid</option>
 
-                            <option value="hybrid">Hybrid</option>
+</div>
 
-                            <option value="ongrid">On Grid</option>
 
-                        </select>
 
-                    </div>
 
-                    <div>
 
-                        <label class="block mb-2">
-                            Roof Type
-                        </label>
 
-                        <select
-                            name="roof_type"
-                            class="w-full rounded-xl border border-gray-200 px-4 py-3">
 
-                            <option value="pitched">Pitched</option>
 
-                            <option value="flat">Flat</option>
 
-                            <option value="metal">Metal</option>
 
-                        </select>
+<form
 
-                    </div>
+method="POST"
 
-                    <div>
+class="space-y-8">
 
-                        <label class="block mb-2">
-                            Roof Area (m²)
-                        </label>
 
-                        <input
-                            type="number"
-                            step="0.1"
-                            name="roof_area"
-                            class="w-full rounded-xl border border-gray-200 px-4 py-3">
+{% csrf_token %}
 
-                    </div>
 
-                </div>
 
-            </div>
 
-        </div>
 
-        <!-- RIGHT -->
 
-        <div class="space-y-8">
 
-            <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-8">
 
-                <h2 class="font-bold text-xl mb-6">
 
-                    Design Parameters
+<!-- CLIENT DETAILS -->
 
-                </h2>
 
-                <div class="space-y-5">
+<section
 
-                    <div>
+class="bg-white dark:bg-slate-900 rounded-3xl border p-6 md:p-8 animate-slide">
 
-                        <label class="block mb-2">
 
-                            Sun Hours
+<div class="flex items-center gap-3 mb-6">
 
-                        </label>
 
-                        <input
-                            type="number"
-                            step="0.1"
-                            value="5"
-                            name="sun_hours"
-                            class="w-full rounded-xl border border-gray-200 px-4 py-3">
+<div class="p-3 rounded-2xl bg-blue-100 text-primary">
 
-                    </div>
+<i data-lucide="user"></i>
 
-                    <div>
+</div>
 
-                        <label class="block mb-2">
 
-                            System Voltage
+<h2 class="text-xl font-bold">
 
-                        </label>
+Client Information
 
-                        <select
-                            name="system_voltage"
-                            class="w-full rounded-xl border border-gray-200 px-4 py-3">
+</h2>
 
-                            <option>12</option>
 
-                            <option selected>24</option>
+</div>
 
-                            <option>48</option>
 
-                        </select>
 
-                    </div>
 
-                    <div>
 
-                        <label class="block mb-2">
+<div class="grid md:grid-cols-2 gap-5">
 
-                            Battery Autonomy
 
-                        </label>
+<div>
 
-                        <input
-                            type="number"
-                            value="1"
-                            name="battery_autonomy"
-                            class="w-full rounded-xl border border-gray-200 px-4 py-3">
+<label class="label">
 
-                    </div>
+Client Name
 
-                    <div>
+</label>
 
-                        <label class="block mb-2">
 
-                            Roof Tilt
+<input
 
-                        </label>
+name="client_name"
 
-                        <input
-                            type="number"
-                            value="20"
-                            name="roof_tilt"
-                            class="w-full rounded-xl border border-gray-200 px-4 py-3">
+required
 
-                    </div>
+class="input"
 
-                    <div>
+placeholder="John Doe">
 
-                        <label class="block mb-2">
 
-                            Roof Orientation
+</div>
 
-                        </label>
 
-                        <input
-                            type="text"
-                            value="South"
-                            name="roof_orientation"
-                            class="w-full rounded-xl border border-gray-200 px-4 py-3">
 
-                    </div>
 
-                    <div>
 
-                        <label class="block mb-2">
+<div>
 
-                            Notes
+<label class="label">
 
-                        </label>
+Email
 
-                        <textarea
-                            rows="4"
-                            name="notes"
-                            class="w-full rounded-xl border border-gray-200 px-4 py-3"></textarea>
+</label>
 
-                    </div>
 
-                </div>
+<input
 
-            </div>
+type="email"
 
-            <button
-                class="w-full bg-primary hover:bg-green-700 text-white py-4 rounded-2xl text-lg font-semibold transition">
+name="email"
 
-                Create Project
+class="input"
 
-            </button>
+placeholder="client@email.com">
 
-        </div>
 
-    </div>
+</div>
+
+
+
+
+
+<div>
+
+<label class="label">
+
+Phone
+
+</label>
+
+
+<input
+
+name="phone"
+
+class="input"
+
+placeholder="+234">
+
+
+</div>
+
+
+
+
+
+<div>
+
+<label class="label">
+
+Company
+
+</label>
+
+
+<input
+
+name="company"
+
+class="input"
+
+placeholder="Company name">
+
+
+</div>
+
+
+</div>
+
+
+</section>
+
+
+
+
+
+
+
+
+
+<!-- LOCATION -->
+
+
+<section
+
+class="bg-white dark:bg-slate-900 rounded-3xl border p-6 md:p-8">
+
+
+<div class="flex items-center gap-3 mb-6">
+
+
+<div class="p-3 rounded-2xl bg-green-100 text-green-600">
+
+<i data-lucide="map-pin"></i>
+
+</div>
+
+
+<h2 class="text-xl font-bold">
+
+Location
+
+</h2>
+
+
+</div>
+
+
+
+
+<div class="grid md:grid-cols-2 gap-5">
+
+
+
+<div>
+
+<label class="label">
+
+Installation Location
+
+</label>
+
+
+<input
+
+name="location"
+
+required
+
+class="input"
+
+placeholder="Lagos, Nigeria">
+
+
+</div>
+
+
+
+
+<div>
+
+<label class="label">
+
+Roof Area (m²)
+
+</label>
+
+
+<input
+
+type="number"
+
+name="roof_area"
+
+class="input"
+
+placeholder="100">
+
+
+</div>
+
+
+
+</div>
+
+
+</section>
+
+
+
+
+
+
+
+
+
+<!-- ROOF -->
+
+
+<section
+
+class="bg-white dark:bg-slate-900 rounded-3xl border p-6 md:p-8">
+
+
+<div class="flex items-center gap-3 mb-6">
+
+
+<div class="p-3 rounded-2xl bg-yellow-100 text-yellow-600">
+
+<i data-lucide="home"></i>
+
+</div>
+
+
+<h2 class="text-xl font-bold">
+
+Roof Configuration
+
+</h2>
+
+
+</div>
+
+
+
+
+
+
+<div class="grid md:grid-cols-2 gap-6">
+
+
+
+<div>
+
+<label class="label">
+
+Roof Type
+
+</label>
+
+
+<select
+
+name="roof_type"
+
+class="input">
+
+
+<option value="flat">
+
+Flat
+
+</option>
+
+
+<option value="pitched">
+
+Pitched
+
+</option>
+
+
+<option value="metal">
+
+Metal
+
+</option>
+
+
+</select>
+
+
+</div>
+
+
+
+
+
+
+<div>
+
+
+<label class="label">
+
+Roof Orientation
+
+</label>
+
+
+<select
+
+name="roof_orientation"
+
+class="input">
+
+
+<option>
+
+South
+
+</option>
+
+
+<option>
+
+East
+
+</option>
+
+
+<option>
+
+West
+
+</option>
+
+
+</select>
+
+
+</div>
+
+
+
+</div>
+
+
+
+
+
+
+
+
+<div class="mt-8">
+
+
+<label class="label">
+
+Roof Tilt:
+
+<span x-text="tilt"></span>°
+
+</label>
+
+
+
+<input
+
+type="range"
+
+min="0"
+
+max="60"
+
+x-model="tilt"
+
+name="roof_tilt"
+
+class="w-full accent-blue-600">
+
+
+</div>
+
+
+</section>
+
+
+
+
+
+
+
+
+
+<!-- SYSTEM -->
+
+
+<section
+
+class="bg-white dark:bg-slate-900 rounded-3xl border p-6 md:p-8">
+
+
+
+<div class="flex items-center gap-3 mb-6">
+
+
+<div class="p-3 rounded-2xl bg-purple-100 text-purple-600">
+
+<i data-lucide="battery-charging"></i>
+
+</div>
+
+
+<h2 class="text-xl font-bold">
+
+Solar System
+
+</h2>
+
+
+</div>
+
+
+
+
+
+
+
+<div class="grid md:grid-cols-3 gap-5">
+
+
+
+<div>
+
+
+<label class="label">
+
+System Type
+
+</label>
+
+
+<select
+
+name="system_type"
+
+class="input">
+
+
+<option value="hybrid">
+
+Hybrid
+
+</option>
+
+
+<option value="offgrid">
+
+Off Grid
+
+</option>
+
+
+<option value="ongrid">
+
+On Grid
+
+</option>
+
+
+</select>
+
+
+</div>
+
+
+
+
+
+
+
+<div>
+
+
+<label class="label">
+
+System Voltage
+
+</label>
+
+
+<select
+
+name="system_voltage"
+
+class="input">
+
+
+<option value="12">
+
+12V
+
+</option>
+
+
+<option value="24">
+
+24V
+
+</option>
+
+
+<option value="48">
+
+48V
+
+</option>
+
+
+</select>
+
+
+</div>
+
+
+
+
+
+
+
+<div>
+
+
+<label class="label">
+
+Sun Hours
+
+</label>
+
+
+<input
+
+type="number"
+
+step="0.1"
+
+name="sun_hours"
+
+value="5"
+
+class="input">
+
+
+</div>
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+<div class="mt-8">
+
+
+<label class="label">
+
+Battery Autonomy:
+
+<span x-text="autonomy"></span>
+
+day(s)
+
+</label>
+
+
+
+<input
+
+type="range"
+
+min="1"
+
+max="7"
+
+x-model="autonomy"
+
+name="battery_autonomy"
+
+class="w-full accent-blue-600">
+
+
+</div>
+
+
+
+</section>
+
+
+
+
+
+
+
+
+
+<!-- NOTES -->
+
+
+<section
+
+class="bg-white dark:bg-slate-900 rounded-3xl border p-6 md:p-8">
+
+
+<label class="label">
+
+Project Notes
+
+</label>
+
+
+<textarea
+
+name="notes"
+
+rows="5"
+
+class="input"
+
+placeholder="Additional information..."></textarea>
+
+
+</section>
+
+
+
+
+
+
+
+
+
+<!-- ACTION -->
+
+
+<div class="flex flex-col md:flex-row gap-4">
+
+
+<button
+
+type="submit"
+
+class="flex-1 py-4 rounded-2xl bg-primary text-white font-bold flex items-center justify-center gap-2 hover:scale-[1.02] transition">
+
+
+<i data-lucide="save"></i>
+
+Create Project
+
+
+</button>
+
+
+
+
+
+<button
+
+type="button"
+
+onclick="window.location.href='{% url 'projects' %}'"
+
+class="px-8 py-4 rounded-2xl bg-slate-200 dark:bg-slate-800">
+
+
+Cancel
+
+
+</button>
+
+
+
+</div>
+
+
+
+
+
+
 
 </form>
+
+
+</div>
+
 
 {% endblock %}

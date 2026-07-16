@@ -1,344 +1,675 @@
 {% load static %}
+
 <!DOCTYPE html>
-<html lang="en" x-data="{ sidebar:false, profile:false }">
+<html lang="en"
+      x-data="{
+          sidebar:false,
+          dark:false
+      }"
+      :class="dark ? 'dark' : ''">
 
 <head>
 
-    <meta charset="UTF-8">
+<meta charset="UTF-8">
 
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>
-        {% block title %}SolarNaija{% endblock %}
-    </title>
 
-    <!-- Tailwind -->
+<title>
+{% block title %}
+SolarNaija
+{% endblock %}
+</title>
 
-    <script src="https://cdn.tailwindcss.com"></script>
 
-    <!-- Alpine -->
+<!-- Tailwind -->
 
-    <script defer
-        src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js">
-    </script>
+<script src="https://cdn.tailwindcss.com"></script>
 
-    <script>
 
-        tailwind.config = {
+<script>
 
-            theme: {
+tailwind.config = {
 
-                extend: {
+    darkMode:"class",
 
-                    colors: {
+    theme:{
 
-                        primary:"#2D8C5A",
+        extend:{
 
-                        secondary:"#EAF7F0",
+            colors:{
 
-                        dark:"#1F2937",
+                primary:"#0057B8",
 
-                        light:"#F8FAF9"
+                secondary:"#00A651",
 
-                    }
+                accent:"#FFC857",
 
-                }
+                surface:"#F8FAFC"
 
             }
 
         }
 
-    </script>
+    }
+
+}
+
+</script>
+
+
+<!-- Alpine -->
+
+<script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+
+<!-- Lucide Icons -->
+
+<script src="https://unpkg.com/lucide@latest"></script>
+
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+
+<style>
+
+body{
+
+    font-family:'Inter',sans-serif;
+
+}
+
+
+[x-cloak]{
+
+    display:none !important;
+
+}
+
+
+.sidebar-transition{
+
+    transition:transform .3s ease;
+
+}
+
+
+.card{
+
+    @apply bg-white rounded-3xl border border-gray-100 shadow-sm;
+
+}
+
+
+</style>
+
 
 </head>
 
-<body class="bg-light">
 
-<!-- Mobile Overlay -->
+
+<body class="bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-white">
+
+
+<!-- MOBILE OVERLAY -->
 
 <div
+
 x-show="sidebar"
+
+x-cloak
+
+@click="sidebar=false"
+
 x-transition.opacity
-class="fixed inset-0 bg-black/40 z-40 lg:hidden"
-@click="sidebar=false">
+
+class="fixed inset-0 bg-black/40 backdrop-blur-sm z-40 lg:hidden">
 
 </div>
 
 
-<div class="flex min-h-screen">
 
-<!-- ========================= -->
-<!-- Sidebar -->
-<!-- ========================= -->
+<!-- SIDEBAR -->
 
 <aside
 
-class="fixed lg:static z-50 w-72 bg-white shadow-xl h-screen transform duration-300"
 
-:class="sidebar ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'">
+class="fixed top-0 left-0 h-screen w-72 bg-white dark:bg-slate-900 border-r border-gray-100 dark:border-slate-800 z-50 sidebar-transition"
 
-<div class="h-20 flex items-center px-8 border-b">
 
-<div class="w-12 h-12 rounded-xl bg-primary flex items-center justify-center text-white font-bold">
+:class="sidebar ? 'translate-x-0':'-translate-x-full lg:translate-x-0'"
 
-☀
 
-</div>
+>
 
-<div class="ml-4">
 
-<h1 class="text-2xl font-bold">
+<!-- BRAND -->
 
-Solar<span class="text-primary">Naija</span>
+<div class="h-20 flex items-center px-6 border-b">
 
-</h1>
 
-<p class="text-gray-500 text-sm">
+<div class="flex items-center gap-3">
 
-Engineering Platform
 
-</p>
+<div class="w-11 h-11 rounded-2xl bg-primary flex items-center justify-center text-white">
 
-</div>
+
+<i data-lucide="sun"></i>
+
 
 </div>
 
 
-<nav class="p-6 space-y-2">
-
-<a href="{% url 'dashboard' %}"
-
-class="flex items-center gap-3 p-4 rounded-xl hover:bg-secondary text-gray-700 font-medium">
-
-🏠 Dashboard
-
-</a>
-
-<a href="{% url 'projects' %}"
-
-class="flex items-center gap-3 p-4 rounded-xl hover:bg-secondary">
-
-📂 Projects
-
-</a>
-
-<a href="{% url 'create_project' %}"
-
-class="flex items-center gap-3 p-4 rounded-xl hover:bg-secondary">
-
-➕ New Project
-
-</a>
-
-<a href="#"
-
-class="flex items-center gap-3 p-4 rounded-xl hover:bg-secondary">
-
-⚡ Calculations
-
-</a>
-
-<a href="#"
-
-class="flex items-center gap-3 p-4 rounded-xl hover:bg-secondary">
-
-📄 Quote
-
-</a>
-
-<a href="#"
-
-class="flex items-center gap-3 p-4 rounded-xl hover:bg-secondary">
-
-📑 Proposal
-
-</a>
-
-<hr>
-
-<a href="{% url 'logout' %}"
-
-class="flex items-center gap-3 p-4 rounded-xl text-red-600 hover:bg-red-50">
-
-🚪 Logout
-
-</a>
-
-</nav>
-
-</aside>
-
-
-
-<!-- ========================= -->
-<!-- Main -->
-<!-- ========================= -->
-
-<div class="flex-1">
-
-<!-- Navbar -->
-
-<header
-
-class="sticky top-0 bg-white border-b z-30 h-20 flex items-center justify-between px-6">
-
-<div class="flex items-center gap-4">
-
-<button
-
-class="lg:hidden text-3xl"
-
-@click="sidebar=true">
-
-☰
-
-</button>
 
 <div>
 
-<h2 class="font-bold text-2xl">
 
-{% block page_title %}
+<h1 class="font-extrabold text-xl">
 
-Dashboard
+SolarNaija
 
-{% endblock %}
+</h1>
 
-</h2>
-
-<p class="text-gray-500">
-
-{% block subtitle %}
-
-Welcome back.
-
-{% endblock %}
-
-</p>
-
-</div>
-
-</div>
-
-
-<div class="flex items-center gap-6">
-
-<button class="relative">
-
-🔔
-
-<span class="absolute -top-2 -right-2 bg-red-500 text-white rounded-full w-5 h-5 text-xs">
-
-2
-
-</span>
-
-</button>
-
-
-<div class="relative">
-
-<button
-
-@click="profile=!profile"
-
-class="flex items-center gap-3">
-
-<div class="w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center">
-
-{{ request.user.first_name|first|default:"U" }}
-
-</div>
-
-<div class="hidden md:block text-left">
-
-<p class="font-semibold">
-
-{{ request.user.first_name }}
-
-{{ request.user.last_name }}
-
-</p>
 
 <p class="text-xs text-gray-500">
 
-Administrator
+Solar Intelligence
 
 </p>
 
+
 </div>
 
-</button>
+
+</div>
 
 
-<div
+</div>
 
-x-show="profile"
 
-@click.outside="profile=false"
 
-x-transition
+<!-- MENU -->
 
-class="absolute right-0 mt-3 bg-white shadow-xl rounded-xl w-52 overflow-hidden">
 
-<a
+<nav class="p-5 space-y-2">
 
-href="#"
 
-class="block px-5 py-3 hover:bg-secondary">
+<a href="{% url 'dashboard' %}"
 
-Profile
+class="flex items-center gap-3 px-4 py-3 rounded-2xl hover:bg-blue-50 hover:text-primary transition">
+
+
+<i data-lucide="layout-dashboard"></i>
+
+<span>
+Dashboard
+</span>
+
 
 </a>
 
-<a
 
-href="{% url 'logout' %}"
 
-class="block px-5 py-3 hover:bg-secondary">
+<a href="{% url 'projects' %}"
 
-Logout
+class="flex items-center gap-3 px-4 py-3 rounded-2xl hover:bg-blue-50 hover:text-primary transition">
+
+
+<i data-lucide="folder-kanban"></i>
+
+<span>
+Projects
+</span>
+
 
 </a>
 
-</div>
+
+
+<a href="#"
+
+class="flex items-center gap-3 px-4 py-3 rounded-2xl hover:bg-blue-50 hover:text-primary transition">
+
+
+<i data-lucide="sun"></i>
+
+<span>
+Solar Design
+</span>
+
+
+</a>
+
+
+
+<a href="#"
+
+class="flex items-center gap-3 px-4 py-3 rounded-2xl hover:bg-blue-50 hover:text-primary transition">
+
+
+<i data-lucide="plug-zap"></i>
+
+<span>
+Appliances
+</span>
+
+
+</a>
+
+
+
+<a href="#"
+
+class="flex items-center gap-3 px-4 py-3 rounded-2xl hover:bg-blue-50 hover:text-primary transition">
+
+
+<i data-lucide="receipt-text"></i>
+
+
+<span>
+Quotes
+</span>
+
+
+</a>
+
+
+
+<a href="#"
+
+class="flex items-center gap-3 px-4 py-3 rounded-2xl hover:bg-blue-50 hover:text-primary transition">
+
+
+<i data-lucide="file-text"></i>
+
+
+<span>
+Proposals
+</span>
+
+
+</a>
+
+
+
+<a href="#"
+
+class="flex items-center gap-3 px-4 py-3 rounded-2xl hover:bg-blue-50 hover:text-primary transition">
+
+
+<i data-lucide="package"></i>
+
+
+<span>
+Inventory
+</span>
+
+
+</a>
+
+
+
+</nav>
+
+
+</aside>
+<!-- MAIN AREA -->
+
+<div class="lg:ml-72 min-h-screen">
+
+
+    <!-- TOP NAVBAR -->
+
+    <header class="sticky top-0 z-30 h-20 bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl border-b border-gray-100 dark:border-slate-800">
+
+
+        <div class="h-full px-4 sm:px-6 flex items-center justify-between">
+
+
+            <!-- LEFT -->
+
+            <div class="flex items-center gap-4">
+
+
+                <!-- MOBILE MENU -->
+
+                <button
+
+                @click="sidebar=true"
+
+                class="lg:hidden w-11 h-11 rounded-2xl hover:bg-gray-100 dark:hover:bg-slate-800 flex items-center justify-center">
+
+                    <i data-lucide="menu"></i>
+
+                </button>
+
+
+
+                <!-- SEARCH -->
+
+                <div class="hidden md:flex items-center gap-3 bg-slate-100 dark:bg-slate-800 rounded-2xl px-4 py-3 w-72">
+
+
+                    <i data-lucide="search" class="text-gray-400"></i>
+
+
+                    <input
+
+                    type="text"
+
+                    placeholder="Search projects..."
+
+                    class="bg-transparent outline-none text-sm w-full">
+
+
+                </div>
+
+
+            </div>
+
+
+
+
+
+            <!-- RIGHT -->
+
+            <div class="flex items-center gap-3">
+
+
+
+                <!-- DARK MODE -->
+
+                <button
+
+                @click="dark=!dark"
+
+                class="w-11 h-11 rounded-2xl hover:bg-gray-100 dark:hover:bg-slate-800 flex items-center justify-center">
+
+
+                    <i x-show="!dark" data-lucide="moon"></i>
+
+
+                    <i x-show="dark" data-lucide="sun"></i>
+
+
+                </button>
+
+
+
+
+
+                <!-- NOTIFICATION -->
+
+                <button
+
+                class="relative w-11 h-11 rounded-2xl hover:bg-gray-100 dark:hover:bg-slate-800 flex items-center justify-center">
+
+
+                    <i data-lucide="bell"></i>
+
+
+                    <span class="absolute top-2 right-2 w-2.5 h-2.5 bg-secondary rounded-full">
+
+                    </span>
+
+
+                </button>
+
+
+
+
+
+                <!-- PROFILE -->
+
+                <div
+
+                x-data="{profile:false}"
+
+                class="relative">
+
+
+                    <button
+
+                    @click="profile=!profile"
+
+                    class="flex items-center gap-3 px-3 py-2 rounded-2xl hover:bg-gray-100 dark:hover:bg-slate-800">
+
+
+                        <div class="w-10 h-10 rounded-2xl bg-primary text-white flex items-center justify-center font-bold">
+
+
+                            {{ request.user.username|first|upper }}
+
+
+                        </div>
+
+
+
+                        <div class="hidden sm:block text-left">
+
+
+                            <p class="text-sm font-semibold">
+
+                                {{ request.user.username }}
+
+                            </p>
+
+
+                            <p class="text-xs text-gray-500">
+
+                                Solar Designer
+
+                            </p>
+
+
+                        </div>
+
+
+                        <i data-lucide="chevron-down" class="w-4"></i>
+
+
+                    </button>
+
+
+
+
+
+                    <!-- DROPDOWN -->
+
+
+                    <div
+
+                    x-show="profile"
+
+                    x-cloak
+
+                    @click.outside="profile=false"
+
+                    x-transition
+
+                    class="absolute right-0 mt-3 w-52 bg-white dark:bg-slate-900 rounded-2xl shadow-xl border p-3">
+
+
+                        <a href="#"
+
+                        class="flex items-center gap-3 px-3 py-3 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800">
+
+
+                            <i data-lucide="user"></i>
+
+                            Profile
+
+
+                        </a>
+
+
+
+
+                        <a href="#"
+
+                        class="flex items-center gap-3 px-3 py-3 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800">
+
+
+                            <i data-lucide="settings"></i>
+
+                            Settings
+
+
+                        </a>
+
+
+
+
+
+                        <hr class="my-2">
+
+
+
+
+
+                        <a href="{% url 'logout' %}"
+
+                        class="flex items-center gap-3 px-3 py-3 rounded-xl text-red-500 hover:bg-red-50">
+
+
+                            <i data-lucide="log-out"></i>
+
+                            Logout
+
+
+                        </a>
+
+
+
+                    </div>
+
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+
+    </header>
+
+
+
+
+
+    <!-- CONTENT -->
+
+
+    <main class="p-4 sm:p-6 lg:p-8">
+
+
+        <!-- MESSAGES -->
+
+
+        {% if messages %}
+
+
+            <div class="fixed top-24 right-5 z-50 space-y-3">
+
+
+            {% for message in messages %}
+
+
+                <div
+
+                x-data="{show:true}"
+
+                x-show="show"
+
+                x-transition
+
+                class="bg-white dark:bg-slate-900 shadow-xl border rounded-2xl px-5 py-4 flex items-center gap-3">
+
+
+                    {% if message.tags == 'success' %}
+
+                    <i data-lucide="circle-check" class="text-secondary"></i>
+
+                    {% else %}
+
+                    <i data-lucide="triangle-alert" class="text-accent"></i>
+
+                    {% endif %}
+
+
+
+                    <span>
+
+                    {{ message }}
+
+                    </span>
+
+
+                    <button @click="show=false">
+
+
+                        <i data-lucide="x" class="w-4"></i>
+
+
+                    </button>
+
+
+                </div>
+
+
+            {% endfor %}
+
+
+            </div>
+
+
+        {% endif %}
+
+
+
+
+
+        <!-- PAGE CONTENT -->
+
+
+        {% block content %}
+
+
+        {% endblock %}
+
+
+
+    </main>
+
 
 </div>
 
-</div>
-
-</header>
 
 
 
-<!-- Messages -->
 
-<div class="p-6">
+<script>
 
-{% if messages %}
 
-{% for message in messages %}
+document.addEventListener(
+    "DOMContentLoaded",
+    function(){
 
-<div class="mb-4 rounded-xl p-4 bg-green-100 text-green-800">
+        lucide.createIcons();
 
-{{ message }}
+    }
+);
 
-</div>
 
-{% endfor %}
+</script>
 
-{% endif %}
 
-{% block content %}
-
-{% endblock %}
-
-</div>
-
-</div>
-
-</div>
 
 </body>
 

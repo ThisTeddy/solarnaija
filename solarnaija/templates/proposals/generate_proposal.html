@@ -1,0 +1,329 @@
+{% extends "base.html" %}
+
+{% block title %}Solar Proposal | SolarNaija{% endblock %}
+
+{% block content %}
+
+<div class="max-w-6xl mx-auto px-4 sm:px-6 py-8">
+
+    <!-- Header -->
+
+    <div class="flex flex-col lg:flex-row lg:justify-between lg:items-center gap-5 mb-10">
+
+        <div>
+
+            <h1 class="text-4xl font-bold text-slate-800">
+
+                Solar Proposal
+
+            </h1>
+
+            <p class="text-gray-500 mt-2">
+
+                Prepared for
+
+                <strong>{{ project.client_name }}</strong>
+
+            </p>
+
+        </div>
+
+        <div class="flex flex-wrap gap-3">
+
+            <button
+                onclick="window.location.href='{% url 'generate_quote' project.id %}'"
+                class="bg-slate-200 hover:bg-slate-300 px-6 py-3 rounded-xl">
+
+                ← Quote
+
+            </button>
+
+            <button
+                onclick="window.print()"
+                class="bg-primary hover:bg-blue-700 text-white px-6 py-3 rounded-xl">
+
+                Print Proposal
+
+            </button>
+
+        </div>
+
+    </div>
+
+    <!-- Executive Summary -->
+
+    <div class="bg-white rounded-2xl shadow p-8 mb-8">
+
+        <h2 class="text-2xl font-bold mb-5">
+
+            Executive Summary
+
+        </h2>
+
+        <p class="leading-8 text-gray-700">
+
+            {{ proposal.executive_summary|default:"This proposal outlines a professionally designed solar power solution tailored specifically for your energy requirements. The system has been sized to maximize energy production, improve reliability, and reduce electricity costs while ensuring long-term performance." }}
+
+        </p>
+
+    </div>
+
+    <!-- Project Information -->
+
+    <div class="grid md:grid-cols-2 gap-6 mb-8">
+
+        <div class="bg-white rounded-2xl shadow p-6">
+
+            <h3 class="font-bold text-lg mb-5">
+
+                Project Information
+
+            </h3>
+
+            <div class="space-y-3">
+
+                <div class="flex justify-between">
+
+                    <span>Client</span>
+
+                    <strong>{{ project.client_name }}</strong>
+
+                </div>
+
+                <div class="flex justify-between">
+
+                    <span>Location</span>
+
+                    <strong>{{ project.location }}</strong>
+
+                </div>
+
+                <div class="flex justify-between">
+
+                    <span>System Type</span>
+
+                    <strong>{{ project.system_type|title }}</strong>
+
+                </div>
+
+                <div class="flex justify-between">
+
+                    <span>Status</span>
+
+                    <strong>{{ project.status|title }}</strong>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="bg-white rounded-2xl shadow p-6">
+
+            <h3 class="font-bold text-lg mb-5">
+
+                Recommended System
+
+            </h3>
+
+            <div class="space-y-3">
+
+                <div class="flex justify-between">
+
+                    <span>Solar Panels</span>
+
+                    <strong>{{ calculation.required_panels }}</strong>
+
+                </div>
+
+                <div class="flex justify-between">
+
+                    <span>Panel Rating</span>
+
+                    <strong>{{ calculation.panel_wattage }}W</strong>
+
+                </div>
+
+                <div class="flex justify-between">
+
+                    <span>Battery Bank</span>
+
+                    <strong>{{ calculation.battery_quantity }}</strong>
+
+                </div>
+
+                <div class="flex justify-between">
+
+                    <span>Inverter</span>
+
+                    <strong>{{ calculation.inverter_size }}W</strong>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Scope -->
+
+    <div class="bg-white rounded-2xl shadow p-8 mb-8">
+
+        <h2 class="text-2xl font-bold mb-5">
+
+            Scope of Work
+
+        </h2>
+
+        <p class="leading-8 text-gray-700">
+
+            {{ proposal.scope_of_work|default:"Supply, installation, testing and commissioning of a complete solar energy system including solar panels, inverter, battery bank, charge controller, protection devices, mounting structures, wiring, and user training." }}
+
+        </p>
+
+    </div>
+
+    <!-- Installation -->
+
+    <div class="grid md:grid-cols-2 gap-6 mb-8">
+
+        <div class="bg-white rounded-2xl shadow p-6">
+
+            <h3 class="font-bold mb-4">
+
+                Installation Duration
+
+            </h3>
+
+            <p>
+
+                {{ proposal.installation_duration }}
+
+            </p>
+
+        </div>
+
+        <div class="bg-white rounded-2xl shadow p-6">
+
+            <h3 class="font-bold mb-4">
+
+                Warranty
+
+            </h3>
+
+            <p>
+
+                {{ proposal.warranty|default:"Panels: 25 Years • Inverter: 5 Years • Battery: Manufacturer Warranty • Workmanship: 1 Year" }}
+
+            </p>
+
+        </div>
+
+    </div>
+
+    <!-- Payment -->
+
+    <div class="bg-white rounded-2xl shadow p-8 mb-8">
+
+        <h2 class="text-2xl font-bold mb-5">
+
+            Payment Terms
+
+        </h2>
+
+        <p class="leading-8 text-gray-700">
+
+            {{ proposal.payment_terms|default:"70% advance payment before procurement. Remaining 30% upon successful installation and commissioning." }}
+
+        </p>
+
+    </div>
+
+    <!-- Exclusions -->
+
+    <div class="bg-white rounded-2xl shadow p-8 mb-8">
+
+        <h2 class="text-2xl font-bold mb-5">
+
+            Exclusions
+
+        </h2>
+
+        <p class="leading-8 text-gray-700">
+
+            {{ proposal.exclusions|default:"Civil works, structural roof reinforcement, permits, utility connection fees, and any unforeseen site modifications are excluded unless specifically stated." }}
+
+        </p>
+
+    </div>
+
+    <!-- Pricing -->
+
+    <div class="bg-gradient-to-r from-primary to-secondary text-white rounded-2xl p-10 mb-8">
+
+        <p class="uppercase tracking-widest text-sm">
+
+            Total Investment
+
+        </p>
+
+        <h2 class="text-5xl font-bold mt-4">
+
+            ₦{{ quote.total }}
+
+        </h2>
+
+        <p class="mt-4 opacity-90">
+
+            Proposal Valid for
+
+            {{ proposal.validity_days }}
+
+            Days
+
+        </p>
+
+    </div>
+
+    <!-- Signature -->
+
+    <div class="grid md:grid-cols-2 gap-8">
+
+        <div class="bg-white rounded-2xl shadow p-8">
+
+            <p class="text-gray-500 mb-12">
+
+                Prepared By
+
+            </p>
+
+            <div class="border-t pt-3">
+
+                SolarNaija
+
+            </div>
+
+        </div>
+
+        <div class="bg-white rounded-2xl shadow p-8">
+
+            <p class="text-gray-500 mb-12">
+
+                Client Signature
+
+            </p>
+
+            <div class="border-t pt-3">
+
+                ________________________
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

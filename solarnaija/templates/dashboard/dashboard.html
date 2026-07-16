@@ -1,310 +1,546 @@
-{% extends 'base.html' %}
+{% extends "base.html" %}
 
-{% block title %}Dashboard | SolarNaija{% endblock %}
 
-{% block page_title %}
-Dashboard
+{% block title %}
+Dashboard | SolarNaija
 {% endblock %}
 
-{% block subtitle %}
-Welcome back, {{ request.user.first_name }} 👋
-{% endblock %}
+
 
 {% block content %}
 
-<!-- Statistics -->
 
-<div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
+<div class="space-y-8">
 
-    <!-- Projects -->
 
-    <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
+    <!-- HEADER -->
 
-        <div class="flex justify-between items-center">
+    <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
 
-            <div>
 
-                <p class="text-gray-500">
-                    Projects
-                </p>
+        <div>
 
-                <h2 class="text-4xl font-bold mt-2">
+            <h1 class="text-3xl md:text-4xl font-extrabold tracking-tight">
 
-                    {{ total_projects }}
+                Welcome back,
+                {{ request.user.first_name|default:request.user.username }}
 
-                </h2>
+                👋
 
-            </div>
+            </h1>
 
-            <div class="w-14 h-14 rounded-2xl bg-secondary flex items-center justify-center text-primary text-2xl">
 
-                📂
+            <p class="text-gray-500 dark:text-gray-400 mt-2">
 
-            </div>
+                Monitor your solar projects and system designs.
+
+            </p>
+
 
         </div>
 
-    </div>
 
-    <!-- Clients -->
 
-    <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
 
-        <div class="flex justify-between">
+        <button
 
-            <div>
+        onclick="window.location.href='{% url 'create_project' %}'"
 
-                <p class="text-gray-500">
+        class="flex items-center justify-center gap-2 px-6 py-3 rounded-2xl bg-primary text-white font-semibold hover:scale-105 transition shadow-lg">
 
-                    Clients
 
-                </p>
-
-                <h2 class="text-4xl font-bold mt-2">
-
-                    {{ total_clients }}
-
-                </h2>
-
-            </div>
-
-            <div class="w-14 h-14 rounded-2xl bg-secondary flex items-center justify-center text-primary text-2xl">
-
-                👤
-
-            </div>
-
-        </div>
-
-    </div>
-
-    <!-- Draft -->
-
-    <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
-
-        <div class="flex justify-between">
-
-            <div>
-
-                <p class="text-gray-500">
-
-                    Draft Projects
-
-                </p>
-
-                <h2 class="text-4xl font-bold mt-2">
-
-                    {{ draft_projects }}
-
-                </h2>
-
-            </div>
-
-            <div class="w-14 h-14 rounded-2xl bg-secondary flex items-center justify-center text-primary text-2xl">
-
-                📝
-
-            </div>
-
-        </div>
-
-    </div>
-
-    <!-- Completed -->
-
-    <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
-
-        <div class="flex justify-between">
-
-            <div>
-
-                <p class="text-gray-500">
-
-                    Completed
-
-                </p>
-
-                <h2 class="text-4xl font-bold mt-2">
-
-                    {{ completed_projects }}
-
-                </h2>
-
-            </div>
-
-            <div class="w-14 h-14 rounded-2xl bg-secondary flex items-center justify-center text-primary text-2xl">
-
-                ✅
-
-            </div>
-
-        </div>
-
-    </div>
-
-</div>
-
-<!-- Quick Actions -->
-
-<div class="grid md:grid-cols-3 gap-6 mt-8">
-
-    <a href="{% url 'create_project' %}"
-       class="bg-primary text-white rounded-2xl p-6 hover:scale-105 duration-300">
-
-        <h3 class="text-xl font-semibold">
+            <i data-lucide="plus"></i>
 
             New Project
 
-        </h3>
 
-        <p class="mt-2 text-green-100">
+        </button>
 
-            Create a new solar design.
-
-        </p>
-
-    </a>
-
-    <a href="{% url 'projects' %}"
-       class="bg-white rounded-2xl border border-gray-100 p-6 hover:border-primary duration-300">
-
-        <h3 class="font-semibold text-xl">
-
-            Projects
-
-        </h3>
-
-        <p class="mt-2 text-gray-500">
-
-            View all client projects.
-
-        </p>
-
-    </a>
-
-    <div class="bg-white rounded-2xl border border-gray-100 p-6">
-
-        <h3 class="font-semibold text-xl">
-
-            SolarNaija
-
-        </h3>
-
-        <p class="mt-2 text-gray-500">
-
-            Engineering Dashboard
-
-        </p>
 
     </div>
 
-</div>
 
-<!-- Recent Projects -->
 
-<div class="bg-white rounded-2xl shadow-sm mt-10">
 
-    <div class="p-6 border-b">
 
-        <h2 class="text-2xl font-bold">
 
-            Recent Projects
+
+    <!-- STAT CARDS -->
+
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-6">
+
+
+
+        <!-- PROJECTS -->
+
+        <div
+
+        class="bg-white dark:bg-slate-900 rounded-3xl p-6 border shadow-sm hover:shadow-xl transition">
+
+
+            <div class="flex justify-between items-start">
+
+
+                <div>
+
+
+                    <p class="text-sm text-gray-500">
+
+                        Total Projects
+
+                    </p>
+
+
+                    <h2 class="text-4xl font-bold mt-3">
+
+                        {{ total_projects }}
+
+                    </h2>
+
+
+                </div>
+
+
+
+                <div class="w-12 h-12 rounded-2xl bg-blue-100 text-primary flex items-center justify-center">
+
+
+                    <i data-lucide="folder-kanban"></i>
+
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+
+
+
+
+
+
+        <!-- DRAFT -->
+
+
+        <div
+
+        class="bg-white dark:bg-slate-900 rounded-3xl p-6 border shadow-sm hover:shadow-xl transition">
+
+
+            <div class="flex justify-between items-start">
+
+
+                <div>
+
+
+                    <p class="text-sm text-gray-500">
+
+                        Draft Projects
+
+                    </p>
+
+
+                    <h2 class="text-4xl font-bold mt-3">
+
+                        {{ draft_projects }}
+
+                    </h2>
+
+
+                </div>
+
+
+
+                <div class="w-12 h-12 rounded-2xl bg-yellow-100 text-yellow-600 flex items-center justify-center">
+
+
+                    <i data-lucide="clock"></i>
+
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+
+
+
+
+
+
+
+        <!-- COMPLETED -->
+
+
+        <div
+
+        class="bg-white dark:bg-slate-900 rounded-3xl p-6 border shadow-sm hover:shadow-xl transition">
+
+
+            <div class="flex justify-between items-start">
+
+
+                <div>
+
+
+                    <p class="text-sm text-gray-500">
+
+                        Completed
+
+                    </p>
+
+
+                    <h2 class="text-4xl font-bold mt-3">
+
+                        {{ completed_projects }}
+
+                    </h2>
+
+
+                </div>
+
+
+
+                <div class="w-12 h-12 rounded-2xl bg-green-100 text-secondary flex items-center justify-center">
+
+
+                    <i data-lucide="circle-check"></i>
+
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+
+
+
+
+
+
+        <!-- CLIENTS -->
+
+
+        <div
+
+        class="bg-white dark:bg-slate-900 rounded-3xl p-6 border shadow-sm hover:shadow-xl transition">
+
+
+            <div class="flex justify-between items-start">
+
+
+                <div>
+
+
+                    <p class="text-sm text-gray-500">
+
+                        Clients
+
+                    </p>
+
+
+                    <h2 class="text-4xl font-bold mt-3">
+
+                        {{ total_clients }}
+
+                    </h2>
+
+
+                </div>
+
+
+
+                <div class="w-12 h-12 rounded-2xl bg-purple-100 text-purple-600 flex items-center justify-center">
+
+
+                    <i data-lucide="users"></i>
+
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+
+    </div>
+
+
+
+
+
+
+
+
+
+    <!-- QUICK ACTIONS -->
+
+
+    <section>
+
+
+        <h2 class="text-xl font-bold mb-5">
+
+            Quick Actions
 
         </h2>
 
-    </div>
 
-    <div class="overflow-x-auto">
 
-        <table class="w-full">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
 
-            <thead>
 
-                <tr class="text-left bg-gray-50">
 
-                    <th class="p-4">Project</th>
+            <button
 
-                    <th class="p-4">Client</th>
+            onclick="window.location.href='{% url 'create_project' %}'"
 
-                    <th class="p-4">Location</th>
+            class="bg-white dark:bg-slate-900 rounded-3xl p-5 border hover:-translate-y-1 transition flex flex-col gap-3">
 
-                    <th class="p-4">Status</th>
 
-                    <th class="p-4"></th>
+                <i data-lucide="folder-plus" class="text-primary"></i>
 
-                </tr>
 
-            </thead>
+                <span class="font-semibold">
 
-            <tbody>
+                Create Project
+
+                </span>
+
+
+            </button>
+
+
+
+
+
+            <button
+
+            onclick="window.location.href='{% url 'projects' %}'"
+
+            class="bg-white dark:bg-slate-900 rounded-3xl p-5 border hover:-translate-y-1 transition flex flex-col gap-3">
+
+
+                <i data-lucide="files" class="text-secondary"></i>
+
+
+                <span class="font-semibold">
+
+                View Projects
+
+                </span>
+
+
+            </button>
+
+
+
+
+
+
+            <button
+
+            class="bg-white dark:bg-slate-900 rounded-3xl p-5 border hover:-translate-y-1 transition flex flex-col gap-3">
+
+
+                <i data-lucide="sun" class="text-yellow-500"></i>
+
+
+                <span class="font-semibold">
+
+                Solar Design
+
+                </span>
+
+
+            </button>
+
+
+
+
+
+
+
+            <button
+
+            class="bg-white dark:bg-slate-900 rounded-3xl p-5 border hover:-translate-y-1 transition flex flex-col gap-3">
+
+
+                <i data-lucide="receipt" class="text-blue-500"></i>
+
+
+                <span class="font-semibold">
+
+                Quotes
+
+                </span>
+
+
+            </button>
+
+
+
+        </div>
+
+
+    </section>
+
+
+
+
+
+
+
+
+
+    <!-- RECENT PROJECTS -->
+
+
+    <section>
+
+
+        <div class="flex items-center justify-between mb-5">
+
+
+            <h2 class="text-xl font-bold">
+
+                Recent Projects
+
+            </h2>
+
+
+
+            <a href="{% url 'projects' %}"
+
+            class="text-primary font-semibold text-sm">
+
+                View all
+
+            </a>
+
+
+        </div>
+
+
+
+
+
+        <div class="bg-white dark:bg-slate-900 rounded-3xl border overflow-hidden">
+
+
+
+            {% if projects %}
+
+
 
             {% for project in projects %}
 
-                <tr class="border-t hover:bg-gray-50">
 
-                    <td class="p-4">
+            <div class="p-5 flex flex-col md:flex-row md:items-center justify-between gap-4 border-b last:border-none">
 
-                        {{ project.project_number }}
 
-                    </td>
+                <div>
 
-                    <td class="p-4">
+
+                    <h3 class="font-bold text-lg">
 
                         {{ project.client_name }}
 
-                    </td>
+                    </h3>
 
-                    <td class="p-4">
+
+                    <p class="text-sm text-gray-500">
 
                         {{ project.location }}
 
-                    </td>
+                    </p>
 
-                    <td class="p-4">
 
-                        <span class="px-3 py-1 rounded-full bg-secondary text-primary text-sm">
+                </div>
 
-                            {{ project.status }}
 
-                        </span>
 
-                    </td>
+                <div class="flex items-center gap-4">
 
-                    <td class="p-4">
 
-                        <a href="{% url 'project_detail' project.id %}"
+                    <span class="px-4 py-2 rounded-full text-sm bg-blue-50 text-primary">
 
-                           class="text-primary font-semibold">
 
-                            Open →
+                        {{ project.status|title }}
 
-                        </a>
 
-                    </td>
+                    </span>
 
-                </tr>
 
-            {% empty %}
 
-                <tr>
+                    <button
 
-                    <td colspan="5"
-                        class="text-center p-10 text-gray-500">
+                    onclick="window.location.href='{% url 'project_detail' project.id %}'"
 
-                        No projects yet.
+                    class="px-4 py-2 rounded-xl bg-slate-100 hover:bg-slate-200">
 
-                    </td>
 
-                </tr>
+                        Open
+
+
+                    </button>
+
+
+                </div>
+
+
+            </div>
+
 
             {% endfor %}
 
-            </tbody>
 
-        </table>
 
-    </div>
+            {% else %}
+
+
+            <div class="p-10 text-center">
+
+
+                <i data-lucide="folder-open" class="mx-auto mb-4 text-gray-400"></i>
+
+
+                <p class="text-gray-500">
+
+                    No projects yet.
+
+                </p>
+
+
+            </div>
+
+
+            {% endif %}
+
+
+
+        </div>
+
+
+    </section>
+
+
+
 
 </div>
+
+
 
 {% endblock %}

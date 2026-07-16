@@ -1,0 +1,702 @@
+{% extends "base.html" %}
+
+
+{% block title %}
+System Design | SolarNaija
+{% endblock %}
+
+
+
+
+{% block content %}
+
+
+<div class="max-w-7xl mx-auto space-y-8">
+
+
+
+
+
+
+<!-- HEADER -->
+
+
+<div class="flex flex-col md:flex-row justify-between gap-5">
+
+
+
+<div>
+
+
+<h1 class="text-3xl md:text-4xl font-extrabold">
+
+Solar System Design
+
+</h1>
+
+
+<p class="text-gray-500 mt-2">
+
+Engineering calculation for {{project.client_name}}
+
+</p>
+
+
+</div>
+
+
+
+
+
+<div class="flex gap-3">
+
+
+<button
+
+onclick="window.location.href='{% url 'project_detail' project.id %}'"
+
+class="px-5 py-3 rounded-2xl bg-slate-200 dark:bg-slate-800 flex gap-2 items-center">
+
+
+<i data-lucide="arrow-left"></i>
+
+Back
+
+
+</button>
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+
+
+
+
+<!-- SUMMARY HERO -->
+
+
+<div
+
+class="rounded-3xl p-8 bg-gradient-to-r from-blue-600 to-cyan-500 text-white shadow-xl animate-slide">
+
+
+<div class="flex items-center gap-4">
+
+
+<div class="p-4 bg-white/20 rounded-2xl">
+
+
+<i data-lucide="solar-panel" class="w-8 h-8"></i>
+
+
+</div>
+
+
+
+<div>
+
+
+<p class="opacity-80">
+
+Recommended Solar System
+
+</p>
+
+
+<h2 class="text-3xl font-bold">
+
+
+{{calculation.required_panels}}
+
+×
+
+550W Panels
+
+
+</h2>
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+<div class="grid md:grid-cols-4 gap-5 mt-8">
+
+
+
+<div>
+
+<p class="opacity-70">
+
+Daily Energy
+
+</p>
+
+
+<h3 class="text-2xl font-bold">
+
+{{calculation.total_daily_load}}
+
+Wh
+
+</h3>
+
+
+</div>
+
+
+
+
+
+<div>
+
+<p class="opacity-70">
+
+Peak Load
+
+</p>
+
+
+<h3 class="text-2xl font-bold">
+
+{{calculation.total_peak_load}}
+
+W
+
+</h3>
+
+
+</div>
+
+
+
+
+
+<div>
+
+<p class="opacity-70">
+
+Inverter
+
+</p>
+
+
+<h3 class="text-2xl font-bold">
+
+{{calculation.inverter_size}}
+
+W
+
+</h3>
+
+
+</div>
+
+
+
+
+
+<div>
+
+<p class="opacity-70">
+
+Estimated Cost
+
+</p>
+
+
+<h3 class="text-2xl font-bold">
+
+₦{{calculation.estimated_cost}}
+
+</h3>
+
+
+</div>
+
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+
+
+
+
+<!-- DESIGN CARDS -->
+
+
+<div class="grid md:grid-cols-2 xl:grid-cols-3 gap-6">
+
+
+
+
+
+
+
+<!-- PANELS -->
+
+
+<div class="design-card">
+
+
+<div class="icon bg-yellow-100 text-yellow-600">
+
+
+<i data-lucide="sun"></i>
+
+
+</div>
+
+
+<h2>
+
+Solar Array
+
+</h2>
+
+
+
+<div class="space-y-2 mt-4 text-sm">
+
+
+<p>
+
+Panel Wattage:
+
+<b>
+
+{{calculation.panel_wattage}}W
+
+</b>
+
+</p>
+
+
+
+<p>
+
+Required Array:
+
+<b>
+
+{{calculation.required_panel_watts}}W
+
+</b>
+
+</p>
+
+
+
+<p>
+
+Panels:
+
+<b>
+
+{{calculation.required_panels}}
+
+</b>
+
+</p>
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+
+
+
+
+<!-- BATTERY -->
+
+
+<div class="design-card">
+
+
+<div class="icon bg-green-100 text-green-600">
+
+
+<i data-lucide="battery-charging"></i>
+
+
+</div>
+
+
+
+<h2>
+
+Battery Bank
+
+</h2>
+
+
+
+<div class="space-y-2 mt-4 text-sm">
+
+
+<p>
+
+Voltage:
+
+<b>
+
+{{project.system_voltage}}V
+
+</b>
+
+</p>
+
+
+
+<p>
+
+Capacity:
+
+<b>
+
+{{calculation.battery_capacity}}Ah
+
+</b>
+
+</p>
+
+
+
+<p>
+
+Quantity:
+
+<b>
+
+{{calculation.battery_quantity}}
+
+</b>
+
+</p>
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+
+
+
+
+<!-- INVERTER -->
+
+
+<div class="design-card">
+
+
+<div class="icon bg-purple-100 text-purple-600">
+
+
+<i data-lucide="cpu"></i>
+
+
+</div>
+
+
+
+<h2>
+
+Inverter
+
+</h2>
+
+
+<div class="mt-4 text-sm">
+
+
+<p>
+
+Recommended Size:
+
+</p>
+
+
+<h3 class="text-3xl font-bold">
+
+{{calculation.inverter_size}}
+
+W
+
+</h3>
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+
+
+
+
+<!-- CONTROLLER -->
+
+
+<div class="design-card">
+
+
+<div class="icon bg-blue-100 text-blue-600">
+
+
+<i data-lucide="gauge"></i>
+
+
+</div>
+
+
+<h2>
+
+Charge Controller
+
+</h2>
+
+
+
+<h3 class="mt-4 text-3xl font-bold">
+
+{{calculation.controller_size}}
+
+A
+
+</h3>
+
+
+</div>
+
+
+
+
+
+
+
+
+
+<!-- ELECTRICAL -->
+
+
+<div class="design-card">
+
+
+<div class="icon bg-red-100 text-red-600">
+
+
+<i data-lucide="shield-check"></i>
+
+
+</div>
+
+
+
+<h2>
+
+Protection
+
+</h2>
+
+
+<div class="mt-4 space-y-2 text-sm">
+
+
+<p>
+
+Breaker:
+
+<b>
+
+{{calculation.breaker_size}}A
+
+</b>
+
+</p>
+
+
+
+<p>
+
+Cable:
+
+<b>
+
+{{calculation.cable_size}}
+
+</b>
+
+</p>
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+
+
+
+<!-- COST -->
+
+
+<div class="design-card">
+
+
+<div class="icon bg-emerald-100 text-emerald-600">
+
+
+<i data-lucide="wallet"></i>
+
+
+</div>
+
+
+<h2>
+
+System Cost
+
+</h2>
+
+
+
+<h3 class="text-3xl font-bold mt-4">
+
+₦{{calculation.estimated_cost}}
+
+</h3>
+
+
+</div>
+
+
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+<!-- ACTIONS -->
+
+
+<div class="grid md:grid-cols-3 gap-4">
+
+
+
+
+
+<button
+
+onclick="window.location.href='{% url 'generate_quote' project.id %}'"
+
+class="py-4 rounded-2xl bg-blue-600 text-white font-bold flex justify-center gap-2 items-center">
+
+
+<i data-lucide="file-text"></i>
+
+
+Generate Quote
+
+
+</button>
+
+
+
+
+
+
+
+<button
+
+onclick="window.location.href='{% url 'generate_proposal' project.id %}'"
+
+class="py-4 rounded-2xl bg-green-600 text-white font-bold flex justify-center gap-2 items-center">
+
+
+<i data-lucide="briefcase"></i>
+
+
+Generate Proposal
+
+
+</button>
+
+
+
+
+
+
+
+<button
+
+onclick="window.location.href='{% url 'project_detail' project.id %}'"
+
+class="py-4 rounded-2xl bg-slate-200 dark:bg-slate-800 font-bold">
+
+
+Project Dashboard
+
+
+</button>
+
+
+
+</div>
+
+
+
+
+
+
+
+
+</div>
+
+
+
+{% endblock %}

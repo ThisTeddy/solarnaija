@@ -244,7 +244,4 @@ class ReportAdmin(admin.ModelAdmin):
         "created_at",
     )
 
-    import math
-
-PANEL_WATTAGE = 550  # Watts
-
+    

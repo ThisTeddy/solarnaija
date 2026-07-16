@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en" x-data="{ mobileMenu:false }">
 <head>
@@ -262,7 +263,7 @@
 
                 <div class="mt-4 flex flex-col sm:flex-row gap-4">
 
-                    <button
+                    <button onclick="window.location.href='{% url 'register' %}'"
                         class="h-14 px-8 rounded-2xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold transition duration-300">
 
                         Get Started
@@ -275,12 +276,12 @@
 
                     </button>
 
-                    <button
+                    <a
                         class="h-14 px-8 rounded-2xl bg-white/10 border border-white/15 backdrop-blur-md text-white hover:bg-white/20 transition duration-300">
 
                         Calculate Savings
 
-                    </button>
+                </a>
 
                 </div>
 

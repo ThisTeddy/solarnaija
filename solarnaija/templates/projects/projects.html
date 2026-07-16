@@ -1,260 +1,399 @@
 {% extends "base.html" %}
 
-{% block title %}Projects | SolarNaija{% endblock %}
 
-{% block page_title %}
-Projects
+{% block title %}
+Projects | SolarNaija
 {% endblock %}
 
-{% block subtitle %}
-Manage all solar projects
-{% endblock %}
+
 
 {% block content %}
 
-<!-- Header -->
 
-<div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+<div
+class="max-w-7xl mx-auto space-y-8"
+x-data="{
+search:''
+}"
+>
 
-    <div>
 
-        <h2 class="text-3xl font-bold text-dark">
-            Solar Projects
-        </h2>
 
-        <p class="text-gray-500 mt-1">
-            View and manage all client projects.
-        </p>
 
-    </div>
+<!-- HEADER -->
 
-    <a href="{% url 'create_project' %}"
-       class="bg-primary hover:bg-green-700 text-white px-6 py-3 rounded-xl font-semibold transition">
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-5">
 
-        + New Project
 
-    </a>
+<div>
+
+<h1 class="text-3xl md:text-4xl font-extrabold">
+
+Solar Projects
+
+</h1>
+
+
+<p class="text-gray-500 dark:text-gray-400 mt-2">
+
+Manage your solar installations.
+
+</p>
+
 
 </div>
 
 
-<!-- Search & Filter -->
 
-<div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 mt-8">
 
-    <div class="grid md:grid-cols-3 gap-4">
 
-        <input
-            type="text"
-            placeholder="Search project..."
-            class="w-full border border-gray-200 rounded-xl px-4 py-3 focus:ring-2 focus:ring-primary focus:outline-none">
+<button
 
-        <select
-            class="border border-gray-200 rounded-xl px-4 py-3 focus:ring-2 focus:ring-primary">
+onclick="window.location.href='{% url 'create_project' %}'"
 
-            <option>All Status</option>
-            <option>Draft</option>
-            <option>Design</option>
-            <option>Approved</option>
-            <option>Completed</option>
+class="px-6 py-3 rounded-2xl bg-blue-600 text-white font-bold flex items-center justify-center gap-2 shadow-lg hover:scale-105 transition">
 
-        </select>
 
-        <button
-            class="bg-secondary text-primary rounded-xl font-semibold">
+<i data-lucide="plus-circle"></i>
 
-            Search
 
-        </button>
+New Project
 
-    </div>
+
+</button>
+
 
 </div>
 
 
-<!-- Projects Table -->
 
-<div class="bg-white rounded-2xl shadow-sm border border-gray-100 mt-8 overflow-hidden">
 
-    <div class="overflow-x-auto">
 
-        <table class="min-w-full">
 
-            <thead class="bg-gray-50">
 
-                <tr>
 
-                    <th class="text-left px-6 py-4">
-                        Project No
-                    </th>
 
-                    <th class="text-left px-6 py-4">
-                        Client
-                    </th>
+<!-- SEARCH -->
 
-                    <th class="text-left px-6 py-4">
-                        Location
-                    </th>
 
-                    <th class="text-left px-6 py-4">
-                        System
-                    </th>
+<div
 
-                    <th class="text-left px-6 py-4">
-                        Status
-                    </th>
+class="bg-white dark:bg-slate-900 rounded-3xl border p-5 flex items-center gap-3">
 
-                    <th class="text-left px-6 py-4">
-                        Created
-                    </th>
 
-                    <th class="text-right px-6 py-4">
-                        Action
-                    </th>
+<i data-lucide="search" class="text-gray-400"></i>
 
-                </tr>
 
-            </thead>
 
-            <tbody>
+<input
 
-            {% for project in projects %}
+x-model="search"
 
-                <tr class="border-t hover:bg-gray-50 transition">
+class="w-full bg-transparent outline-none"
 
-                    <td class="px-6 py-5 font-semibold">
+placeholder="Search projects...">
 
-                        {{ project.project_number }}
-
-                    </td>
-
-                    <td class="px-6 py-5">
-
-                        {{ project.client_name }}
-
-                    </td>
-
-                    <td class="px-6 py-5">
-
-                        {{ project.location }}
-
-                    </td>
-
-                    <td class="px-6 py-5">
-
-                        {{ project.get_system_type_display }}
-
-                    </td>
-
-                    <td class="px-6 py-5">
-
-                        {% if project.status == "draft" %}
-
-                        <span class="px-3 py-1 rounded-full bg-yellow-100 text-yellow-700 text-sm">
-
-                            Draft
-
-                        </span>
-
-                        {% elif project.status == "completed" %}
-
-                        <span class="px-3 py-1 rounded-full bg-green-100 text-green-700 text-sm">
-
-                            Completed
-
-                        </span>
-
-                        {% else %}
-
-                        <span class="px-3 py-1 rounded-full bg-blue-100 text-blue-700 text-sm">
-
-                            {{ project.get_status_display }}
-
-                        </span>
-
-                        {% endif %}
-
-                    </td>
-
-                    <td class="px-6 py-5">
-
-                        {{ project.created_at|date:"M d, Y" }}
-
-                    </td>
-
-                    <td class="px-6 py-5">
-
-                        <div class="flex justify-end gap-3">
-
-                            <a href="{% url 'project_detail' project.id %}"
-                               class="text-primary font-semibold">
-
-                                View
-
-                            </a>
-
-                            <a href="{% url 'delete_project' project.id %}"
-                               class="text-red-600">
-
-                                Delete
-
-                            </a>
-
-                        </div>
-
-                    </td>
-
-                </tr>
-
-            {% empty %}
-
-                <tr>
-
-                    <td colspan="7"
-                        class="text-center py-20">
-
-                        <div class="space-y-4">
-
-                            <div class="text-6xl">
-
-                                ☀️
-
-                            </div>
-
-                            <h3 class="text-2xl font-bold">
-
-                                No Projects Yet
-
-                            </h3>
-
-                            <p class="text-gray-500">
-
-                                Start by creating your first solar project.
-
-                            </p>
-
-                            <a href="{% url 'create_project' %}"
-
-                               class="inline-block mt-4 bg-primary text-white px-6 py-3 rounded-xl">
-
-                                Create Project
-
-                            </a>
-
-                        </div>
-
-                    </td>
-
-                </tr>
-
-            {% endfor %}
-
-            </tbody>
-
-        </table>
-
-    </div>
 
 </div>
+
+
+
+
+
+
+
+
+
+<!-- PROJECT GRID -->
+
+
+<div
+
+class="grid md:grid-cols-2 xl:grid-cols-3 gap-6">
+
+
+
+{% for project in projects %}
+
+
+
+<div
+
+x-show=" '{{project.client_name|lower}}'.includes(search.toLowerCase()) "
+
+class="bg-white dark:bg-slate-900 rounded-3xl border shadow-sm hover:shadow-xl transition p-6 animate-slide">
+
+
+
+
+
+<!-- TOP -->
+
+
+<div class="flex justify-between items-start">
+
+
+<div>
+
+
+<div class="flex items-center gap-2">
+
+
+<i data-lucide="folder-kanban" class="text-blue-600"></i>
+
+
+<h2 class="font-bold text-lg">
+
+{{project.project_number}}
+
+</h2>
+
+
+</div>
+
+
+
+<p class="text-gray-500 mt-2">
+
+{{project.client_name}}
+
+</p>
+
+
+</div>
+
+
+
+
+
+
+
+<span
+
+class="px-3 py-1 rounded-full text-xs font-bold
+
+{% if project.status == 'completed' %}
+
+bg-green-100 text-green-700
+
+{% elif project.status == 'approved' %}
+
+bg-blue-100 text-blue-700
+
+{% elif project.status == 'draft' %}
+
+bg-gray-100 text-gray-700
+
+{% else %}
+
+bg-yellow-100 text-yellow-700
+
+{% endif %}
+
+">
+
+
+{{project.status|title}}
+
+
+</span>
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+<!-- INFO -->
+
+
+<div class="mt-6 space-y-4">
+
+
+
+
+
+<div class="flex items-center gap-3 text-sm">
+
+
+<i data-lucide="map-pin" class="w-5"></i>
+
+
+<span>
+
+{{project.location}}
+
+</span>
+
+
+</div>
+
+
+
+
+
+
+
+<div class="flex items-center gap-3 text-sm">
+
+
+<i data-lucide="sun" class="w-5"></i>
+
+
+<span>
+
+{{project.system_type|title}}
+
+</span>
+
+
+</div>
+
+
+
+
+
+
+
+<div class="flex items-center gap-3 text-sm">
+
+
+<i data-lucide="zap" class="w-5"></i>
+
+
+<span>
+
+{{project.total_daily_load|default:"0"}}
+
+Wh/day
+
+</span>
+
+
+</div>
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+<!-- FOOTER -->
+
+
+<div class="mt-8 flex gap-3">
+
+
+
+
+
+<button
+
+onclick="window.location.href='{% url 'project_detail' project.id %}'"
+
+class="flex-1 py-3 rounded-xl bg-blue-600 text-white font-semibold flex justify-center gap-2 items-center">
+
+
+<i data-lucide="eye"></i>
+
+
+View
+
+
+</button>
+
+
+
+
+
+
+
+<button
+
+onclick="window.location.href='{% url 'delete_project' project.id %}'"
+
+class="px-4 rounded-xl bg-red-100 text-red-600">
+
+
+<i data-lucide="trash-2"></i>
+
+
+</button>
+
+
+
+
+</div>
+
+
+
+
+
+
+</div>
+
+
+
+{% empty %}
+
+
+
+
+
+<div class="col-span-full text-center py-20">
+
+
+<i data-lucide="folder-open" class="mx-auto w-12 h-12 text-gray-400"></i>
+
+
+
+<h2 class="text-xl font-bold mt-4">
+
+No projects yet
+
+</h2>
+
+
+
+<p class="text-gray-500">
+
+Create your first solar project.
+
+</p>
+
+
+</div>
+
+
+
+
+
+{% endfor %}
+
+
+
+</div>
+
+
+
+
+
+
+</div>
+
+
 
 {% endblock %}
